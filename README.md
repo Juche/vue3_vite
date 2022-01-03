@@ -45,11 +45,33 @@ git push -u origin "master"
 
 ## 添加项目依赖
 
-### tailwind
+### tailwind css
 
 ```sh
+# https://www.tailwindcss.cn/docs/installation
 # https://www.tailwindcss.cn/docs/guides/vue-3-vite
 # https://blog.csdn.net/wuovo233/article/details/117425047
+# 1. 安装依赖
 yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest
+# 2. 初始化 tailwind 和 postcss 配置文件
 npx tailwindcss init -p
+# 3. 在 src/styles/ 目录下新建 index.css, 在文件中写入：
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+# 4. 在 main.js 中引入 index.css 文件：
+import './styles/index.css'
+
+# tailwind.config.js，更改配置,写入如下代码:
+purge: [
+  './index.html',
+  './src/**/*.{vue,js,ts,jsx,tsx}', //包含了src文件夹下所有的vue,js等等文件
+],
+
+# 运行项目(可能会报如下错误)
+Error: PostCSS plugin tailwindcss requires PostCSS 8.
+
+# https://www.tailwindcss.cn/docs/installation#post-css-7
+yarn remove tailwindcss postcss autoprefixer
+yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 ```
