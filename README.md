@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2021-12-31 16:52:30
- * @LastEditTime: 2021-12-31 17:04:30
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \v3_vite\README.md
--->
 # Vue 3 + Typescript + Vite
 
 This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
@@ -47,4 +39,17 @@ git push -u origin "master"
 cd existing_git_repo
 git remote add origin https://gitee.com/juching/vue3_vite.git
 git push -u origin "master"
+```
+
+---
+
+## 添加项目依赖
+
+### tailwind
+
+```sh
+# https://www.tailwindcss.cn/docs/guides/vue-3-vite
+# https://blog.csdn.net/wuovo233/article/details/117425047
+yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest
+npx tailwindcss init -p
 ```
