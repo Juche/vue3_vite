@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2021-12-31 16:52:30
- * @LastEditTime: 2021-12-31 17:04:30
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \v3_vite\README.md
--->
 # Vue 3 + Typescript + Vite
 
 This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
@@ -47,4 +39,39 @@ git push -u origin "master"
 cd existing_git_repo
 git remote add origin https://gitee.com/juching/vue3_vite.git
 git push -u origin "master"
+```
+
+---
+
+## 添加项目依赖
+
+### tailwind css
+
+```sh
+# https://www.tailwindcss.cn/docs/installation
+# https://www.tailwindcss.cn/docs/guides/vue-3-vite
+# https://blog.csdn.net/wuovo233/article/details/117425047
+# 1. 安装依赖
+yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest
+# 2. 初始化 tailwind 和 postcss 配置文件
+npx tailwindcss init -p
+# 3. 在 src/styles/ 目录下新建 index.css, 在文件中写入：
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+# 4. 在 main.js 中引入 index.css 文件：
+import './styles/index.css'
+
+# tailwind.config.js，更改配置,写入如下代码:
+purge: [
+  './index.html',
+  './src/**/*.{vue,js,ts,jsx,tsx}', //包含了src文件夹下所有的vue,js等等文件
+],
+
+# 运行项目(可能会报如下错误)
+Error: PostCSS plugin tailwindcss requires PostCSS 8.
+
+# https://www.tailwindcss.cn/docs/installation#post-css-7
+yarn remove tailwindcss postcss autoprefixer
+yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 ```
