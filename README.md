@@ -93,3 +93,50 @@ Error: PostCSS plugin tailwindcss requires PostCSS 8.
 yarn remove tailwindcss postcss autoprefixer
 yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 ```
+
+## 注意
+
+### 环境变量配置文件
+
+环境变量配置位于项目根目录下的 `.env`、`.env.development`、`.env.production`
+
+```sh
+.env                # 在所有的环境中被载入
+.env.local          # 在所有的环境中被载入，但会被 git 忽略
+.env.[mode]         # 只在指定的模式中被载入
+.env.[mode].local   # 只在指定的模式中被载入，但会被 git 忽略
+
+# 只有以 VITE_ 开头的变量会被嵌入到客户端侧的包中，你可以项目代码中这样访问它们：
+# console.log(import.meta.env.VITE_PROT);
+# 以 VITE_GLOB_* 开头的的变量，在打包的时候，会被加入_app.config.js配置文件当中.
+# 生产环境 build 构建项目之后，会自动生成 _app.config.js 文件并插入 index.html
+```
+
+### 网页主题模式实现
+
+```less
+html,
+body {
+  &.color-weak {
+    filter: invert(80%);
+  }
+
+  &.gray-mode {
+    filter: grayscale(100%);
+    filter: progid:dximagetransform.microsoft.basicimage(grayscale=1);
+  }
+}
+```
+
+### 测试服务器
+
+在 `/test/server` 内有简单的 Node.js 测试后台接口服务，用 Koa2 实现
+
+```sh
+cd ./test/server
+# 安装依赖
+yarn
+# 运行服务
+yarn start
+# 服务运行成功之后，就可以访问测试上传接口及 websocket 接口服务
+```
