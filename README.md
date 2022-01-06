@@ -94,6 +94,36 @@ yarn remove tailwindcss postcss autoprefixer
 yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 ```
 
+### Ant Design
+
+```js
+// Vite 按需
+// https://next.antdv.com/docs/vue/introduce-cn#按需加载
+// vite.config.js
+import Components from 'unplugin-vue-components/vite'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+
+export default {
+  plugins: [
+    /* ... */
+    Components({
+      resolvers: [
+        AntDesignVueResolver(),
+      ],
+    }),
+  ],
+};
+```
+
+## Vue 3
+
+```js
+// <script setup lang="ts">
+// This starter template is using Vue 3 <script setup> SFCs
+// https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+// https://v3.cn.vuejs.org/api/sfc-script-setup.html
+```
+
 ## 注意
 
 ### 环境变量配置文件
@@ -115,6 +145,7 @@ yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer
 ### 网页主题模式实现
 
 ```less
+// [CSS3 filter(滤镜)实现网页灰色或者黑色模式的代码](https://www.jb51.net/css/754348.html)
 html,
 body {
   &.color-weak {
