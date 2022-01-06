@@ -117,11 +117,34 @@ export default {
 
 ## Vue 3
 
+- `<script setup lang="ts">`
+
 ```js
-// <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 // https://v3.cn.vuejs.org/api/sfc-script-setup.html
+1. 里面的代码会被编译成组件 setup() 函数的内容
+2. 必须以 vNameOfDirective 的形式来命名本地自定义指令
+const vMyDirective = {
+  beforeMount: (el) => {
+    // 在元素上做些操作
+  }
+}
+// 导入的指令同样能够工作，并且能够通过重命名来使其符合命名规范
+import { myDirective as vMyDirective } from './MyDirective.js'
+3. 必须使用 defineProps 和 defineEmits API 来声明 props 和 emits
+const props = defineProps({
+  foo: String
+})
+const emit = defineEmits(['change', 'delete'])
+4. 为了在 <script setup> 组件中明确要暴露出去的属性，使用 defineExpose 编译器宏
+```
+
+- `defineAsyncComponent`
+
+```js
+// https://blog.csdn.net/qq_42204414/article/details/114838871
+// https://v3.cn.vuejs.org/guide/migration/async-components.html
 ```
 
 ## 注意
