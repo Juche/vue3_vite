@@ -5,6 +5,8 @@ import HelloWorld from './components/HelloWorld.vue';
 import Test1 from './components/Test1.vue';
 import TestSub from './components/TestSub.vue';
 import TestAsync from './components/TestAsync.vue';
+import TotalView from './components/TotalView.vue';
+import SpInfo from './components/SpInfo.vue';
 
 // import { defineComponent } from 'vue';
 // export default defineComponent({
@@ -22,9 +24,6 @@ const toggleColorMode = (colorMode: string): void => {
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
-  <Test1 />
-  <TestAsync />
-  <!-- <TestSub /> -->
   <p class="text-3xl font-bold">Hello Tailwind!</p>
   <div class="ant-btns">
     <a-button type="primary">Primary</a-button>
@@ -48,6 +47,11 @@ const toggleColorMode = (colorMode: string): void => {
       >正常模式</a-button
     >
   </div>
+  <Test1 />
+  <!-- <TestSub /> -->
+  <TestAsync />
+  <TotalView />
+  <SpInfo />
 </template>
 
 <style lang="less">
@@ -59,7 +63,7 @@ const toggleColorMode = (colorMode: string): void => {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
+  // text-align: center;
   color: #2c3e50;
 }
 
