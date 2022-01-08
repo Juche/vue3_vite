@@ -34,8 +34,8 @@ export default {
         { id: 4, name: '累计安装设备数', num: 0 },
         // { id: 5, name: "接入服务商", num: this.overview.projectNums || 0 },
       ],
-      // count: -10000,
-      count: 0,
+      count: -9999.99,
+      // count: 0,
     };
   },
   methods: {
@@ -52,7 +52,7 @@ export default {
   mounted() {
     setInterval(() => {
       // setInterval
-      this.updateCount();
+      // this.updateCount();
       this.updateList();
     }, 3000);
   },

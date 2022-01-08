@@ -66,24 +66,24 @@ export default {
         color: '#fff',
       },
       serviceInfo: [
-        // {
-        //   key: '守护家庭总数',
-        //   val: 0,
-        //   icon: 's1',
-        // },
-        // {
-        //   key: '守护人总数',
-        //   val: 0,
-        //   icon: 's2',
-        // },
-        // {
-        //   key: '服务次数总数',
-        //   val: 0,
-        //   icon: 's3',
-        // },
+        {
+          key: '守护家庭总数',
+          val: 0,
+          icon: 's1',
+        },
+        {
+          key: '守护人总数',
+          val: 0,
+          icon: 's2',
+        },
+        {
+          key: '服务次数总数',
+          val: 0,
+          icon: 's3',
+        },
         {
           key: '管家总量',
-          val: 9.8,
+          val: 98.76,
           icon: 's4',
         },
       ],
@@ -100,28 +100,28 @@ export default {
   mounted() {
     setTimeout(() => {
       this.serviceInfo = [
-        // {
-        //   key: '守护家庭总数',
-        //   val: 666,
-        //   icon: 's1',
-        // },
-        // {
-        //   key: '守护人总数',
-        //   val: 88,
-        //   icon: 's2',
-        // },
-        // {
-        //   key: '服务次数总数',
-        //   val: 33.33,
-        //   icon: 's3',
-        // },
+        {
+          key: '守护家庭总数',
+          val: 666,
+          icon: 's1',
+        },
+        {
+          key: '守护人总数',
+          val: 88,
+          icon: 's2',
+        },
+        {
+          key: '服务次数总数',
+          val: 33.33,
+          icon: 's3',
+        },
         {
           key: '管家总量',
-          val: 12.3,
+          val: -923.45,
           icon: 's4',
         },
       ];
-    }, 5000);
+    }, 3000);
   },
 };
 </script>

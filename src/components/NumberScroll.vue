@@ -60,10 +60,9 @@ export default {
   data() {
     return {
       numList: [0], // 用于页面for循环展示的内容
-      newNum: [], // 记录新数字的整数和小数位
-      oldNum: [], // 记录旧数字的整数和小数位
-      oldNumItems: [], // 记录旧数字DOM节点信息
-      closeTransition: false,  // 过度动画开关
+      newNumPart: [], // 记录新数字的整数和小数位
+      oldNumPart: [], // 记录旧数字的整数和小数位
+      closeTransition: false, // 过度动画开关
     };
   },
   computed: {
@@ -72,7 +71,9 @@ export default {
     numTransition() {
       // let duration = this.closeTransition ? 0 : this.duration;
       return {
-        transition: this.closeTransition ? 'none' : `transform ${this.duration} ease-in-out`,
+        transition: this.closeTransition
+          ? 'none'
+          : `transform ${this.duration} ease-in-out`,
       };
     },
   },
@@ -85,9 +86,8 @@ export default {
         // this.oldNum = oldVal;
         let _numStr = Math.abs(val).toString();
         let _oldNumStr = Math.abs(oldVal).toString();
-        this.newNum = _numStr.split('.');
-        this.oldNum = _oldNumStr.split('.');
-        // this.oldNumItems = this.$refs.numItem || [];
+        this.newNumPart = _numStr.split('.');
+        this.oldNumPart = _oldNumStr.split('.');
 
         // if(!!this.numLen)
         let _numLen = _numStr.length || 0;
@@ -108,17 +108,8 @@ export default {
         }
 
         if (this.format) {
-          // 12345678
-          // parseInt(len / 3)
-          // let _numArr = [];
-          // let _part = Math.ceil(this.numLen / 3);
-          // for(let i = _part; i > 1; i--) {
-          //   // _numArr[i] = ',' + _numStr.substr(-3 * (_part - i + 1), -3 * (_part - i))
-          // }
-
-          // _numStr = _numStr.match(/\d{3}/g).join(',').replace(/^0+/, '');
-          // _numStr = _numStr.match(/\d{3}/g).join(',');
           let [_int, _dec] = _numStr.split('.');
+          // 给整数位加上千分符 & 拼接上小数位
           // _numStr = _numStr.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
           _numStr =
             _int.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') +
@@ -141,38 +132,22 @@ export default {
     // 设置文字滚动
     setNumberTransform() {
       const numItems = this.$refs.numItem || []; // 拿到数字的ref，计算元素数量
-      // console.log(`🚀 ~ setNumberTransform ~ numItems`, numItems)
       const numberArr = this.numList.filter((item) => !isNaN(item));
 
       // 新增数字位没有位移样式,不会有过渡动画
       // 这里做判断,给新增数字初始位移样式值
-      // TODO: 标记每一位数字的位移值, 根据位移值做精准的定位
+      // 标记每一位数字的位移值, 根据位移值做精准的定位
       const hasNewItem = numItems.some((item) => !item.style.transform);
       let numLen = numItems.length;
       if (hasNewItem) {
-        // let oldIntLen;
-        // newNum: [],  // 记录新数字的整数和小数位
-        // oldNum: [],  // 记录旧数字的整数和小数位
-        // oldNumItems: [],  // 记录旧数字DOM节点信息
-        console.log(`🚀 ~ setNumberTransform ~ oldNumItems`, this.oldNumItems);
-        console.log(`🚀 ~ setNumberTransform ~ oldNum`, this.oldNum);
-        console.log(`🚀 ~ setNumberTransform ~ newNum`, this.newNum);
         // 用旧数字的整数位长度减去新数字的,计算出索引的位移值
-        // 67.89 => 123.45
-        // 67.8 => 123.45
         let idxShift =
-          (this.newNum[0]?.length ?? 0) - (this.oldNum[0]?.length ?? 0);
-        console.log(`🚀 ~ setNumberTransform ~ idxShift`, idxShift);
-
-        // let oldNumLen = this.oldNumItems.length;
-        let oldNum = this.oldNum.join('').split('');
+          (this.newNumPart[0]?.length ?? 0) - (this.oldNumPart[0]?.length ?? 0);
+        let oldNum = this.oldNumPart.join('').split('');
         for (let i = 0; i < numLen; i++) {
-          // for (let i = numLen - 1; i > 0; i--) {
           const el = numItems[i];
-          // const oldEl = this.oldNumItems[i - idxShift] ?? null
           const oldEl = oldNum[i - idxShift] ?? null;
-          // if (!el.style.transform) el.style.transform = 'translateY(0%)';
-          // el.style.transform = oldEl ? oldEl.style.transform : 'translateY(0%)';
+          // 初始化新数据的位移位置还原为对应旧数据的对应数字位
           el.style.transform = oldEl
             ? `translateY(-${oldEl}0%)`
             : 'translateY(0%)';
@@ -208,7 +183,7 @@ export default {
 /*滚动数字设置*/
 .list {
   width: 36px;
-  height: 54px;
+  height: 1em;
   font-family: DINAlternate-Bold;
   font-weight: bold;
   color: #05ffed;
@@ -222,7 +197,7 @@ export default {
     overflow: hidden;
 
     .num-item {
-      letter-spacing: 10px;
+      letter-spacing: 0.2em;
       font-style: normal;
     }
   }
@@ -233,15 +208,21 @@ export default {
 /* 符号 */
 /* TODO: 调整样式 */
 .symbol-li {
+  width: 0.25em !important;
+  display: flex;
+  align-items: center;
   line-height: 100%;
-  width: 10px !important;
 
   .symbol {
     position: relative;
     display: block;
     writing-mode: initial;
     text-orientation: initial;
-    .negative,
+    .negative {
+      position: relative;
+      left: -0.2em;
+      top: -0.05em;
+    }
     .comma {
       // display: block;
       // line-height: 100%;
