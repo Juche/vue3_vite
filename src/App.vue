@@ -50,7 +50,7 @@ const toggleColorMode = (colorMode: string): void => {
   <Test1 />
   <!-- <TestSub /> -->
   <TestAsync />
-  <TotalView />
+  <!-- <TotalView /> -->
   <SpInfo />
 </template>
 

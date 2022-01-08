@@ -8,11 +8,13 @@
           'symbol-li': isNaN(item),
         }"
         :style="numStyle"
-        v-for="(item, index) in orderNum"
+        v-for="(item, index) in numList"
         :key="index"
       >
         <span class="num-col" v-if="!isNaN(item)">
-          <i class="num-item" ref="numItem" :style="numTransform">0123456789</i>
+          <i class="num-item" ref="numItem" :style="numTransition"
+            >0123456789</i
+          >
         </span>
         <!-- <span class="symbol negative" v-else-if="item === '-'">{{ item }}</span>
         <span class="symbol comma" v-else>{{ item }}</span> -->
@@ -57,24 +59,36 @@ export default {
   },
   data() {
     return {
-      orderNum: [0],
+      numList: [0], // 用于页面for循环展示的内容
+      newNum: [], // 记录新数字的整数和小数位
+      oldNum: [], // 记录旧数字的整数和小数位
+      oldNumItems: [], // 记录旧数字DOM节点信息
+      closeTransition: false,  // 过度动画开关
     };
   },
   computed: {
     // TODO: ZC 可以考虑多一种切换方式(日历翻页 || 半翻页效果)
     // 提供更多定制项: 尺寸/字体/背景/配色...
-    numTransform() {
+    numTransition() {
+      // let duration = this.closeTransition ? 0 : this.duration;
       return {
-        transition: `transform ${this.duration} ease-in-out`,
+        transition: this.closeTransition ? 'none' : `transform ${this.duration} ease-in-out`,
       };
     },
   },
   watch: {
     number: {
       immediate: true,
-      handler(val) {
-        let _symbol = val >= 0 ? '' : '-'; // 判断是否为负数,为负号预留一个符号位
+      handler(val, oldVal) {
+        // 临时关闭过度效果
+        this.closeTransition = true;
+        // this.oldNum = oldVal;
         let _numStr = Math.abs(val).toString();
+        let _oldNumStr = Math.abs(oldVal).toString();
+        this.newNum = _numStr.split('.');
+        this.oldNum = _oldNumStr.split('.');
+        // this.oldNumItems = this.$refs.numItem || [];
+
         // if(!!this.numLen)
         let _numLen = _numStr.length || 0;
         if (this.numLen) {
@@ -92,6 +106,7 @@ export default {
             _numStr.substr(-numLen);
           }
         }
+
         if (this.format) {
           // 12345678
           // parseInt(len / 3)
@@ -110,9 +125,10 @@ export default {
             (_dec ? `.${_dec}` : '');
         }
 
+        let _symbol = val >= 0 ? '' : '-'; // 判断是否为负数,为负号预留一个符号位
         _numStr = _symbol + _numStr;
 
-        this.orderNum = _numStr.split('').map((item) => Number(item) || item);
+        this.numList = _numStr.split('').map((item) => Number(item) || item);
         // 解决未设置数字长度时内容更新不准确的问题
         // this.setNumberTransform();
         this.$nextTick(() => {
@@ -125,7 +141,8 @@ export default {
     // 设置文字滚动
     setNumberTransform() {
       const numItems = this.$refs.numItem || []; // 拿到数字的ref，计算元素数量
-      const numberArr = this.orderNum.filter((item) => !isNaN(item));
+      // console.log(`🚀 ~ setNumberTransform ~ numItems`, numItems)
+      const numberArr = this.numList.filter((item) => !isNaN(item));
 
       // 新增数字位没有位移样式,不会有过渡动画
       // 这里做判断,给新增数字初始位移样式值
@@ -133,17 +150,42 @@ export default {
       const hasNewItem = numItems.some((item) => !item.style.transform);
       let numLen = numItems.length;
       if (hasNewItem) {
-        for (let index = 0; index < numLen; index++) {
-          const elem = numItems[index];
-          if (!elem.style.transform) elem.style.transform = 'translateY(0%)';
+        // let oldIntLen;
+        // newNum: [],  // 记录新数字的整数和小数位
+        // oldNum: [],  // 记录旧数字的整数和小数位
+        // oldNumItems: [],  // 记录旧数字DOM节点信息
+        console.log(`🚀 ~ setNumberTransform ~ oldNumItems`, this.oldNumItems);
+        console.log(`🚀 ~ setNumberTransform ~ oldNum`, this.oldNum);
+        console.log(`🚀 ~ setNumberTransform ~ newNum`, this.newNum);
+        // 用旧数字的整数位长度减去新数字的,计算出索引的位移值
+        // 67.89 => 123.45
+        // 67.8 => 123.45
+        let idxShift =
+          (this.newNum[0]?.length ?? 0) - (this.oldNum[0]?.length ?? 0);
+        console.log(`🚀 ~ setNumberTransform ~ idxShift`, idxShift);
+
+        // let oldNumLen = this.oldNumItems.length;
+        let oldNum = this.oldNum.join('').split('');
+        for (let i = 0; i < numLen; i++) {
+          // for (let i = numLen - 1; i > 0; i--) {
+          const el = numItems[i];
+          // const oldEl = this.oldNumItems[i - idxShift] ?? null
+          const oldEl = oldNum[i - idxShift] ?? null;
+          // if (!el.style.transform) el.style.transform = 'translateY(0%)';
+          // el.style.transform = oldEl ? oldEl.style.transform : 'translateY(0%)';
+          el.style.transform = oldEl
+            ? `translateY(-${oldEl}0%)`
+            : 'translateY(0%)';
         }
       }
 
       setTimeout(() => {
+        // 重新开启过度效果
+        this.closeTransition = false;
         // 结合CSS 对数字字符进行滚动
-        for (let index = 0; index < numLen; index++) {
-          const elem = numItems[index];
-          elem.style.transform = `translateY(-${numberArr[index] * 10}%)`;
+        for (let i = 0; i < numLen; i++) {
+          const el = numItems[i];
+          el.style.transform = `translateY(-${numberArr[i] * 10}%)`;
         }
       }, 100);
     },
