@@ -68,22 +68,22 @@ export default {
       serviceInfo: [
         {
           key: '守护家庭总数',
-          val: 666,
+          val: 0,
           icon: 's1',
         },
         {
           key: '守护人总数',
-          val: 88,
+          val: 0,
           icon: 's2',
         },
         {
           key: '服务次数总数',
-          val: 99999,
+          val: 0,
           icon: 's3',
         },
         {
           key: '管家总量',
-          val: 36,
+          val: 0,
           icon: 's4',
         },
       ],
@@ -96,6 +96,32 @@ export default {
     close() {
       this.isFold = true;
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.serviceInfo = [
+        {
+          key: '守护家庭总数',
+          val: 666,
+          icon: 's1',
+        },
+        {
+          key: '守护人总数',
+          val: 88,
+          icon: 's2',
+        },
+        {
+          key: '服务次数总数',
+          val: 33.33,
+          icon: 's3',
+        },
+        {
+          key: '管家总量',
+          val: 99999,
+          icon: 's4',
+        },
+      ];
+    }, 3000);
   },
 };
 </script>

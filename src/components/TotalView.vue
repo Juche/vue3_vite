@@ -50,7 +50,7 @@ export default {
     },
   },
   mounted() {
-    setTimeout(() => {
+    setInterval(() => {
       // setInterval
       this.updateCount();
       this.updateList();

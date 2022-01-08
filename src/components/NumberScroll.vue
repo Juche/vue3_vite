@@ -2,7 +2,11 @@
   <div class="scroll-num" :style="{ 'justify-content': align }">
     <ul class="num-ul">
       <li
-        :class="{ 'list': true, 'num-li': !isNaN(item), 'symbol-li': isNaN(item) }"
+        :class="{
+          list: true,
+          'num-li': !isNaN(item),
+          'symbol-li': isNaN(item),
+        }"
         :style="numStyle"
         v-for="(item, index) in orderNum"
         :key="index"
@@ -48,7 +52,7 @@ export default {
     },
     numStyle: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
   },
   data() {
@@ -104,20 +108,16 @@ export default {
           _numStr =
             _int.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') +
             (_dec ? `.${_dec}` : '');
-
-          // console.log(`🚀 ~ handler ~ _numStr`, _numStr);
-          // debugger
         }
 
         _numStr = _symbol + _numStr;
 
         this.orderNum = _numStr.split('').map((item) => Number(item) || item);
-        // console.log(`🚀 ~ handler ~  this.orderNum `, this.orderNum);
-        // console.log(`🚀 ~ handler ~  this.numLen `, this.numLen);
         // 解决未设置数字长度时内容更新不准确的问题
         // this.setNumberTransform();
-        // this.$nextTick(() => {});
-        this.setNumberTransform();
+        this.$nextTick(() => {
+          this.setNumberTransform();
+        });
       },
     },
   },
@@ -126,16 +126,27 @@ export default {
     setNumberTransform() {
       const numItems = this.$refs.numItem || []; // 拿到数字的ref，计算元素数量
       const numberArr = this.orderNum.filter((item) => !isNaN(item));
-      // 结合CSS 对数字字符进行滚动
-      for (let index = 0; index < numItems.length; index++) {
-        const elem = numItems[index];
-        // elem.style.transform = `translate(-50%, -${numberArr[index] * 10}%)`;
-        elem.style.transform = `translateY(-${numberArr[index] * 10}%)`;
+
+      // 新增数字位没有位移样式,不会有过渡动画
+      // 这里做判断,给新增数字初始位移样式值
+      // TODO: 标记每一位数字的位移值, 根据位移值做精准的定位
+      const hasNewItem = numItems.some((item) => !item.style.transform);
+      let numLen = numItems.length;
+      if (hasNewItem) {
+        for (let index = 0; index < numLen; index++) {
+          const elem = numItems[index];
+          if (!elem.style.transform) elem.style.transform = 'translateY(0%)';
+        }
       }
+
+      setTimeout(() => {
+        // 结合CSS 对数字字符进行滚动
+        for (let index = 0; index < numLen; index++) {
+          const elem = numItems[index];
+          elem.style.transform = `translateY(-${numberArr[index] * 10}%)`;
+        }
+      }, 100);
     },
-  },
-  mounted() {
-    this.setNumberTransform();
   },
 };
 </script>
@@ -181,7 +192,7 @@ export default {
 /* TODO: 调整样式 */
 .symbol-li {
   line-height: 100%;
-  width: 10px!important;
+  width: 10px !important;
 
   .symbol {
     position: relative;
