@@ -18,7 +18,8 @@
 </template>
 
 <script lang="ts">
-import NumberScroll from './NumberScroll.vue';
+// import { NumberScroll } from '../../components/Basic';
+import { NumberScroll } from '/@/components/Basic';
 
 export default {
   name: 'total-view',

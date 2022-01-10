@@ -46,7 +46,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import NumberScroll from './NumberScroll.vue';
+
+// import { NumberScroll } from '../../components/Basic';
+import { NumberScroll } from '/@/components/Basic';
 
 export default {
   name: 'sp-info',
