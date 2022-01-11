@@ -1,7 +1,7 @@
 // import { mount } from '@vue/test-utils';
 // import { Button } from '/@/components/Button';
 
-test('if jest is normal.', async () => {
+test('jest is ready', async () => {
   expect('jest').toEqual('jest');
 });
 

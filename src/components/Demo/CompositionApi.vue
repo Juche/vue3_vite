@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="message">{{ message }}</div>
+    <div class="message">{{ uppercaseMsg(message) }}</div>
     <div class="count">Count: {{ state.count }}</div>
     <button @click="increment">Increment</button>
   </div>
@@ -27,9 +27,14 @@ export default {
       state.count += 1;
     };
 
+    function uppercaseMsg(msg: string) {
+      return msg.toUpperCase();
+    }
+
     return {
       state,
       increment,
+      uppercaseMsg,
     };
   },
 };

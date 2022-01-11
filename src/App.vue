@@ -28,8 +28,8 @@ import { ColorMode } from '/@/components/Setting';
   <!-- <Test1 />
   <TestSub />
   <TestAsync /> -->
-  <TotalView />
-  <SpInfo />
+  <!-- <TotalView />
+  <SpInfo /> -->
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <TailWind />
 </template>
