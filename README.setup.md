@@ -86,6 +86,16 @@ const emit = defineEmits(['change', 'delete'])
 // https://v3.cn.vuejs.org/guide/migration/async-components.html
 ```
 
+- `globalProperties`
+
+```js
+// Vue 3 提供了一个 globalProperties 对象，用来添加可以被任意组件实例访问的全局 property。
+// 例如一个插件想要注入一个共享全局对象或函数。
+import axios from 'axios'
+const app = Vue.createApp({})
+app.config.globalProperties.$http = axios
+```
+
 ## 注意
 
 ### 环境变量配置文件

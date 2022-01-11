@@ -14,6 +14,16 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "useDefineForClassFields": true,
+
+    // "noLib": false,
+    // "forceConsistentCasingInFileNames": true,
+    // "strictFunctionTypes": false,
+    // "allowJs": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noImplicitAny": false,
+    // "removeComments": true,
+
     "types": [
       "webpack-env",
       "vite/client",
