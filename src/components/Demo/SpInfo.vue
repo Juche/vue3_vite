@@ -1,11 +1,11 @@
 <template>
   <div class="sp-ctn" :class="[isFold ? 'sp-fold' : 'sp-unfold']">
     <div class="sp-ctt">
-      <div class="ripple-ctn" style="width: 64px; height: 64px">
+      <!-- <div class="ripple-ctn" style="width: 64px; height: 64px">
         <div class="ripple">
           <img class="ripple-image" src="../assets/images/v1/s1.png" />
         </div>
-      </div>
+      </div> -->
 
       <div
         class="service-overview"
@@ -45,8 +45,6 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-
 // import { NumberScroll } from '../../components/Basic';
 import { NumberScroll } from '/@/components/Basic';
 

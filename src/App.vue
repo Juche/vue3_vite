@@ -21,18 +21,17 @@ import {
 } from '/@/components/Demo';
 
 import { ColorMode } from '/@/components/Setting';
-
 </script>
 
 <template>
   <ColorMode />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
-  <TailWind />
   <!-- <Test1 />
   <TestSub />
   <TestAsync /> -->
-  <!-- <TotalView />
-  <SpInfo /> -->
+  <TotalView />
+  <SpInfo />
+  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
+  <TailWind />
 </template>
 
 <style lang="less">
