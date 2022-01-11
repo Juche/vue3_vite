@@ -7,22 +7,50 @@
 ```sh
 # https://v3.cn.vuejs.org/guide/testing.html
 # https://next.vue-test-utils.vuejs.org/guide/
-@vue/test-utils
-
-jest
-ts-jest
-@types/jest
+pnpm add -D @vue/test-utils jest ts-jest @types/jest
 ```
 
-- lint
+  - 代码风格 `lint`
 
 ```sh
-"eslint": "^8.5.0",
-"eslint-config-prettier": "^8.3.0",
-"eslint-define-config": "^1.2.1",
-"eslint-plugin-jest": "^25.3.2",
-"eslint-plugin-prettier": "^4.0.0",
-"eslint-plugin-vue": "^8.2.0",
+# "eslint": "^8.5.0",
+# "eslint-config-prettier": "^8.3.0",
+# "eslint-define-config": "^1.2.1",
+# "eslint-plugin-jest": "^25.3.2",
+# "eslint-plugin-prettier": "^4.0.0",
+# "eslint-plugin-vue": "^8.2.0",
+# "@typescript-eslint/eslint-plugin": "^5.8.1",
+# "@typescript-eslint/parser": "^5.8.1",
+
+pnpm add -D eslint eslint-config-prettier eslint-define-config eslint-plugin-jest eslint-plugin-prettier eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/parser
+
+pnpm add -D prettier
+
+# "stylelint": "^14.2.0",
+# "stylelint-config-html": "^1.0.0",
+# "stylelint-config-prettier": "^9.0.3",
+# "stylelint-config-recommended": "^6.0.0",
+# "stylelint-config-standard": "^24.0.0",
+# "stylelint-order": "^5.0.0",
+
+pnpm add -D stylelint stylelint-config-html stylelint-config-prettier stylelint-config-recommended stylelint-config-standard stylelint-order
+
+"postcss": "^8.4.5",
+"postcss-html": "^1.3.0",
+"postcss-less": "^5.0.0",
+
+pnpm add -D postcss postcss-html postcss-less
+```
+
+- 代码提交规范
+
+```sh
+"husky": "^7.0.4",
+"lint-staged": "12.1.4",
+
+"commitizen": "^4.2.4",
+"@commitlint/cli": "^16.0.1",
+"@commitlint/config-conventional": "^16.0.0",
 ```
 
 - 打包
