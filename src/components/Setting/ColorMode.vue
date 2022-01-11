@@ -6,6 +6,9 @@
     <a-button type="default" @click="toggleColorMode('color-gray')"
       >灰度模式</a-button
     >
+    <a-button type="ghost" @click="toggleColorMode('color-dark')"
+      >暗黑模式</a-button
+    >
     <a-button type="primary" @click="toggleColorMode('color-normal')"
       >正常模式</a-button
     >

@@ -1,0 +1,40 @@
+html,
+body {
+  &.color-weak {
+    filter: invert(80%);
+  }
+
+  &.color-gray {
+    filter: grayscale(100%);
+    filter: progid:dximagetransform.microsoft.basicimage(grayscale=1);
+  }
+
+  &.color-dark,
+  &.color-dark img {
+    // filter: invert(1) hue-rotate(0.5turn);
+    filter: invert(1) hue-rotate(180deg);
+  }
+  &.color-dark img {
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html,
+  img {
+    // filter: invert(1) hue-rotate(0.5turn);
+    filter: invert(1) hue-rotate(180deg);
+  }
+  img {
+    opacity: 0.75;
+  }
+  // .bgfilter {
+  //   filter: invert(1) hue-rotate(180deg);
+  // }
+  // .some-ele-box {
+  //   box-shadow: none;
+  // }
+  // 背景图片特殊处理
+  //全局颜色特殊处理
+  //background-color: var(--darkColor)
+}

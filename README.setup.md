@@ -106,7 +106,7 @@ const emit = defineEmits(['change', 'delete'])
 
 ### 网页主题模式实现
 
-```less
+```jsx
 // [CSS3 filter(滤镜)实现网页灰色或者黑色模式的代码](https://www.jb51.net/css/754348.html)
 html,
 body {
@@ -119,4 +119,8 @@ body {
     filter: progid:dximagetransform.microsoft.basicimage(grayscale=1);
   }
 }
+
+// 如果需要在JavaScript代码中对系统的深浅主题进行判断，可以使用原生的window.matchMedia()方法，例如：
+// 是否支持深色模式: 返回true或false
+window.matchMedia("(prefers-color-scheme: dark)").matches;
 ```
