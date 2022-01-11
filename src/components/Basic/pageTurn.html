@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>原生JS实现翻书特效</title>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            #btn {
+                width: 50px;
+                height: 40px;
+                line-height: 40px;
+                position: relative;
+                left: 50%;
+                margin-left: -25px;
+                top: 100px;
+            }
+
+            #book {
+                width: 600px;
+                height: 400px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin: -200px 0 0 -300px;
+                border: 1px solid black;
+                /* 第一个封面 */
+                background: url(images/0.jpg);
+            }
+
+            #rightPage {
+                width: 50%;
+                height: 100%;
+                position: absolute;
+                left: 50%;
+                z-index: 2;
+                transition: 0.5s;
+                transform: perspective(800px) rotateY(0px);
+                transform-origin: left center;
+                background: black;
+                transform-style: preserve-3d;
+            }
+
+            #rightPage #topNode {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                /* 第一个封面 */
+                background: url(images/0.jpg) 300px 0;
+                transform: translateZ(1px);
+            }
+
+            #rightPage #bottomNode {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                /* 第三个封面 */
+                background: url(images/2.jpg) 0 0;
+                /*scaleX将翻书镜像后的图像还原镜像*/
+                transform: translateZ(-1px) scaleX(-1);
+            }
+
+            #rightOtherPage {
+                position: absolute;
+                left: 50%;
+                height: 100%;
+                width: 50%;
+                /* 第三个封面 */
+                background: url(images/2.jpg) 300px 0;
+                z-index: 1;
+            }
+        </style>
+    </head>
+
+    <body>
+        <input type='button' value='下一页' id='btn'>
+        <div id='book'>
+            <div id='rightPage'>
+                <div id='topNode'></div>
+                <div id='bottomNode'></div>
+            </div>
+            <div id='rightOtherPage'></div>
+        </div>
+        <script type="text/javascript">
+            var index = 0;
+            var flag = false;
+
+            btn.onclick = function () {
+                if (flag) return;
+                flag = true;
+                index++;
+                rightPage.style.transition = '0.5s';
+                rightPage.style.transform = 'perspective(800px) rotateY(-180deg)';
+
+                setTimeout(function () {
+                    // 翻页后瞬间更换下一页的背景
+                    book.style.backgroundImage = 'url(images/' + (index % 2 + 1) + '.jpg)';
+                    // 让翻页瞬间回去
+                    rightPage.style.transition = '0s';
+                    rightPage.style.transform = 'perspective(800px) rotateY(0deg)';
+
+                    // 更换翻页纸正面背景
+                    topNode.style.backgroundImage = 'url(images/' + (index % 2 + 1) + '.jpg)';
+                    // 更换翻页纸背面背景
+                    bottomNode.style.backgroundImage = 'url(images/' + ((index + 1) % 2 + 1) + '.jpg)';
+
+                    // 更换翻页后的纸背景
+                    rightOtherPage.style.backgroundImage = 'url(images/' + ((index + 1) % 2 + 1) + '.jpg)';
+                    flag = false;
+
+                }, 500);
+
+            };
+        </script>
+    </body>
+
+</html>
