@@ -63,7 +63,21 @@ pnpm add -D commitizen @commitlint/cli @commitlint/config-conventional
 
 ### 扫文档(jsx/异步组件/测试...)
 
-### lerna
+### 多项目资源公用 `lerna`
+
+### 数据可视化
+
+- amap
+- echarts
+- three
+- cesium
+
+```sh
+# https://zhuanlan.zhihu.com/p/34217817
+# https://www.cnblogs.com/fuckgiser/p/5706842.html
+# https://github.com/wangfeilong321/ExamplesforCesium
+# https://github.com/CesiumGS/cesium/releases/download/1.89/Cesium-1.89.zip
+```
 
 ----
 

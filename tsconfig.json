@@ -15,10 +15,10 @@
     "resolveJsonModule": true,
     "useDefineForClassFields": true,
 
+    "allowJs": true,
     // "noLib": false,
     // "forceConsistentCasingInFileNames": true,
     // "strictFunctionTypes": false,
-    // "allowJs": true,
     // "noUnusedLocals": true,
     // "noUnusedParameters": true,
     // "noImplicitAny": false,

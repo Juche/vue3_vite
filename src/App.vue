@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  // This starter template is using Vue 3 <script setup> SFCs
+// This starter template is using Vue 3 <script setup> SFCs
   // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
   // import HelloWorld from '@/components/Demo/HelloWorld';
@@ -20,11 +20,13 @@
     TotalView,
   } from '/@/components/Demo';
 
+  import { Three_01 } from '/@/components/Datav';
   import { ColorMode } from '/@/components/Setting';
 </script>
 
 <template>
   <ColorMode />
+  <Three_01 />
   <!-- <Test1 />
   <TestSub />
   <TestAsync /> -->
