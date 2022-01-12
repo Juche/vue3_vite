@@ -52,6 +52,7 @@ specifiers:
   unplugin-vue-components: ^0.17.11
   vite: ^2.7.8
   vue: ^3.2.26
+  vue-cesium: ^3.0.6
   vue-jest: ^5.0.0-alpha.10
   vue-router: ^4.0.12
   vue-tsc: ^0.30.1
@@ -67,6 +68,7 @@ dependencies:
   pinia: 2.0.9_typescript@4.5.4+vue@3.2.26
   three: 0.136.0
   vue: 3.2.26
+  vue-cesium: 3.0.6_vue@3.2.26
   vue-router: 4.0.12_vue@3.2.26
 
 devDependencies:
@@ -115,6 +117,10 @@ devDependencies:
   vue-tsc: 0.30.1_typescript@4.5.4
 
 packages:
+
+  /@amap/amap-jsapi-loader/1.0.1:
+    resolution: {integrity: sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==}
+    dev: false
 
   /@ant-design/colors/5.1.1:
     resolution: {integrity: sha512-Txy4KpHrp3q4XZdfgOBqLl+lkQIc3tEvHXOimRN1giX1AEC7mGtyrO9p8iRGJ3FLuVMGa2gNEzQyghVymLttKQ==}
@@ -2208,6 +2214,10 @@ packages:
     dependencies:
       vue: 3.2.26
     dev: true
+
+  /@zouyaoji/heatmap.js/2.0.8:
+    resolution: {integrity: sha512-kBQny/zOUFH2OFoVyu6IdGJEcQMENIAASUsaZhk+OuJ9WexsYf6EU2lCyGURcsFly1kTMZKODlV7nBTCgfvJqg==}
+    dev: false
 
   /JSONStream/1.3.5:
     resolution: {integrity: sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==}
@@ -5980,6 +5990,10 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
+  /mgrs/1.0.0:
+    resolution: {integrity: sha1-+5FYjnjJACVnI5XLQLJffNatGCk=}
+    dev: false
+
   /micromatch/3.1.10:
     resolution: {integrity: sha512-MWikgl9n9M3w+bpsY3He8L+w9eF9338xRl8IAO5viDizwSzziFEyUzo2xrrloB64ADbTf8uA8vRqqttDTOmccg==}
     engines: {node: '>=0.10.0'}
@@ -6060,6 +6074,10 @@ packages:
   /minimist/1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
     dev: true
+
+  /mitt/3.0.0:
+    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
+    dev: false
 
   /mixin-deep/1.3.2:
     resolution: {integrity: sha512-WRoDn//mXBiJ1H40rqa3vH0toePwSsGb45iInWlTySa+Uu4k3tYUSxa2v1KqAiLtvlrSzaExqS1gtk96A9zvEA==}
@@ -6629,6 +6647,13 @@ packages:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
     dev: true
+
+  /proj4/2.7.5:
+    resolution: {integrity: sha512-5ecXUXbHAfvdhfBQpU7EhUfPCQGUCPmVup/4gnZA3bJY3JcK/xxzm4QQDz1xiXokN6ux65VDczlCtBtKrTSpAQ==}
+    dependencies:
+      mgrs: 1.0.0
+      wkt-parser: 1.3.2
+    dev: false
 
   /promise/7.3.1:
     resolution: {integrity: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==}
@@ -8189,6 +8214,21 @@ packages:
       vscode-typescript-languageservice: 0.30.1
     dev: true
 
+  /vue-cesium/3.0.6_vue@3.2.26:
+    resolution: {integrity: sha512-zaQffWvESKusDL+vFOGIZhyir9ERL2o1oIHtrX+tfjF4WVtUYA4tUE9mZu/7WGzYI3/G1V1SSE2Q77M/1nGK4A==}
+    peerDependencies:
+      vue: ^3.2.26
+    dependencies:
+      '@amap/amap-jsapi-loader': 1.0.1
+      '@vue/shared': 3.2.26
+      '@zouyaoji/heatmap.js': 2.0.8
+      echarts: 5.2.2
+      lodash-es: 4.17.21
+      mitt: 3.0.0
+      proj4: 2.7.5
+      vue: 3.2.26
+    dev: false
+
   /vue-demi/0.12.1_vue@3.2.26:
     resolution: {integrity: sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==}
     engines: {node: '>=12'}
@@ -8411,6 +8451,10 @@ packages:
       assert-never: 1.2.1
       babel-walk: 3.0.0-canary-5
     dev: true
+
+  /wkt-parser/1.3.2:
+    resolution: {integrity: sha512-A26BOOo7sHAagyxG7iuRhnKMO7Q3mEOiOT4oGUmohtN/Li5wameeU4S6f8vWw6NADTVKljBs8bzA8JPQgSEMVQ==}
+    dev: false
 
   /word-wrap/1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}

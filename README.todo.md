@@ -69,8 +69,8 @@ pnpm add -D commitizen @commitlint/cli @commitlint/config-conventional
 
 - amap
 - echarts
-- three
-- cesium
+- three https://threejs.org/docs/index.html#manual/zh
+- cesium https://zouyaoji.gitee.io/vue-cesium/#/zh-CN/component
 
 ```sh
 # https://zhuanlan.zhihu.com/p/34217817

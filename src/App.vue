@@ -20,13 +20,14 @@
     TotalView,
   } from '/@/components/Demo';
 
-  import { Three_01 } from '/@/components/Datav';
+  import { Three_01, Cesium_01 } from '/@/components/Datav';
   import { ColorMode } from '/@/components/Setting';
 </script>
 
 <template>
   <ColorMode />
   <Three_01 />
+  <Cesium_01 />
   <!-- <Test1 />
   <TestSub />
   <TestAsync /> -->

@@ -26,6 +26,7 @@
     "pinia": "2.0.9",
     "three": "^0.136.0",
     "vue": "^3.2.26",
+    "vue-cesium": "^3.0.6",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {

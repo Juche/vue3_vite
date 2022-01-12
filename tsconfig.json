@@ -14,7 +14,6 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "useDefineForClassFields": true,
-
     "allowJs": true,
     // "noLib": false,
     // "forceConsistentCasingInFileNames": true,
@@ -23,15 +22,20 @@
     // "noUnusedParameters": true,
     // "noImplicitAny": false,
     // "removeComments": true,
-
     "types": [
       "webpack-env",
       "vite/client",
       "jest",
+      "vue-cesium/global",
+      "vue-cesium/Cesium"
     ], // 申明加载的模块
     "paths": {
-      "/@/*": ["src/*"],
-      "/#/*": ["types/*"]
+      "/@/*": [
+        "src/*"
+      ],
+      "/#/*": [
+        "types/*"
+      ]
     },
     "lib": [
       "esnext",
