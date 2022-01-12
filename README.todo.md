@@ -60,7 +60,10 @@ pnpm add -D commitizen @commitlint/cli @commitlint/config-conventional
 ```
 
 ### 打包
+
 ### 扫文档(jsx/异步组件/测试...)
+
+### lerna
 
 ----
 
@@ -89,9 +92,7 @@ const purred = {
 
 块翻转扫描翻页加载动画占位元素/动画
 
----
-
-lerna
+----
 
 [链接]CSS 开发快速提升技巧 https://mp.weixin.qq.com/s/r-S8iu8zRd8ari7d5spLgg
 
