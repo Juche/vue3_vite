@@ -10,18 +10,18 @@
   // import SpInfo from '@/components/Demo/SpInfo';
 
   import {
-    AntComp,
-    HelloWorld,
-    SpInfo,
-    TailWind,
-    Test1,
-    TestAsync,
+    // AntComp,
+    // HelloWorld,
+    // SpInfo,
+    // TailWind,
+    // TotalView,
+    // Test1,
     TestSub,
-    TotalView,
+    // TestAsync,
   } from '/@/components/Demo';
 
-  import { Three_01, Cesium_01 } from '/@/components/Datav';
-  import { ColorMode } from '/@/components/Setting';
+  // import { Three_01, Cesium_01 } from '/@/components/Datav';
+  // import { ColorMode } from '/@/components/Setting';
 
   let person1: Person = {
     name: 'Juche',
@@ -32,17 +32,17 @@
 </script>
 
 <template>
-  <ColorMode />
-  <Three_01 />
-  <Cesium_01 />
+  <!-- <ColorMode /> -->
+  <TestAsync />
   <!-- <Test1 />
   <TestSub />
-  <TestAsync /> -->
-  <AntComp />
+  <Three_01 />
+  <Cesium_01 />
+  <AntComp /> -->
   <!-- <TotalView />
   <SpInfo /> -->
-  <TailWind />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <!-- <TailWind />
+  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
 </template>
 
 <style lang="less">

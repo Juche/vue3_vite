@@ -61,6 +61,8 @@ pnpm add -D commitizen @commitlint/cli @commitlint/config-conventional
 
 ### 打包
 
+https://v3.cn.vuejs.org/guide/single-file-component.html#%E4%BD%BF%E7%94%A8-rollup-%E6%9E%84%E5%BB%BA
+
 ### 扫文档(jsx/异步组件/测试...)
 
 ### 多项目资源公用 `lerna`
