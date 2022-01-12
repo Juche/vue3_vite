@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
+  // This starter template is using Vue 3 <script setup> SFCs
   // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
   // import HelloWorld from '@/components/Demo/HelloWorld';
@@ -22,6 +22,13 @@
 
   import { Three_01, Cesium_01 } from '/@/components/Datav';
   import { ColorMode } from '/@/components/Setting';
+
+  let person1: Person = {
+    name: 'Juche',
+    gender: 'female',
+    age: 0,
+  };
+  console.log(`🚀 ~ person1`, person1);
 </script>
 
 <template>
