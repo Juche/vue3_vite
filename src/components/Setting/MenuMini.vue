@@ -9,6 +9,16 @@
         {{ item.name }}
       </router-link>
     </a-button>
+    <br />
+    <a-button
+      v-for="item in routes"
+      type="ghost"
+      :danger="item.name === route.name"
+      :key="item.name"
+      @click="routeTo(item.path)"
+    >
+      {{ item.name }}
+    </a-button>
   </div>
 </template>
 
@@ -19,13 +29,18 @@
   const router = useRouter();
   const route = useRoute();
 
+  function routeTo(path: string): void {
+    console.log(`🚀 ~ routeTo ~ path`, path);
+    router.replace(path);
+  }
+
   window.routes = routes;
   window.router = router;
   window.route = route;
 
-  console.log(`🚀 ~ routes`, routes);
-  console.log(`🚀 ~ router`, router);
-  console.log(`🚀 ~ route`, route);
+  // console.log(`🚀 ~ routes`, routes);
+  // console.log(`🚀 ~ router`, router);
+  // console.log(`🚀 ~ route`, route);
 </script>
 
 <style lang="less">
