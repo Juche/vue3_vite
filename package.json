@@ -13,7 +13,8 @@
     "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
     "lint:lint-staged": "lint-staged",
     "test:unit": "jest",
-    "test:unit-coverage": "jest --coverage"
+    "test:unit-coverage": "jest --coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "ant-design-vue": "3.0.0-beta.3",
