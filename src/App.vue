@@ -1,10 +1,11 @@
 <script setup lang="ts">
   // Vue 3 <script setup> SFCs :https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
-  import { ColorMode } from '/@/components/Setting';
+  import { ColorMode, MenuMini } from '/@/components/Setting';
 </script>
 
 <template>
+  <MenuMini />
   <ColorMode />
   <RouterView />
 </template>

@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 
-import router from './routes';
+import { router } from './routes';
 
 import './styles/tailwind.css';
 import './styles/index.less';
@@ -21,5 +21,7 @@ app.use(VueCesium, {
   // 使用Cesium ion的数据源需要到https://cesium.com/ion/申请一个账户，获取Access Token。不指定的话可能导致 CesiumIon 的在线影像、地形加载失败
   // accessToken: 'Your Cesium Ion defaultAccessToken'
 });
+
+// window.app = app;
 
 app.mount('#app');

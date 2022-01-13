@@ -1,5 +1,4 @@
-import ColorMode from './ColorMode.vue'
+import ColorMode from './ColorMode.vue';
+import MenuMini from './MenuMini.vue';
 
-export {
-  ColorMode,
-}
+export { ColorMode, MenuMini };

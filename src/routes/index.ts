@@ -7,11 +7,11 @@ import Demo from '/@/views/demo/index.vue';
 import UI from '/@/views/ui/index.vue';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/comp', component: Comp },
-  { path: '/datav', component: Datav },
-  { path: '/demo', component: Demo },
-  { path: '/ui', component: UI },
+  { path: '/', component: Home, name: 'Home' },
+  { path: '/comp', component: Comp, name: 'Comp' },
+  { path: '/datav', component: Datav, name: 'Datav' },
+  { path: '/demo', component: Demo, name: 'Demo' },
+  { path: '/ui', component: UI, name: 'UI' },
 ];
 
 // 3. 创建路由实例并传递 `routes` 配置
@@ -23,4 +23,4 @@ const router = createRouter({
   routes, // `routes: routes` 的缩写
 });
 
-export default router;
+export { routes, router };
