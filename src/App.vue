@@ -16,8 +16,8 @@
     // TailWind,
     // TotalView,
     // Test1,
-    TestSub,
-    // TestAsync,
+    // TestSub,
+    TestAsync,
   } from '/@/components/Demo';
 
   // import { Three_01, Cesium_01 } from '/@/components/Datav';

@@ -22,7 +22,7 @@
   const TestSub = defineAsyncComponent({
     loader: () => import('./TestSub.vue'),
     delay: 100,
-    timeout: 500,
+    timeout: 3000,
     errorComponent: ErrorComponent,
     loadingComponent: LoadingComponent,
   });
