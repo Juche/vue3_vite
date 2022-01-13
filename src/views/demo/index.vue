@@ -1,7 +1,4 @@
 <script setup lang="ts">
-  // This starter template is using Vue 3 <script setup> SFCs
-  // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-
   import { defineAsyncComponent } from 'vue';
 
   import { AntComp, HelloWorld, SpInfo, TailWind, TotalView, AsyncComp } from '/@/components/Demo';
@@ -29,16 +26,14 @@
 </script>
 
 <template>
-  <ColorMode />
-  <RouterView />
-  <!-- <ColorMode />
-  <AsyncComp /> -->
+  <!-- <ColorMode /> -->
+  <AsyncComp />
   <!-- <Three01 />
   <AsyncCesium />
   <Cesium01 /> -->
-  <!-- <AntComp />
+  <AntComp />
   <TailWind />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
+  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
   <!-- <TotalView />
   <SpInfo /> -->
 </template>

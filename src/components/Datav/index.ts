@@ -1,4 +1,4 @@
-import Three_01 from './Three_01.vue';
-import Cesium_01 from './Cesium_01.vue';
+import Three01 from './Three01.vue';
+import Cesium01 from './Cesium01.vue';
 
-export { Three_01, Cesium_01 };
+export { Three01, Cesium01 };
