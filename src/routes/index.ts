@@ -2,14 +2,16 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Home from '/@/views/home/index.vue';
 import Comp from '/@/views/comp/index.vue';
-import Datav from '/@/views/datav/index.vue';
+import Three from '/@/views/datav/three.vue';
+import Cesium from '/@/views/datav/cesium.vue';
 import Demo from '/@/views/demo/index.vue';
 import UI from '/@/views/ui/index.vue';
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
   { path: '/comp', component: Comp, name: 'Comp' },
-  { path: '/datav', component: Datav, name: 'Datav' },
+  { path: '/three', component: Three, name: 'Three' },
+  { path: '/cesium', component: Cesium, name: 'Cesium' },
   { path: '/demo', component: Demo, name: 'Demo' },
   { path: '/ui', component: UI, name: 'UI' },
 ];

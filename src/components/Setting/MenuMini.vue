@@ -12,7 +12,7 @@
     <br />
     <a-button
       v-for="item in routes"
-      type="ghost"
+      type="default"
       :danger="item.name === route.name"
       :key="item.name"
       @click="routeTo(item.path)"

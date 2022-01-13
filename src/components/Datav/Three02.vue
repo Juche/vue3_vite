@@ -1,5 +1,5 @@
 <template>
-  <canvas id="canvasDom1"></canvas>
+  <canvas id="canvasDom2"></canvas>
 </template>
 
 <script lang="ts" setup>
@@ -9,10 +9,10 @@
   function init() {
     // const renderer = new THREE.WebGLRenderer();
     var renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById('canvasDom1'),
+      canvas: document.getElementById('canvasDom2'),
     });
     renderer.setSize(200, 100);
-    renderer.setClearColor(0xff0000);
+    renderer.setClearColor(0x000000);
     // document.body.appendChild(renderer.domElement);
 
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
@@ -44,7 +44,7 @@
 </script>
 
 <style lang="less" scoped>
-  #canvasDom1 {
+  #canvasDom2 {
     width: 400px;
     height: 300px;
   }
