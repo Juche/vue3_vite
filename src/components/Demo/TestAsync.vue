@@ -11,20 +11,20 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { defineComponent, defineAsyncComponent, ref } from 'vue';
+  import { defineAsyncComponent, ref } from 'vue';
 
   // const TestSub = defineAsyncComponent(() => import('./TestSub.vue'))
 
-  // import ErrorComponent form './ErrorComponent.vue';
-  // import LoadingComponent form './LoadingComponent.vue';
+  import ErrorComponent from './ErrorComponent.vue';
+  import LoadingComponent from './LoadingComponent.vue';
 
   // 带选项的异步组件
   const TestSub = defineAsyncComponent({
     loader: () => import('./TestSub.vue'),
-    delay: 60000,
-    timeout: 70000,
-    // errorComponent: ErrorComponent,
-    // loadingComponent: LoadingComponent
+    delay: 100,
+    timeout: 500,
+    errorComponent: ErrorComponent,
+    loadingComponent: LoadingComponent,
   });
 
   let show = ref(false);
@@ -38,15 +38,4 @@
   defineExpose({
     show,
   });
-
-  // export default defineComponent({
-  //   name: 'TestAsync',
-  //   components: {
-  //     TestSub: defineAsyncComponent(
-  //       () =>
-  //         // 异步引入组件
-  //         import('./TestSub.vue')
-  //     ),
-  //   },
-  // });
 </script>
