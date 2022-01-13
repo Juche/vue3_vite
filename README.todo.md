@@ -81,7 +81,7 @@ https://v3.cn.vuejs.org/guide/single-file-component.html#%E4%BD%BF%E7%94%A8-roll
 # https://github.com/CesiumGS/cesium/releases/download/1.89/Cesium-1.89.zip
 ```
 
-----
+---
 
 ## 一些思考
 
@@ -108,7 +108,7 @@ const purred = {
 
 块翻转扫描翻页加载动画占位元素/动画
 
-----
+---
 
 [链接]CSS 开发快速提升技巧 https://mp.weixin.qq.com/s/r-S8iu8zRd8ari7d5spLgg
 
