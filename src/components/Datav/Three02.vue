@@ -7,34 +7,45 @@
   import { onMounted } from 'vue';
 
   function init() {
-    // const renderer = new THREE.WebGLRenderer();
-    var renderer = new THREE.WebGLRenderer({
+    const width = 300;
+    const height = 300;
+    // 创建场景
+    const scene = new THREE.Scene();
+    // 创建相机
+    // 使用的是PerspectiveCamera（透视摄像机）
+    // 第一个参数是视野角度（FOV）
+    // 第二个参数是窗口的宽高比（aspect ratio）
+    // 第三个参数是近裁剪面的距离（near clipping plane）
+    // 第四个参数是远裁剪面的距离（far clipping plane）
+    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    // 创建渲染器
+    const renderer = new THREE.WebGLRenderer({
       canvas: document.getElementById('canvasDom2'),
     });
-    renderer.setSize(200, 100);
-    renderer.setClearColor(0x000000);
+
+    renderer.setSize(width, height);
     // document.body.appendChild(renderer.domElement);
 
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
-    camera.position.set(0, 0, 100);
-    camera.lookAt(0, 0, 0);
+    // 创建一个立方体
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
 
-    const scene = new THREE.Scene();
+    scene.add(cube);
+    camera.position.z = 5;
 
-    //create a blue LineBasicMaterial
-    const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+    camera.position.z = 5;
 
-    const points = [];
-    points.push(new THREE.Vector3(-10, 0, 0));
-    points.push(new THREE.Vector3(0, 10, 0));
-    points.push(new THREE.Vector3(10, 0, 0));
+    function animate() {
+      requestAnimationFrame(animate);
 
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
 
-    const line = new THREE.Line(geometry, material);
+      renderer.render(scene, camera);
+    }
 
-    scene.add(line);
-    renderer.render(scene, camera);
+    animate();
   }
 
   // init();
