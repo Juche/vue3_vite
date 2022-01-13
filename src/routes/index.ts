@@ -1,11 +1,17 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import Demo from '/@/views/Demo/index.vue';
-import Datav from '/@/views/Datav/index.vue';
+import Home from '/@/views/home/index.vue';
+import Comp from '/@/views/comp/index.vue';
+import Datav from '/@/views/datav/index.vue';
+import Demo from '/@/views/demo/index.vue';
+import UI from '/@/views/ui/index.vue';
 
 const routes = [
-  { path: '/', component: Demo },
+  { path: '/', component: Home },
+  { path: '/comp', component: Comp },
   { path: '/datav', component: Datav },
+  { path: '/demo', component: Demo },
+  { path: '/ui', component: UI },
 ];
 
 // 3. 创建路由实例并传递 `routes` 配置
