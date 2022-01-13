@@ -8,10 +8,21 @@
 - hook
 - three.js & Cesium.js
 
-<!-- - 异步组件案例
-- SFCs 模式案例
-- ts interface 案例
-- 修复 VueCesium 不渲染的问题
 - 代码格式化相关 prettier & husky
-- 添加路由 & 菜单组件
-- 页面和组件分类整理 -->
+- ts interface 案例
+- 更新 three.js 示例
+- 修复 VueCesium 不渲染的问题
+- three 和 cesium 样例分离
+
+1. 代码格式化相关 prettier & husky
+2. ts interface 案例
+3. 修复 VueCesium 不渲染的问题
+4. 更新 three.js 示例
+
+---
+
+1. 异步组件案例
+2. SFCs 模式案例
+3. 3D 案例
+4. 添加路由 & 菜单组件
+5. 页面和组件分类整理
