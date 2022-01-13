@@ -1,30 +1,30 @@
 <template>
   <!-- <Suspense>
     <template #default>
-      <TestSub />
+      <AsyncLoader />
     </template>
     <template #fallback> Loading ... </template>
   </Suspense> -->
   <div class="toggle-show">
     <a-button @click="toggleShow">切换组件显示</a-button>
-    <TestSub v-if="show" />
+    <AsyncLoader v-if="show" />
   </div>
 </template>
 <script lang="ts" setup>
   import { defineAsyncComponent, ref } from 'vue';
 
-  // const TestSub = defineAsyncComponent(() => import('./TestSub.vue'))
+  // const AsyncLoader = defineAsyncComponent(() => import('./AsyncLoader.vue'))
 
-  import ErrorComponent from './ErrorComponent.vue';
-  import LoadingComponent from './LoadingComponent.vue';
+  import AsyncError from './AsyncError.vue';
+  import AsyncLoading from './AsyncLoading.vue';
 
   // 带选项的异步组件
-  const TestSub = defineAsyncComponent({
-    loader: () => import('./TestSub.vue'),
+  const AsyncLoader = defineAsyncComponent({
+    loader: () => import('./AsyncLoader.vue'),
     delay: 100,
     timeout: 3000,
-    errorComponent: ErrorComponent,
-    loadingComponent: LoadingComponent,
+    errorComponent: AsyncError,
+    loadingComponent: AsyncLoading,
   });
 
   let show = ref(false);

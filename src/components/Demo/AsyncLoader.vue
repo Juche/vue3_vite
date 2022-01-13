@@ -2,9 +2,9 @@
   <div v-for="(item, index) in items" :key="item"> {{ index }} --> {{ item }} </div>
 </template>
 <script lang="ts">
-  import { defineComponent, reactive, toRefs } from 'vue';
+  import { defineComponent, reactive } from 'vue';
   export default defineComponent({
-    name: 'TestSub',
+    name: 'AsyncLoader',
     setup() {
       const items = reactive([
         '山有木兮木有枝，心悦君兮君不知',
