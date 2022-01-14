@@ -1,11 +1,19 @@
 <template>
-  <!-- <Three01 />
-  <Three02 />
-  <Three03 />
-  <Three04 /> -->
-  <Three05 />
+  <!-- <ThreeLine /> -->
+  <ThreeText />
+  <!-- <ThreeCube /> -->
+  <!-- <ThreeLion /> -->
+  <!-- <ThreeParticle /> -->
+  <!-- <ThreeSnow /> -->
 </template>
 
 <script setup lang="ts">
-  import { Three01, Three02, Three03, Three04, Three05 } from '/@/components/Datav';
+  import {
+    ThreeLine,
+    ThreeText,
+    ThreeCube,
+    ThreeLion,
+    ThreeParticle,
+    ThreeSnow,
+  } from '/@/components/Datav';
 </script>

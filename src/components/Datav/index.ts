@@ -1,8 +1,9 @@
-import Three01 from './Three01.vue';
-import Three02 from './Three02.vue';
-import Three03 from './Three03.vue';
-import Three04 from './Three04.vue';
-import Three05 from './Three05.vue';
+import ThreeLine from './ThreeLine.vue';
+import ThreeText from './ThreeText.vue';
+import ThreeCube from './ThreeCube.vue';
+import ThreeLion from './ThreeLion.vue';
+import ThreeParticle from './ThreeParticle.vue';
+import ThreeSnow from './ThreeSnow.vue';
 import Cesium01 from './Cesium01.vue';
 
-export { Three01, Three02, Three03, Three04, Three05, Cesium01 };
+export { ThreeLine, ThreeText, ThreeCube, ThreeLion, ThreeParticle, ThreeSnow, Cesium01 };
