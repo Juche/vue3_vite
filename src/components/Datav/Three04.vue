@@ -1,5 +1,7 @@
 <template>
-  <div id="world"></div>
+  <div id="world">
+    <canvas id="canvasDom4"></canvas>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -25,8 +27,8 @@
 
   function init() {
     // container = document.createElement('div');
-    container = document.getElementById('world');
-    document.body.appendChild(container);
+    // container = document.getElementById('world');
+    // document.body.appendChild(container);
 
     camera = new THREE.PerspectiveCamera(120, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 1000;
@@ -60,10 +62,12 @@
     }
 
     // renderer = new THREE.CanvasRenderer();
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({
+      canvas: document.getElementById('canvasDom4'),
+    });
     // renderer.setClearColor(0x000000);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    container.appendChild(renderer.domElement);
+    // container.appendChild(renderer.domElement);
 
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.addEventListener('touchstart', onDocumentTouchStart, false);
@@ -144,23 +148,10 @@
   });
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   #world {
-    background-color: #193c6d;
-    // filter: progid: DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#003073', endColorstr='#029797');
-    // background-image: url(//img.alicdn.com/tps/TB1d.u8MXXXXXXuXFXXXXXXXXXX-1900-790.jpg);
-    // background-size: 100%;
-    // background-image: -webkit-gradient(
-    //   linear,
-    //   0 0,
-    //   100% 100%,
-    //   color-stop(0, #003073),
-    //   color-stop(100%, #029797)
-    // );
+    // background-color: #193c6d;
     background-image: linear-gradient(135deg, #003073, #029797);
-    // text-align: center;
-    // margin: 0px;
-    // overflow: hidden;
   }
 
   canvas {

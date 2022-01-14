@@ -1,7 +1,7 @@
 <template>
-  <!-- <Three01 />
+  <Three01 />
   <Three02 />
-  <Three03 /> -->
+  <Three03 />
   <Three04 />
 </template>
 
