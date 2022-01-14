@@ -1,11 +1,10 @@
 <template>
   <div id="world"></div>
-  <div id="instructions"
+  <!-- <div id="instructions"
     >Press and drag to make wind<br /><span class="lightInstructions"
       >the lion will surely appreciate</span
     ></div
   >
-
   <div id="credits">
     <p
       >Prints on
@@ -13,7 +12,7 @@
       <a href="https://codepen.io/Yakudoo/" target="blank">my other codepens</a> |
       <a href="https://www.epic.net" target="blank">epic.net</a></p
     >
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
@@ -48,8 +47,8 @@
     WIDTH,
     windowHalfX,
     windowHalfY,
-    mousePos = { x: 0, y: 0 };
-  dist = 0;
+    mousePos = { x: 0, y: 0 },
+    dist = 0;
 
   //INIT THREE JS, SCREEN AND MOUSE EVENTS
 
@@ -167,7 +166,7 @@
     scene.add(fan.threegroup);
   }
 
-  Fan = function () {
+  const Fan = function () {
     this.isBlowing = false;
     this.speed = 0;
     this.acc = 0;
@@ -236,7 +235,7 @@
     this.propeller.rotation.z += this.speed;
   };
 
-  Lion = function () {
+  const Lion = function () {
     this.windTime = 0;
     this.bodyInitPositions = [];
     this.maneParts = [];
@@ -300,10 +299,14 @@
     this.bodyVertices = [0, 1, 2, 3, 4, 10];
 
     for (var i = 0; i < this.bodyVertices.length; i++) {
-      var tv = this.body.geometry.vertices[this.bodyVertices[i]];
-      tv.z = 70;
+      if (this.body.geometry.vertices) {
+        var tv = this.body.geometry.vertices[this.bodyVertices[i]];
+        tv.z = 70;
+        this.bodyInitPositions.push({ x: tv.x, y: tv.y, z: tv.z });
+      } else {
+        this.bodyInitPositions.push({ x: 0, y: 0, z: 0 });
+      }
       //tv.x = 0;
-      this.bodyInitPositions.push({ x: tv.x, y: tv.y, z: tv.z });
     }
 
     // knee
@@ -627,8 +630,8 @@
 
     for (var i = 0; i < this.bodyVertices.length; i++) {
       var tvInit = this.bodyInitPositions[i];
-      var tv = this.body.geometry.vertices[this.bodyVertices[i]];
-      tv.x = tvInit.x + this.head.position.x;
+      // var tv = this.body.geometry.vertices[this.bodyVertices[i]];
+      // tv.x = tvInit.x + this.head.position.x;
     }
     this.body.geometry.verticesNeedUpdate = true;
   };
@@ -715,13 +718,6 @@
     renderer.render(scene, camera);
   }
 
-  init();
-  createLights();
-  createFloor();
-  createLion();
-  createFan();
-  loop();
-
   function clamp(v, min, max) {
     return Math.min(Math.max(v, min), max);
   }
@@ -735,15 +731,18 @@
     return tv;
   }
 
-  // init();
   onMounted(() => {
     init();
+    createLights();
+    createFloor();
+    createLion();
+    createFan();
+    loop();
   });
 </script>
 
 <style lang="less" scoped>
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
-
+  // @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
   #world {
     background: #ebe5e7;
     position: absolute;
