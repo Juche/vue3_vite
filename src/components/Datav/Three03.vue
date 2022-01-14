@@ -1,6 +1,6 @@
 <template>
   <div id="world"></div>
-  <!-- <div id="instructions"
+  <div id="instructions"
     >Press and drag to make wind<br /><span class="lightInstructions"
       >the lion will surely appreciate</span
     ></div
@@ -12,7 +12,7 @@
       <a href="https://codepen.io/Yakudoo/" target="blank">my other codepens</a> |
       <a href="https://www.epic.net" target="blank">epic.net</a></p
     >
-  </div> -->
+  </div>
 </template>
 
 <script lang="ts" setup>
