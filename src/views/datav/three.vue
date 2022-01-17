@@ -5,6 +5,7 @@
   <!-- <ThreeLion /> -->
   <!-- <ThreeParticle /> -->
   <!-- <ThreeSnow /> -->
+  <ThreeLoadModels />
 </template>
 
 <script setup lang="ts">
@@ -15,5 +16,6 @@
     ThreeLion,
     ThreeParticle,
     ThreeSnow,
+    ThreeLoadModels,
   } from '/@/components/Datav';
 </script>
