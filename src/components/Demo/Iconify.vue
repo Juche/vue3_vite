@@ -1,8 +1,6 @@
 <template>
   <div class="icon-set" :style="iconStyle">
-    <Icon icon="mdi:rocket-launch" :inline="true" />
-    <Icon icon="mdi:rocket-launch" :inline="true" />
-    <Icon icon="mdi:rocket-launch" :inline="true" />
+    <h5>Iconify 使用示例</h5>
     <Icon icon="mdi:rocket-launch" :inline="true" />
     <Icon icon="mdi:rocket-launch" :inline="true" />
     <!-- Material Design Icons -->
@@ -42,6 +40,25 @@
     <Icon icon="ion:ios-cart" />
     <Icon icon="mdi:flask" />
     <Icon icon="noto:anchor" />
+    <h5>色彩模式</h5>
+    <Icon icon="noto:sun" />
+    <Icon icon="noto:first-quarter-moon" />
+    <Icon icon="noto:new-moon" />
+    <Icon icon="noto:sun-behind-small-cloud" />
+    <br />
+    <Icon icon="noto:full-moon" />
+    <Icon icon="noto:waxing-crescent-moon" />
+    <Icon icon="noto:last-quarter-moon" />
+    <Icon icon="noto:waning-crescent-moon" />
+    <Icon icon="openmoji:sun" />
+    <Icon icon="openmoji:sun-behind-small-cloud" />
+    <Icon icon="openmoji:full-moon" />
+    <Icon icon="openmoji:last-quarter-moon" />
+    <Icon icon="openmoji:new-moon" />
+    <Icon icon="emojione-v1:sun" />
+    <Icon icon="emojione-v1:sun-behind-cloud" />
+    <Icon icon="emojione:sun-behind-small-cloud" />
+    <Icon icon="emojione:sun-behind-large-cloud" />
   </div>
 </template>
 
