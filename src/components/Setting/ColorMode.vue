@@ -1,9 +1,5 @@
 <template>
   <div class="color-mode">
-    <!-- <a-button type="dashed" @click="toggleColorMode('color-weak')">色弱模式</a-button>
-    <a-button type="default" @click="toggleColorMode('color-gray')">灰度模式</a-button>
-    <a-button type="ghost" @click="toggleColorMode('color-dark')">暗黑模式</a-button>
-    <a-button type="primary" @click="toggleColorMode('color-normal')">正常模式</a-button> -->
     <a-button
       v-for="mode in ColorMode"
       @click="toggleColorMode(mode.id)"
@@ -11,36 +7,63 @@
       :type="activeMode === mode.id ? 'primary' : 'dashed'"
       >{{ mode.name }}</a-button
     >
+    <div class="color-icon">
+      <!-- <Icon icon="fxemoji:sunrays" />
+      <Icon icon="noto:new-moon" />
+      <Icon icon="noto:first-quarter-moon" />
+      <Icon icon="noto:last-quarter-moon" /> -->
+
+      <Icon :icon="ColorMode[modeIdx].icon" @click="switchColorMode" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { Icon } from '@iconify/vue';
 
   const ColorMode = [
     {
-      name: '正常模式',
+      name: '浅色模式',
       id: 'color-normal',
+      icon: 'fxemoji:sunrays',
     },
     {
-      name: '暗黑模式',
+      name: '深色模式',
       id: 'color-dark',
+      icon: 'noto:new-moon',
     },
     {
       name: '灰度模式',
       id: 'color-gray',
+      icon: 'noto:first-quarter-moon',
     },
     {
       name: '色弱模式',
       id: 'color-weak',
+      // icon: 'noto:last-quarter-moon',
+      icon: 'noto:first-quarter-moon',
     },
   ];
   let activeMode = ref('color-normal');
+  let modeIdx = ref(0);
   const rootEl: HTMLElement = document.documentElement;
 
-  const toggleColorMode = (colorMode: string): void => {
-    activeMode.value = colorMode;
-    rootEl.className = colorMode;
+  const toggleColorMode = (mode: string): void => {
+    activeMode.value = mode;
+    rootEl.className = mode;
+    ColorMode.forEach((item, idx) => {
+      if (item.id === mode) {
+        modeIdx.value = idx;
+        return true;
+      }
+      return false;
+    });
+  };
+  const switchColorMode = (): void => {
+    modeIdx.value = (modeIdx.value + 1) % ColorMode.length;
+    rootEl.className = ColorMode[modeIdx.value].id;
+    activeMode.value = ColorMode[modeIdx.value].id;
   };
 </script>
 
@@ -50,5 +73,9 @@
     right: 0;
     top: 0;
     z-index: 9999;
+  }
+
+  .color-icon {
+    font-size: 30px;
   }
 </style>

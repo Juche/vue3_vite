@@ -41,11 +41,24 @@
     <Icon icon="mdi:flask" />
     <Icon icon="noto:anchor" />
     <h5>色彩模式</h5>
+    <Icon icon="fxemoji:sunrays" />
+    <Icon icon="noto:new-moon" />
+    <Icon icon="noto:first-quarter-moon" />
+    <Icon icon="noto:last-quarter-moon" />
+    <br />
     <Icon icon="noto:sun" />
     <Icon icon="noto:first-quarter-moon" />
     <Icon icon="noto:new-moon" />
     <Icon icon="noto:sun-behind-small-cloud" />
-    <br />
+    <Icon icon="noto:sun" />
+    <Icon icon="noto:new-moon-face" />
+    <Icon icon="fxemoji:firstquartermoonface" />
+    <Icon icon="fxemoji:lastquartermoonface" />
+    <Icon icon="noto:first-quarter-moon-face" />
+    <Icon icon="openmoji:last-quarter-moon-face" />
+    <Icon icon="noto:first-quarter-moon" />
+    <Icon icon="noto:last-quarter-moon" />
+    <Icon icon="noto:sun-behind-small-cloud" />
     <Icon icon="noto:full-moon" />
     <Icon icon="noto:waxing-crescent-moon" />
     <Icon icon="noto:last-quarter-moon" />
