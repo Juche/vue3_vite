@@ -10,7 +10,18 @@
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
   import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 
-  let camera, scene, renderer;
+  let camera: {
+      position: { set: (arg0: number, arg1: number, arg2: number) => void };
+      aspect: number;
+      updateProjectionMatrix: () => void;
+    },
+    scene: { background: any; add: (arg0: any) => void },
+    renderer: {
+      setPixelRatio: (arg0: number) => void;
+      setSize: (arg0: number, arg1: number) => void;
+      domElement: any;
+      render: (arg0: any, arg1: any) => void;
+    };
 
   function init() {
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
@@ -20,67 +31,70 @@
     scene.background = new THREE.Color(0xf0f0f0);
 
     const loader = new FontLoader();
-    loader.load('/src/assets/threejs/fonts/helvetiker_regular.typeface.json', function (font) {
-      const color = 0x006699;
+    loader.load(
+      '/src/assets/threejs/fonts/helvetiker_regular.typeface.json',
+      function (font: { generateShapes: (arg0: string, arg1: number) => any }) {
+        const color = 0x006699;
 
-      const matDark = new THREE.LineBasicMaterial({
-        color: color,
-        side: THREE.DoubleSide,
-      });
+        const matDark = new THREE.LineBasicMaterial({
+          color: color,
+          side: THREE.DoubleSide,
+        });
 
-      const matLine = new THREE.MeshBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: 0.5,
-        side: THREE.DoubleSide,
-      });
+        const matLine = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.5,
+          side: THREE.DoubleSide,
+        });
 
-      const message = 'Juching\nHello Three.js';
+        const message = 'Juching\nHello Three.js';
 
-      const shapes = font.generateShapes(message, 100);
+        const shapes = font.generateShapes(message, 100);
 
-      const geometry = new THREE.ShapeGeometry(shapes);
+        const geometry = new THREE.ShapeGeometry(shapes);
 
-      geometry.computeBoundingBox();
+        geometry.computeBoundingBox();
 
-      const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+        const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
 
-      geometry.translate(xMid, 0, 0);
-
-      const text = new THREE.Mesh(geometry, matLine);
-      text.position.z = -150;
-      scene.add(text);
-
-      const holeShapes = [];
-
-      for (let i = 0; i < shapes.length; i++) {
-        const shape = shapes[i];
-        if (shape.holes && shape.holes.length > 0) {
-          for (let j = 0; j < shape.holes.length; j++) {
-            const hole = shape.holes[j];
-            holeShapes.push(hole);
-          }
-        }
-      }
-
-      shapes.push.apply(shapes, holeShapes);
-
-      const lineText = new THREE.Object3D();
-      for (let i = 0; i < shapes.length; i++) {
-        const shape = shapes[i];
-        const points = shape.getPoints();
-
-        const geometry = new THREE.BufferGeometry().setFromPoints(points);
         geometry.translate(xMid, 0, 0);
 
-        const lineMesh = new THREE.Line(geometry, matDark);
-        lineText.add(lineMesh);
-      }
+        const text = new THREE.Mesh(geometry, matLine);
+        text.position.z = -150;
+        scene.add(text);
 
-      scene.add(lineText);
+        const holeShapes = [];
 
-      render();
-    });
+        for (let i = 0; i < shapes.length; i++) {
+          const shape = shapes[i];
+          if (shape.holes && shape.holes.length > 0) {
+            for (let j = 0; j < shape.holes.length; j++) {
+              const hole = shape.holes[j];
+              holeShapes.push(hole);
+            }
+          }
+        }
+
+        shapes.push.apply(shapes, holeShapes);
+
+        const lineText = new THREE.Object3D();
+        for (let i = 0; i < shapes.length; i++) {
+          const shape = shapes[i];
+          const points = shape.getPoints();
+
+          const geometry = new THREE.BufferGeometry().setFromPoints(points);
+          geometry.translate(xMid, 0, 0);
+
+          const lineMesh = new THREE.Line(geometry, matDark);
+          lineText.add(lineMesh);
+        }
+
+        scene.add(lineText);
+
+        render();
+      },
+    );
 
     const container: HTMLElement | null = document.getElementById('container');
     renderer = new THREE.WebGLRenderer({ antialias: true });

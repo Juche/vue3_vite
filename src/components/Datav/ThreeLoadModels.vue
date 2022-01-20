@@ -13,13 +13,31 @@
 
   import { RoomEnvironment } from '/@/assets/threejs/jsm/RoomEnvironment.js';
 
-  let mixer;
-  let clock;
-  let controls;
-  let stats;
-  let renderer;
-  let scene;
-  let camera;
+  let mixer: {
+    clipAction: (arg0: any) => { (): any; new (): any; play: { (): void; new (): any } };
+    update: (arg0: any) => void;
+  };
+  let clock: { getDelta: () => any };
+  let controls: {
+    target: { set: (arg0: number, arg1: number, arg2: number) => void };
+    update: () => void;
+    enablePan: boolean;
+    enableDamping: boolean;
+  };
+  let stats: { dom: any; update: () => void };
+  let renderer: {
+    setPixelRatio: (arg0: number) => void;
+    setSize: (arg0: number, arg1: number) => void;
+    outputEncoding: any;
+    domElement: any;
+    render: (arg0: any, arg1: any) => void;
+  };
+  let scene: { background: any; environment: any; add: (arg0: any) => void };
+  let camera: {
+    position: { set: (arg0: number, arg1: number, arg2: number) => void };
+    aspect: number;
+    updateProjectionMatrix: () => void;
+  };
 
   function init() {
     clock = new THREE.Clock();
@@ -56,7 +74,7 @@
     loader.setDRACOLoader(dracoLoader);
     loader.load(
       '/src/assets/threejs/gltf/LittlestTokyo.glb',
-      function (gltf) {
+      function (gltf: { scene: any; animations: any[] }) {
         const model = gltf.scene;
         model.position.set(1, 1, 0);
         model.scale.set(0.01, 0.01, 0.01);
@@ -68,7 +86,7 @@
         animate();
       },
       undefined,
-      function (e) {
+      function (e: any) {
         console.error(e);
       },
     );

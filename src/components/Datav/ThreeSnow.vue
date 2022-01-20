@@ -20,7 +20,7 @@
   let windowHalfX = window.innerWidth / 2;
   let windowHalfY = window.innerHeight / 2;
 
-  const materials = [];
+  const materials: string | any[] = [];
 
   // init();
   // animate();
