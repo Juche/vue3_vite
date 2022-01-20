@@ -1,6 +1,6 @@
 <template>
   <div class="menu-mini">
-    <a-button
+    <!-- <a-button
       v-for="item in routes"
       :type="item.name === route.name ? 'primary' : 'dashed'"
       :key="item.name"
@@ -9,10 +9,10 @@
         {{ item.name }}
       </router-link>
     </a-button>
-    <br />
+    <br /> -->
     <a-button
       v-for="item in routes"
-      type="default"
+      :type="item.name === route.name ? 'primary' : 'default'"
       :danger="item.name === route.name"
       :key="item.name"
       @click="routeTo(item.path)"
@@ -30,13 +30,13 @@
   const route = useRoute();
 
   function routeTo(path: string): void {
-    console.log(`🚀 ~ routeTo ~ path`, path);
+    // console.log(`🚀 ~ routeTo ~ path`, path);
     router.replace(path);
   }
 
-  window.routes = routes;
-  window.router = router;
-  window.route = route;
+  // window.routes = routes;
+  // window.router = router;
+  // window.route = route;
 
   // console.log(`🚀 ~ routes`, routes);
   // console.log(`🚀 ~ router`, router);
@@ -46,8 +46,8 @@
 <style lang="less">
   .menu-mini {
     position: fixed;
-    right: 0;
-    top: 50px;
+    left: 0;
+    top: 0;
     z-index: 9999;
   }
 </style>
