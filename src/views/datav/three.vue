@@ -5,7 +5,7 @@
   <!-- <ThreeLion /> -->
   <!-- <ThreeParticle /> -->
   <!-- <ThreeSnow /> -->
-  <ThreeLoadModels />
+  <!-- <ThreeLoadModels /> -->
 </template>
 
 <script setup lang="ts">

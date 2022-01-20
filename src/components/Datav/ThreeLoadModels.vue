@@ -55,7 +55,7 @@
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
     loader.load(
-      './src/assets/threejs/gltf/LittlestTokyo.glb',
+      '/src/assets/threejs/gltf/LittlestTokyo.glb',
       function (gltf) {
         const model = gltf.scene;
         model.position.set(1, 1, 0);
