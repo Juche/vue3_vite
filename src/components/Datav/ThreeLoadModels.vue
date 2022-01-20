@@ -23,16 +23,16 @@
 
   function init() {
     clock = new THREE.Clock();
-    const container = document.getElementById('container');
+    const container: HTMLElement | null = document.getElementById('container');
 
     stats = new Stats();
-    container.appendChild(stats.dom);
+    container?.appendChild(stats.dom);
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
-    container.appendChild(renderer.domElement);
+    container?.appendChild(renderer.domElement);
 
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
 

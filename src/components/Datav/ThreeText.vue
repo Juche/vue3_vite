@@ -1,5 +1,6 @@
 <template>
   <div id="info">Description</div>
+  <div id="container"></div>
 </template>
 
 <script lang="ts" setup>
@@ -81,10 +82,11 @@
       render();
     });
 
+    const container: HTMLElement | null = document.getElementById('container');
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    container?.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, 0);
