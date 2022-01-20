@@ -1,6 +1,15 @@
 <template>
   <div class="color-mode">
-    <Icon :icon="ColorMode[modeIdx].icon" @click="switchColorMode" />
+    <a-button
+      v-for="mode in ColorMode"
+      @click="toggleColorMode(mode.id)"
+      :key="mode.id"
+      :type="activeMode === mode.id ? 'primary' : 'dashed'"
+      >{{ mode.name }}</a-button
+    >
+    <div class="color-icon">
+      <Icon :icon="ColorMode[modeIdx].icon" @click="switchColorMode" />
+    </div>
   </div>
 </template>
 
@@ -31,22 +40,37 @@
       icon: 'noto:first-quarter-moon',
     },
   ];
-
+  let activeMode = ref('color-normal');
   let modeIdx = ref(0);
   const rootEl: HTMLElement = document.documentElement;
 
+  const toggleColorMode = (mode: string): void => {
+    activeMode.value = mode;
+    rootEl.className = mode;
+    ColorMode.forEach((item, idx) => {
+      if (item.id === mode) {
+        modeIdx.value = idx;
+        return true;
+      }
+      return false;
+    });
+  };
   const switchColorMode = (): void => {
     modeIdx.value = (modeIdx.value + 1) % ColorMode.length;
     rootEl.className = ColorMode[modeIdx.value].id;
+    activeMode.value = ColorMode[modeIdx.value].id;
   };
 </script>
 
 <style lang="less">
   .color-mode {
     position: fixed;
-    top: 5px;
-    right: 10px;
-    font-size: 24px;
+    right: 0;
+    top: 0;
     z-index: 9999;
+  }
+
+  .color-icon {
+    font-size: 30px;
   }
 </style>
