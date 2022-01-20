@@ -6,6 +6,6 @@
 @tailwind utilities; */
 
 /* 正常导入 */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
+/* @import "tailwindcss/base"; */
+/* @import "tailwindcss/components"; */
 @import "tailwindcss/utilities";
