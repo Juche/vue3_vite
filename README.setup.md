@@ -39,16 +39,14 @@ yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer
 // Vite 按需
 // https://next.antdv.com/docs/vue/introduce-cn#按需加载
 // vite.config.js
-import Components from 'unplugin-vue-components/vite'
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 
 export default {
   plugins: [
     /* ... */
     Components({
-      resolvers: [
-        AntDesignVueResolver(),
-      ],
+      resolvers: [AntDesignVueResolver()],
     }),
   ],
 };
@@ -91,9 +89,9 @@ const emit = defineEmits(['change', 'delete'])
 ```js
 // Vue 3 提供了一个 globalProperties 对象，用来添加可以被任意组件实例访问的全局 property。
 // 例如一个插件想要注入一个共享全局对象或函数。
-import axios from 'axios'
-const app = Vue.createApp({})
-app.config.globalProperties.$http = axios
+import axios from 'axios';
+const app = Vue.createApp({});
+app.config.globalProperties.$http = axios;
 ```
 
 ## 注意
@@ -134,3 +132,7 @@ body {
 // 是否支持深色模式: 返回true或false
 window.matchMedia("(prefers-color-scheme: dark)").matches;
 ```
+
+### esbuild
+
+### iconify
