@@ -1,8 +1,9 @@
 <template>
   <AntComp />
+  <Iconify />
   <TailWind />
 </template>
 
 <script setup lang="ts">
-  import { AntComp, TailWind } from '/@/components/Demo';
+  import { AntComp, Iconify, TailWind } from '/@/components/Demo';
 </script>
