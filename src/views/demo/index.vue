@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-  import { useMessageStore } from '/@/stores/message';
+  import { useMessageStore } from '/@/stores';
   const message = useMessageStore();
 
   let person1: Person = {

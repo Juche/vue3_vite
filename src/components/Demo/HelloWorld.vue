@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { ref, unref } from 'vue';
-  import { useCounterStore } from '/@/stores/counter';
-  import { useMessageStore } from '/@/stores/message';
+  import { useCounterStore, useMessageStore } from '/@/stores';
 
   defineProps<{ msg: string }>();
 
