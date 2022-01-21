@@ -137,4 +137,6 @@ window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 ### iconify
 
-### lernax
+### lerna
+
+### pinia

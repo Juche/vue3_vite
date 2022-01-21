@@ -1,11 +1,12 @@
+import './styles/tailwind.css';
+import './styles/index.less';
+import 'ant-design-vue/dist/antd.css';
+
 import { createApp } from 'vue';
 import App from './App.vue';
 
 import { router } from './routes';
-
-import './styles/tailwind.css';
-import './styles/index.less';
-import 'ant-design-vue/dist/antd.css';
+import { createPinia } from 'pinia';
 
 import VueCesium from 'vue-cesium';
 import 'vue-cesium/dist/index.css';
@@ -13,6 +14,7 @@ import 'vue-cesium/dist/index.css';
 const app = createApp(App);
 
 app.use(router);
+app.use(createPinia());
 app.use(VueCesium, {
   // cesiumPath 是指引用的Cesium.js路径，如
   // cesiumPath: './Cesium/Cesium.js',
