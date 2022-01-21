@@ -137,6 +137,12 @@ window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 ### iconify
 
-### lerna
+### faker/mockjs/json-server
 
-### pinia
+代理模拟数据
+
+### color
+
+### 项目热更新 & 打包问题
+
+### lerna
