@@ -1,10 +1,12 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, unref } from 'vue';
   import { useCounterStore } from '/@/stores/counter';
+  import { useMessageStore } from '/@/stores/message';
 
   defineProps<{ msg: string }>();
 
   const counter = useCounterStore();
+  const message = useMessageStore();
   function countPlus() {
     // 直接修改 store 里的值
     // counter.count++;
@@ -14,12 +16,20 @@
     counter.increment();
     console.log(`🚀 ~ counter.count`, counter.count);
   }
+  let sth = ref('');
+  function hello() {
+    let _sth = unref(sth);
+    message.helloAnyThing(_sth);
+    console.log(`🚀 ~ hello ~ sth`, _sth);
+  }
 </script>
 
 <template>
   <img alt="Vue logo" src="/src/assets/logo.png" />
 
   <h1>{{ msg }}</h1>
+  <h1>{{ message.message }}</h1>
+  <input v-model="sth" /><button @click="hello">欢迎一下</button>
 
   <p>
     Recommended IDE setup:
