@@ -27,3 +27,9 @@
 4. 3D 案例
 
 5. 继续 3D 资源的探究
+
+<!-- dedent
+htmlparser2
+codemirror -->
+
+pnpm add dedent htmlparser2 codemirror
