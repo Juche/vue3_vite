@@ -26,6 +26,7 @@
     "nprogress": "^0.2.0",
     "pinia": "2.0.9",
     "three": "^0.136.0",
+    "vivus": "^0.4.6",
     "vue": "^3.2.26",
     "vue-cesium": "^3.0.6",
     "vue-router": "^4.0.12"

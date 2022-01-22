@@ -54,6 +54,7 @@ specifiers:
   typescript: ^4.5.4
   unplugin-vue-components: ^0.17.11
   vite: ^2.7.8
+  vivus: ^0.4.6
   vue: ^3.2.26
   vue-cesium: ^3.0.6
   vue-jest: ^5.0.0-alpha.10
@@ -70,6 +71,7 @@ dependencies:
   nprogress: 0.2.0
   pinia: 2.0.9_typescript@4.5.4+vue@3.2.26
   three: 0.136.0
+  vivus: 0.4.6
   vue: 3.2.26
   vue-cesium: 3.0.6_vue@3.2.26
   vue-router: 4.0.12_vue@3.2.26
@@ -8902,6 +8904,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /vivus/0.4.6:
+    resolution: {integrity: sha512-q6cDPTGqw/bq9sKF2h2T6GJ9PlwAFncHq7MdaK95WTSyd/7gz//UHTZbJ3B+r8f7AhcISPTC3sv9+u65BmmFbw==}
+    dev: false
 
   /void-elements/3.1.0:
     resolution: {integrity: sha1-YU9/v42AHwu18GYfWy9XhXUOTwk=}
