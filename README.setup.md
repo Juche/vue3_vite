@@ -135,7 +135,7 @@ window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 <!-- ### esbuild -->
 
-### iconify
+### `iconify`
 
 ### faker/mockjs/json-server
 
@@ -143,7 +143,9 @@ window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 ### Tools
 
-day/big/qs/file-saver/js-xlsx/动画(svg 绘制轮廓动画)
+day/big/qs/file-saver/js-xlsx/
+
+- 动画(svg 绘制轮廓动画) `vivus`
 
 ### color
 
