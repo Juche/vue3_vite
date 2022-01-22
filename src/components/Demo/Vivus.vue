@@ -1,6 +1,10 @@
 <template>
   <!-- Head: HI THERE -->
   <div class="bloc bloc-head">
+    <img :src="hiThere" alt="" />
+    <!-- <object id="hi-there" type="image/svg+xml" data="../src/assets/svg/hi-there.svg" /> -->
+    <object id="hi-there2" type="image/svg+xml" :data="hiThere" />
+    <div id="hi-there3"></div>
     <svg
       height="300"
       xmlns="http://www.w3.org/2000/svg"
@@ -84,6 +88,7 @@
 <script lang="ts" setup>
   import { onMounted } from 'vue';
   import Vivus from 'vivus';
+  import hiThere from '/@/assets/svg/hi-there.svg';
 
   let hi;
   function hiReset() {
@@ -91,14 +96,16 @@
   }
 
   onMounted(() => {
+    // new Vivus('my-div', { duration: 200, file: 'link/to/my.svg' }, myCallback);
     hi = new Vivus(
-      'hi-there',
+      'hi-there3',
       {
         type: 'scenario-sync',
         duration: 20,
         start: 'autostart',
         dashGap: 20,
         forceRender: false,
+        file: hiThere,
       },
       function () {
         if (window.console) {
