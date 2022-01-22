@@ -1,9 +1,11 @@
 <template>
   <h1>demo</h1>
   <h3>{{ message.message }}</h3>
+  <Vivus />
 </template>
 
 <script setup lang="ts">
+  import { Vivus } from '/@/components/Demo';
   import { useMessageStore } from '/@/stores';
   const message = useMessageStore();
 
