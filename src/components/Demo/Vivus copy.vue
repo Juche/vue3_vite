@@ -144,7 +144,7 @@
     color: #4fe084;
   }
 
-  /deep/ svg g {
+  ::v-deep svg g {
     fill: none;
     // stroke: #ff0;
     stroke: currentColor;
