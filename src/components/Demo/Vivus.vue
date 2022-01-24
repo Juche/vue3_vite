@@ -11,28 +11,9 @@
     <RenderImg2 :imgSrc="shutter" />
     <RenderSvg svgId="hi-there" :svgSrc="synth" @svgPlay="hiReset" />
     -->
-    <svg
-      width="100%"
-      height="260"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-    >
-      <defs>
-        <g id="Port">
-          <circle style="fill: inherit" r="10" />
-        </g>
-      </defs>
 
-      <!-- <text y="15">black</text>
-      <use x="50" y="10" xlink:href="#Port" />
-      <text y="35">red</text>
-      <use x="50" y="30" xlink:href="#Port" class="red" />
-      <text y="55">blue</text> -->
-      <use x="20" y="20" href="#Port" class="green" />
-      <use x="0" y="0" :href="`${shutter}#circle`" class="green" />
-      <use x="0" y="0" :href="`${synth}#Synth`" class="blue" />
-    </svg>
     <RenderImg :imgSrc="synth" />
+    <GroupSvg :gGroup="gGroup" />
     <RenderSvg class="red" svgId="close" :svgSrc="close" />
     <RenderSvg class="green" svgId="hiThere" :svgSrc="hiThere" />
     <RenderSvg class="blue" svgId="shutter" :svgSrc="shutter" />
@@ -45,6 +26,7 @@
 
 <script lang="tsx" setup>
   import { RenderImg, RenderSvg } from './RSvgImg';
+  import { GroupSvg } from './GSvg';
 
   import close from '/@/assets/svg/close.svg';
   import hiThere from '/@/assets/svg/hi-there.svg';
@@ -52,6 +34,8 @@
   import polaroid from '/@/assets/svg/polaroid.svg';
   import synth from '/@/assets/svg/synth.svg';
   // import appleLogo from '/@/assets/svg/icons8/icons8-apple-logo-50.svg';
+
+  const gGroup = [`${shutter}#Circle`, `${polaroid}#Camera`, `${synth}#Synth`];
 </script>
 
 <style lang="less" scoped>
