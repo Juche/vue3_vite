@@ -5,25 +5,16 @@
     <!-- <ImgSvg /> -->
     <!-- <object id="hi-there" type="image/svg+xml" data="../src/assets/svg/hi-there.svg" /> -->
     <!-- <object id="hi-there2" type="image/svg+xml" :data="hiThere" /> -->
-    <div id="hi-there" @click="hiReset"></div>
+    <div id="hi-there" @click="hiReset" />
+    <RenderImg />
   </div>
 </template>
 
-<script lang="tsx" setup>
+<script lang="ts" setup>
   import { onMounted } from 'vue';
   import Vivus from 'vivus';
   import hiThere from '/@/assets/svg/hi-there.svg';
-
-  function renderImg() {
-    return <img src={hiThere} />;
-  }
-
-  // let ImgSvg = { renderImg(); };
-  // console.log(`🚀 ~ ImgSvg`, ImgSvg);
-
-  // const renderImg = () => {
-  //   return <img src={hiThere} alt="" />;
-  // };
+  import { RenderImg } from './RImg';
 
   let hi;
   function hiReset() {
