@@ -1,6 +1,23 @@
 import { defineComponent, onMounted } from 'vue';
 import Vivus from 'vivus';
 
+export const RenderImg = defineComponent({
+  props: {
+    imgSrc: {
+      type: String,
+      default: '',
+    },
+  },
+  emits: ['img-click'],
+  setup({ imgSrc }, { emit }) {
+    function emitPlay() {
+      emit('img-click');
+      console.log(`🚀 ~ emitPlay ~ img-click`);
+    }
+    return () => <img src={imgSrc} onClick={emitPlay} />;
+  },
+});
+
 export const RenderSvg = defineComponent({
   props: {
     svgSrc: {

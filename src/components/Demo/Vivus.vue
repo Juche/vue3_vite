@@ -1,14 +1,18 @@
 <template>
   <!-- Head: HI THERE -->
   <div class="bloc bloc-head">
-    <!-- <img :src="hiThere" alt="" /> -->
-    <!-- <ImgSvg /> -->
-    <!-- <object id="hi-there" type="image/svg+xml" data="../src/assets/svg/hi-there.svg" /> -->
-    <!-- <object id="hi-there2" type="image/svg+xml" :data="hiThere" /> -->
-    <!-- <div id="hi-there" @click="hiReset" /> -->
-    <!-- <RenderImg :imgSrc="synth" @imgPlay="imgPlay" />
-    <RenderImg2 :imgSrc="obturateur" /> -->
-    <!-- <RenderSvg svgId="hi-there" :svgSrc="synth" @svgPlay="hiReset" /> -->
+    <!--
+    <img :src="hiThere" alt="" />
+    <ImgSvg />
+    <object id="hi-there" type="image/svg+xml" data="../src/assets/svg/hi-there.svg" />
+    <object id="hi-there2" type="image/svg+xml" :data="hiThere" />
+    <div id="hi-there" @click="hiReset" />
+    <RenderImg :imgSrc="synth" @imgPlay="imgPlay" />
+    <RenderImg2 :imgSrc="obturateur" />
+    <RenderSvg svgId="hi-there" :svgSrc="synth" @svgPlay="hiReset" />
+    -->
+
+    <RenderImg :imgSrc="synth" />
     <RenderSvg class="red" svgId="close" :svgSrc="close" />
     <RenderSvg class="green" svgId="hiThere" :svgSrc="hiThere" />
     <RenderSvg class="blue" svgId="obturateur" :svgSrc="obturateur" />
@@ -19,8 +23,7 @@
 </template>
 
 <script lang="tsx" setup>
-  import { RenderImg } from './RImg';
-  import { RenderSvg } from './RSvgImg';
+  import { RenderImg, RenderSvg } from './RSvgImg';
 
   import close from '/@/assets/svg/close.svg';
   import hiThere from '/@/assets/svg/hi-there.svg';
