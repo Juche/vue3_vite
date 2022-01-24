@@ -7,14 +7,19 @@
     <!-- <object id="hi-there2" type="image/svg+xml" :data="hiThere" /> -->
     <div id="hi-there" @click="hiReset" />
     <RenderImg />
+    <RenderImg2 />
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="tsx" setup>
   import { onMounted } from 'vue';
   import Vivus from 'vivus';
   import hiThere from '/@/assets/svg/hi-there.svg';
   import { RenderImg } from './RImg';
+
+  const RenderImg2 = () => {
+    return <img src={hiThere} alt="" />;
+  };
 
   let hi;
   function hiReset() {
