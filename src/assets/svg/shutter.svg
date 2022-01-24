@@ -10,7 +10,7 @@
     <line x1="131.19" y1="165.957" x2="77.781" y2="132.953" />
     <line x1="75.417" y1="168.693" x2="60.987" y2="107.59" />
   </g>
-  <g id="circle" stroke="#f00" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <g id="Circle" stroke="#f00" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="100" cy="100" r="90" />
     <circle cx="100" cy="100" r="85.74" />
     <circle cx="100" cy="100" r="72.947" />

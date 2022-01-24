@@ -1,7 +1,8 @@
 <svg id="polaroid" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 200 160"
   enable-background="new 0 0 200 160">
 
-  <g stroke="#000" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+  <g id="Camera" stroke="#000" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+    stroke-miterlimit="10">
 
     <!-- Case -->
     <!-- The case items will be drawn at the same time (attribute `data-async` on each tag) with a custom duration of 40 frames (attribute `data-duration`). WARNING: When you want to draw a bloc asynchronously (like here), the last item need to be `data-async` free. Otherwise the following tags will also start at the same time. I know it's a bit confusing, play a bit with it and you'll see. -->
