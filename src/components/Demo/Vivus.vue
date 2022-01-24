@@ -5,9 +5,10 @@
     <!-- <ImgSvg /> -->
     <!-- <object id="hi-there" type="image/svg+xml" data="../src/assets/svg/hi-there.svg" /> -->
     <!-- <object id="hi-there2" type="image/svg+xml" :data="hiThere" /> -->
-    <div id="hi-there" @click="hiReset" />
-    <RenderImg :imgSrc="synth" @imgPlay="imgPlay" />
-    <RenderImg2 :imgSrc="obturateur" />
+    <!-- <div id="hi-there" @click="hiReset" /> -->
+    <!-- <RenderImg :imgSrc="synth" @imgPlay="imgPlay" />
+    <RenderImg2 :imgSrc="obturateur" /> -->
+    <RenderSvg svgId="hi-there" :svgSrc="synth" @svgPlay="hiReset" />
   </div>
 </template>
 
@@ -15,6 +16,7 @@
   import { onMounted } from 'vue';
   import Vivus from 'vivus';
   import { RenderImg } from './RImg';
+  import { RenderSvg } from './RSvgImg';
 
   import close from '/@/assets/svg/close.svg';
   import hiThere from '/@/assets/svg/hi-there.svg';
@@ -26,16 +28,16 @@
     alert('imgPlay');
   }
 
-  const props = defineProps({
-    imgSrc: {
-      type: String,
-      default: '',
-    },
-  });
+  // const props = defineProps({
+  //   imgSrc: {
+  //     type: String,
+  //     default: '',
+  //   },
+  // });
 
-  const RenderImg2 = (props: { imgSrc: string | undefined }) => {
-    return <img src={props.imgSrc} alt="" />;
-  };
+  // const RenderImg2 = (props: { imgSrc: string | undefined }) => {
+  //   return <img src={props.imgSrc} alt="" />;
+  // };
 
   let hi: { reset: () => { (): any; new (): any; play: { (): void; new (): any } } };
   function hiReset() {
