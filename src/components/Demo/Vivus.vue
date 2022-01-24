@@ -8,13 +8,17 @@
     <!-- <div id="hi-there" @click="hiReset" /> -->
     <!-- <RenderImg :imgSrc="synth" @imgPlay="imgPlay" />
     <RenderImg2 :imgSrc="obturateur" /> -->
-    <RenderSvg svgId="hi-there" :svgSrc="synth" @svgPlay="hiReset" />
+    <!-- <RenderSvg svgId="hi-there" :svgSrc="synth" @svgPlay="hiReset" /> -->
+    <RenderSvg class="red" svgId="close" :svgSrc="close" />
+    <RenderSvg class="green" svgId="hiThere" :svgSrc="hiThere" />
+    <RenderSvg class="blue" svgId="obturateur" :svgSrc="obturateur" />
+    <RenderSvg class="yellow" svgId="polaroid" :svgSrc="polaroid" />
+    <RenderSvg class="" svgId="synth" :svgSrc="synth" />
+    <!-- <RenderSvg class="yellow" svgId="appleLogo" :svgSrc="appleLogo" /> -->
   </div>
 </template>
 
 <script lang="tsx" setup>
-  import { onMounted } from 'vue';
-  import Vivus from 'vivus';
   import { RenderImg } from './RImg';
   import { RenderSvg } from './RSvgImg';
 
@@ -23,46 +27,7 @@
   import obturateur from '/@/assets/svg/obturateur.svg';
   import polaroid from '/@/assets/svg/polaroid.svg';
   import synth from '/@/assets/svg/synth.svg';
-
-  function imgPlay() {
-    alert('imgPlay');
-  }
-
-  // const props = defineProps({
-  //   imgSrc: {
-  //     type: String,
-  //     default: '',
-  //   },
-  // });
-
-  // const RenderImg2 = (props: { imgSrc: string | undefined }) => {
-  //   return <img src={props.imgSrc} alt="" />;
-  // };
-
-  let hi: { reset: () => { (): any; new (): any; play: { (): void; new (): any } } };
-  function hiReset() {
-    hi.reset().play();
-  }
-
-  onMounted(() => {
-    // new Vivus('my-div', { duration: 200, file: 'link/to/my.svg' }, myCallback);
-    hi = new Vivus(
-      'hi-there',
-      {
-        type: 'scenario-sync',
-        duration: 20,
-        start: 'autostart',
-        dashGap: 20,
-        forceRender: false,
-        file: hiThere,
-      },
-      function () {
-        if (window.console) {
-          console.log('Animation finished. [log triggered from callback]');
-        }
-      },
-    );
-  });
+  // import appleLogo from '/@/assets/svg/icons8/icons8-apple-logo-50.svg';
 </script>
 
 <style lang="less" scoped>
@@ -72,28 +37,32 @@
   //   // stroke-width: 3;
   // }
 
-  [id^='hi-there'] {
-    color: #ff0;
+  // [id^='hiThere'] {
+  //   color: #ff0;
+  // }
+
+  .red {
+    color: #ff495f;
   }
 
-  #hi-there1 {
+  .green {
+    color: #4fe084;
+  }
+
+  .blue {
     color: #5aa8c5;
     padding: 30px;
   }
 
-  #hi-there2 {
-    color: #ff495f;
+  .yellow {
+    color: #ff0;
   }
 
-  #hi-there3 {
+  .orange {
     color: #f7a800;
   }
 
-  #hi-there {
-    color: #4fe084;
-  }
-
-  /deep/ svg g {
+  ::v-deep svg g {
     fill: none;
     // stroke: #ff0;
     stroke: currentColor;
