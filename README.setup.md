@@ -146,6 +146,8 @@ window.matchMedia("(prefers-color-scheme: dark)").matches;
 day/big/qs/file-saver/js-xlsx/
 
 - 动画(svg 绘制轮廓动画) `vivus`
+- icon 过渡动画 `titanic` `lottie`
+- 引入 svg 指定部分 `<use href="http://example.com/someDrawing.svg#Lamppost" />`
 
 ### color
 
