@@ -1,9 +1,19 @@
 import { defineComponent } from 'vue';
-import hiThere from '/@/assets/svg/hi-there.svg';
 
 export const RenderImg = defineComponent({
-  setup() {
-    return () => <img src={hiThere} />;
+  props: {
+    imgSrc: {
+      type: String,
+      default: '',
+    },
+  },
+  emits: ['img-play'],
+  setup({ imgSrc }, { emit }) {
+    function emitPlay() {
+      emit('img-play');
+      console.log(`🚀 ~ emitPlay ~ img-play`);
+    }
+    return () => <img src={imgSrc} onClick={emitPlay} />;
   },
 });
 

@@ -6,22 +6,38 @@
     <!-- <object id="hi-there" type="image/svg+xml" data="../src/assets/svg/hi-there.svg" /> -->
     <!-- <object id="hi-there2" type="image/svg+xml" :data="hiThere" /> -->
     <div id="hi-there" @click="hiReset" />
-    <RenderImg />
-    <RenderImg2 />
+    <RenderImg :imgSrc="synth" @imgPlay="imgPlay" />
+    <RenderImg2 :imgSrc="obturateur" />
   </div>
 </template>
 
 <script lang="tsx" setup>
   import { onMounted } from 'vue';
   import Vivus from 'vivus';
-  import hiThere from '/@/assets/svg/hi-there.svg';
   import { RenderImg } from './RImg';
 
-  const RenderImg2 = () => {
-    return <img src={hiThere} alt="" />;
+  import close from '/@/assets/svg/close.svg';
+  import hiThere from '/@/assets/svg/hi-there.svg';
+  import obturateur from '/@/assets/svg/obturateur.svg';
+  import polaroid from '/@/assets/svg/polaroid.svg';
+  import synth from '/@/assets/svg/synth.svg';
+
+  function imgPlay() {
+    alert('imgPlay');
+  }
+
+  const props = defineProps({
+    imgSrc: {
+      type: String,
+      default: '',
+    },
+  });
+
+  const RenderImg2 = (props: { imgSrc: string | undefined }) => {
+    return <img src={props.imgSrc} alt="" />;
   };
 
-  let hi;
+  let hi: { reset: () => { (): any; new (): any; play: { (): void; new (): any } } };
   function hiReset() {
     hi.reset().play();
   }
