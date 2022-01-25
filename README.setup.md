@@ -54,6 +54,18 @@ export default {
 
 ## Vue 3
 
+- `app.config.globalProperties` 添加一个可以在应用的任何组件实例中访问的全局 property
+
+```js
+// 这可以代替 Vue 2.x 的 Vue.prototype 扩展：
+// 之前 (Vue 2.x)
+Vue.prototype.$http = () => {};
+
+// 之后 (Vue 3.x)
+const app = createApp({});
+app.config.globalProperties.$http = () => {};
+```
+
 - `<script setup lang="ts">`
 
 ```js
@@ -146,10 +158,26 @@ window.matchMedia("(prefers-color-scheme: dark)").matches;
 day/big/qs/file-saver/js-xlsx/
 
 - 动画(svg 绘制轮廓动画) `vivus`
+- 引入 svg 指定部分(使用动画) `<use href="http://example.com/someDrawing.svg#Lamppost" />`
 - icon 过渡动画 `titanic` `lottie`
-- 引入 svg 指定部分 `<use href="http://example.com/someDrawing.svg#Lamppost" />`
 
-### color
+### color 相关依赖
+
+### 项目配色表(主题色切换)
+
+### 按插件使用拆分案例组件
+
+### 动态路由生成导航菜单
+
+### vue
+
+directives/provide,inject/mixins,extends/plugins,use,install
+
+watch/watchEffect
+
+render,h/jsx
+
+### webcomponent
 
 ### 项目热更新 & 打包问题
 
