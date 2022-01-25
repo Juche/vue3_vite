@@ -87,6 +87,10 @@ const props = defineProps({
 })
 const emit = defineEmits(['change', 'delete'])
 4. 为了在 <script setup> 组件中明确要暴露出去的属性，使用 defineExpose 编译器宏
+defineExpose({
+  a,
+  b
+})
 ```
 
 - `defineAsyncComponent`
@@ -147,19 +151,20 @@ window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 <!-- ### esbuild -->
 
-### `iconify`
+### Tools
+
+- `iconify`
+- 动画(svg 绘制轮廓动画) `vivus`
+- 引入 svg 指定部分(使用动画) `<use href="http://example.com/someDrawing.svg#Lamppost" />`
+- icon 过渡动画 `titanic` `lottie`
+
+day/big/qs/file-saver/js-xlsx/
+
+### node 脚本生成对应的文件/组件/页面数据
 
 ### faker/mockjs/json-server
 
 代理模拟数据
-
-### Tools
-
-day/big/qs/file-saver/js-xlsx/
-
-- 动画(svg 绘制轮廓动画) `vivus`
-- 引入 svg 指定部分(使用动画) `<use href="http://example.com/someDrawing.svg#Lamppost" />`
-- icon 过渡动画 `titanic` `lottie`
 
 ### color 相关依赖
 
