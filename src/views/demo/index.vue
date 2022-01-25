@@ -1,11 +1,12 @@
 <template>
   <h1>demo</h1>
   <h3>{{ message.message }}</h3>
+  <Lottie />
   <Vivus />
 </template>
 
 <script setup lang="ts">
-  import { Vivus } from '/@/components/Demo';
+  import { Lottie, Vivus } from '/@/components/Demo';
   import { useMessageStore } from '/@/stores';
   const message = useMessageStore();
 
