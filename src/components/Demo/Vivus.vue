@@ -14,17 +14,23 @@
 
     <RenderImg :imgSrc="synth" />
     <GroupSvg :gGroup="gGroup" />
-    <RenderSvg class="red" svgId="close" :svgSrc="close" />
-    <RenderSvg class="green" svgId="hiThere" :svgSrc="hiThere" />
-    <RenderSvg class="blue" svgId="shutter" :svgSrc="shutter" />
-    <RenderSvg class="yellow" svgId="polaroid" :svgSrc="polaroid" />
-    <RenderSvg class="" svgId="synth" :svgSrc="synth" />
+    <RenderSvg class="red" svgId="close" :svgSrc="close" key="close" />
+    <RenderSvg class="green" svgId="hiThere" :svgSrc="hiThere" key="hiThere" />
+    <RenderSvg class="blue" svgId="shutter" :svgSrc="shutter" key="shutter" />
+    <RenderSvg class="yellow" svgId="polaroid" :svgSrc="polaroid" key="polaroid" />
+    <RenderSvg class="" svgId="synth" :svgSrc="synth" key="synth" />
 
     <!-- <RenderSvg class="yellow" svgId="appleLogo" :svgSrc="appleLogo" /> -->
   </div>
 </template>
 
-<script lang="tsx" setup>
+<script lang="ts">
+  export default {
+    name: 'VivusComp',
+  };
+</script>
+
+<script lang="ts" setup>
   import { RenderImg, RenderSvg } from './RSvgImg';
   import { GroupSvg } from './GSvg';
 

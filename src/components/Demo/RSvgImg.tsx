@@ -2,6 +2,7 @@ import { defineComponent, onMounted } from 'vue';
 import Vivus from 'vivus';
 
 export const RenderImg = defineComponent({
+  name: 'RenderImg',
   props: {
     imgSrc: {
       type: String,
@@ -19,6 +20,7 @@ export const RenderImg = defineComponent({
 });
 
 export const RenderSvg = defineComponent({
+  name: 'RenderSvg',
   props: {
     svgSrc: {
       type: String,

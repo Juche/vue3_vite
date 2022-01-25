@@ -1,6 +1,7 @@
 import { defineComponent, PropType } from 'vue';
 
 export const GroupSvg = defineComponent({
+  name: 'GroupSvg',
   props: {
     gGroup: {
       type: Array as PropType<string[]>,
