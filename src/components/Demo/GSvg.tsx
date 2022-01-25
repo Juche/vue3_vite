@@ -1,16 +1,16 @@
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export const GroupSvg = defineComponent({
   props: {
     gGroup: {
-      type: Array,
-      default: (): string[] => [
+      type: Array as PropType<string[]>,
+      default: () => [
         // '/src/assets/svg/shutter.svg#circle',
         // '/src/assets/svg/synth.svg#Synth',
       ],
     },
   },
-  setup(props: { gGroup: string[] }) {
+  setup(props) {
     function UseG() {
       return props.gGroup.map((g) => {
         return <use x="0" y="0" href={g} class="blue" key={g} />;
@@ -26,8 +26,6 @@ export const GroupSvg = defineComponent({
 
         <use x="20" y="20" href="#Port" class="green" />
         {UseG()}
-        {/* <use x="0" y="0" :href="`${shutter}#circle`" class="green" />
-      <use x="0" y="0" :href="`${synth}#Synth`" class="blue" /> */}
       </svg>
     );
   },
