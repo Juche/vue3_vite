@@ -30,7 +30,13 @@
         renderer: 'svg',
         loop: true,
         // path: '/src/assets/json/lottie/markus.json',
-        path: '/src/assets/json/lottie/bell.json',
+        // path: '/src/assets/json/lottie/bell.json',
+        path: '/src/assets/json/lottie/email-sent.json',
+        // path: '/src/assets/json/titanic/pause.json',
+        // path: '/src/assets/json/titanic/checkbox.json',
+        // path: '/src/assets/json/titanic/menu-close.json',
+        // path: '/src/assets/json/titanic/heart.json',
+        // path: '/src/assets/json/titanic/shield.json',
       });
     },
   };
@@ -44,9 +50,15 @@
     width: 200px;
     height: 300px;
   }
-  /* #bm {
-    width: 100%;
-    height: 100%;
-    margin: 0px auto;
+
+  /* #lottie_box {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+  } */
+
+  /* #lottie_box path {
+    fill: #0f0;
+    stroke: #f00;
   } */
 </style>
