@@ -33,7 +33,7 @@ export const RenderSvg = defineComponent({
   },
   emits: ['svg-play'],
   setup({ svgSrc, svgId }, { emit }) {
-    let vivusSvg: { reset: () => { (): any; new (): any; play: { (): void; new (): any } } };
+    let vivusSvg: Vivus;
 
     function emitSvgPlay() {
       vivusSvg.reset().play();
