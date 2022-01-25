@@ -23,6 +23,7 @@ export const Lottie = defineComponent({
   },
   setup(props) {
     let _lottie: AnimationItem;
+    let lottieCtn: HTMLElement | null;
 
     function suspendFun() {
       _lottie?.pause();
@@ -31,25 +32,18 @@ export const Lottie = defineComponent({
       _lottie?.play();
     }
 
-    watch(
-      () => props.option.path,
-      (newVal) => {
-        console.log(`🚀 ~ watch ~ props.option.path`, newVal);
-      },
-    );
+    function loadLottie() {
+      lottie.destroy();
+      _lottie = lottieCtn && lottie.loadAnimation({ ...props.option, container: lottieCtn });
+    }
 
-    watchEffect(() => {
-      console.log(`🚀 ~ watchEffect ~ props.option`, props.option);
-    });
     onMounted(() => {
-      const ctn = document.getElementById('lottie');
-      console.log(`🚀 ~ onMounted ~ ctn`, ctn);
-      // _lottie = lottie.loadAnimation({ ...props.option, container: ctn });
+      lottieCtn = document.getElementById('lottie');
+      loadLottie();
     });
     onUpdated(() => {
-      const ctn = document.getElementById('lottie');
-      console.log(`🚀 ~ onUpdated ~ ctn`, ctn);
-      // _lottie = lottie.loadAnimation({ ...props.option, container: ctn });
+      lottie.destroy();
+      loadLottie();
     });
 
     const boxStyle: StyleValue = {
