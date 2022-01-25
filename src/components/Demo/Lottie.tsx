@@ -1,9 +1,19 @@
-import { defineComponent, onMounted, StyleValue } from 'vue';
+import { computed, defineComponent, onMounted, StyleValue } from 'vue';
 import lottie, { AnimationItem } from 'lottie-web';
 
 export const Lottie = defineComponent({
   name: 'Lottie',
-  setup() {
+  props: {
+    option: {
+      type: Object,
+      default: () => ({
+        renderer: 'svg',
+        loop: true,
+        path: '',
+      }),
+    },
+  },
+  setup(props) {
     let _lottie: AnimationItem;
 
     function suspendFun() {
@@ -14,19 +24,8 @@ export const Lottie = defineComponent({
     }
 
     onMounted(() => {
-      _lottie = lottie.loadAnimation({
-        container: document.getElementById('lottie_box'),
-        renderer: 'svg',
-        loop: true,
-        // path: '/src/assets/json/lottie/markus.json',
-        // path: '/src/assets/json/lottie/bell.json',
-        path: '/src/assets/json/lottie/email-sent.json',
-        // path: '/src/assets/json/titanic/pause.json',
-        // path: '/src/assets/json/titanic/checkbox.json',
-        // path: '/src/assets/json/titanic/menu-close.json',
-        // path: '/src/assets/json/titanic/heart.json',
-        // path: '/src/assets/json/titanic/shield.json',
-      });
+      const ctn = document.getElementById('lottie');
+      _lottie = lottie.loadAnimation({ ...props.option, container: ctn });
     });
 
     const boxStyle: StyleValue = {
@@ -39,7 +38,7 @@ export const Lottie = defineComponent({
 
     return () => (
       <div class="box" style={boxStyle}>
-        <div id="lottie_box"></div>
+        {props.option.path ? <div id="lottie"></div> : <h2>视图为空</h2>}
         <button onClick={startFun}>播放</button>
         <button onClick={suspendFun}>暂停</button>
       </div>
