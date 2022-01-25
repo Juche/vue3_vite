@@ -1,4 +1,12 @@
-import { computed, defineComponent, onMounted, StyleValue } from 'vue';
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUpdated,
+  StyleValue,
+  watchEffect,
+  watch,
+} from 'vue';
 import lottie, { AnimationItem } from 'lottie-web';
 
 export const Lottie = defineComponent({
@@ -23,9 +31,25 @@ export const Lottie = defineComponent({
       _lottie?.play();
     }
 
+    watch(
+      () => props.option.path,
+      (newVal) => {
+        console.log(`🚀 ~ watch ~ props.option.path`, newVal);
+      },
+    );
+
+    watchEffect(() => {
+      console.log(`🚀 ~ watchEffect ~ props.option`, props.option);
+    });
     onMounted(() => {
       const ctn = document.getElementById('lottie');
-      _lottie = lottie.loadAnimation({ ...props.option, container: ctn });
+      console.log(`🚀 ~ onMounted ~ ctn`, ctn);
+      // _lottie = lottie.loadAnimation({ ...props.option, container: ctn });
+    });
+    onUpdated(() => {
+      const ctn = document.getElementById('lottie');
+      console.log(`🚀 ~ onUpdated ~ ctn`, ctn);
+      // _lottie = lottie.loadAnimation({ ...props.option, container: ctn });
     });
 
     const boxStyle: StyleValue = {

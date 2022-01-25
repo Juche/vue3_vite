@@ -6,10 +6,11 @@
 </template>
 
 <script setup lang="ts">
+  import { reactive } from 'vue';
   import { Lottie, Vivus } from '/@/components/Demo';
   import { useMessageStore } from '/@/stores';
   const message = useMessageStore();
-  const lottieOption = {
+  let lottieOption = reactive({
     // container: document.getElementById('lottie_box'),
     renderer: 'svg',
     loop: true,
@@ -21,7 +22,20 @@
     // path: '/src/assets/json/titanic/menu-close.json',
     // path: '/src/assets/json/titanic/heart.json',
     // path: '/src/assets/json/titanic/shield.json',
-  };
+  });
+
+  setTimeout(() => {
+    lottieOption.path = '/src/assets/json/titanic/shield.json';
+    // lottieOption = {
+    //   renderer: 'svg',
+    //   loop: true,
+    //   path: '/src/assets/json/titanic/shield.json',
+    // };
+  }, 2000);
+
+  setTimeout(() => {
+    lottieOption.path = '/src/assets/json/titanic/heart.json';
+  }, 4000);
 
   let person1: Person = {
     name: 'Juche',

@@ -53,9 +53,9 @@ export const RenderSvg = defineComponent({
           file: svgSrc,
         },
         function () {
-          if (window.console) {
-            console.log('Animation finished. [log triggered from callback]');
-          }
+          // if (window.console) {
+          //   console.log('Animation finished. [log triggered from callback]');
+          // }
         },
       );
     });
