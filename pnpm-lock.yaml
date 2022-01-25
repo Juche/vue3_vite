@@ -39,6 +39,7 @@ specifiers:
   json-server: ^0.17.0
   less: ^4.1.2
   lint-staged: ^12.1.7
+  lottie-web: ^5.8.1
   mockjs: ^1.1.0
   nprogress: ^0.2.0
   pinia: 2.0.9
@@ -72,6 +73,7 @@ dependencies:
   crypto-js: 4.1.1
   dayjs: 1.10.7
   echarts: 5.2.2
+  lottie-web: 5.8.1
   nprogress: 0.2.0
   pinia: 2.0.9_typescript@4.5.4+vue@3.2.26
   three: 0.136.0
@@ -6452,6 +6454,10 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: false
+
+  /lottie-web/5.8.1:
+    resolution: {integrity: sha512-9gIizWADlaHC2GCt+D+yNpk5l2clZQFqnVWWIVdY0LnxC/uLa39dYltAe3fcmC/hrZ2IUQ8dLlY0O934Npjs7Q==}
     dev: false
 
   /lowdb/1.0.0:

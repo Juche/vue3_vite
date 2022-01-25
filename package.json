@@ -23,6 +23,7 @@
     "crypto-js": "^4.1.1",
     "dayjs": "^1.10.7",
     "echarts": "^5.2.2",
+    "lottie-web": "^5.8.1",
     "nprogress": "^0.2.0",
     "pinia": "2.0.9",
     "three": "^0.136.0",
