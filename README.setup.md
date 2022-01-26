@@ -110,6 +110,43 @@ const app = Vue.createApp({});
 app.config.globalProperties.$http = axios;
 ```
 
+## TypeScript
+
+```js
+// 类型定义
+// 在 d.ts 声明文件中，declare 默认就是 global 的
+// 在模块文件中的定义，如果想要全局就使用 declare global
+
+// declare module xxx {} 是用来做一些第三方库没有支持ts的，通过declare module，让我们在代码中可以import进来，从而使用它
+// 一般来说这个 .d.ts 文件放在工程的根目录下，如：
+
+declare module "test" {
+  export var value: number;
+  export function hello(str: string): String;
+}
+
+declare var D2: string;
+
+declare namespace mySpace {
+  interface ITest {
+    id: number;
+  }
+}
+// 这样子我们在文件中 import 那个没有支持ts的库就不会报错了，而且还会提示 库暴露出来的属性/方法
+// 上面的例子只有 declare module 是定义一个模块，需要被 import
+
+import test from "test";
+
+test.hello('123');
+test.value;
+
+window.D2 = "hello";
+
+const obj: mySpace.ITest = {
+  id: 1
+};
+```
+
 ## 注意
 
 ### 环境变量配置文件
@@ -175,6 +212,17 @@ day/big/qs/file-saver/js-xlsx/
 ### 动态路由生成导航菜单
 
 ### vue
+
+```js
+// 使用es6解构赋值，消除了props的响应式
+// 解决方案：使用toRefs
+
+setup (props) {
+  const { title } = toRefs(props)
+  console.log(title.value)
+  return { title  }
+}
+```
 
 directives/provide,inject/mixins,extends/plugins,use,install
 
