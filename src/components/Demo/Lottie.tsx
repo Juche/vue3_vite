@@ -15,7 +15,7 @@ export const Lottie = defineComponent({
   name: 'Lottie',
   props: {
     option: {
-      type: Object,
+      type: Object as PropType<LottieOption>,
       default: () => ({
         renderer: 'svg',
         loop: true,
