@@ -9,13 +9,13 @@ import {
   nextTick,
   PropType,
 } from 'vue';
-import lottie, { AnimationConfigWithPath, AnimationItem } from 'lottie-web';
+import lottie, { AnimationConfig, AnimationConfigWithPath, AnimationItem } from 'lottie-web';
 
 export const Lottie = defineComponent({
   name: 'Lottie',
   props: {
     option: {
-      type: Object as PropType<AnimationConfigWithPath>,
+      type: Object as PropType<LottieOption>,
       default: () => ({
         renderer: 'svg',
         loop: true,
@@ -41,8 +41,13 @@ export const Lottie = defineComponent({
     function loadLottie() {
       lottie.destroy();
       nextTick(() => {
-        const lottieCtn = document.getElementById('lottie') as HTMLElement;
-        const lottieOption = { ...props.option, container: lottieCtn };
+        // const lottieCtn = document.getElementById('lottie') as HTMLElement;
+        const lottieCtn = document.getElementById('lottie');
+        // const lottieOption: AnimationConfig<'svg'> = { ...props.option, container: lottieCtn };
+        const lottieOption: AnimationConfigWithPath = {
+          ...props.option,
+          container: lottieCtn,
+        } as AnimationConfig<'svg'>;
         lottieAniItem = lottie.loadAnimation(lottieOption);
       });
     }
