@@ -6,6 +6,8 @@ import {
   StyleValue,
   watchEffect,
   watch,
+  nextTick,
+  PropType,
 } from 'vue';
 import lottie, { AnimationItem } from 'lottie-web';
 
@@ -22,29 +24,30 @@ export const Lottie = defineComponent({
     },
   },
   setup(props) {
-    let _lottie: AnimationItem;
-    let lottieCtn: HTMLElement | null;
+    let lottieAniItem: AnimationItem | null;
+    // let lottieCtn: HTMLElement | null;
 
-    function suspendFun() {
-      _lottie?.pause();
+    function startAni() {
+      lottieAniItem?.play();
     }
-    function startFun() {
-      _lottie?.play();
+    function stopAni() {
+      lottieAniItem?.stop();
+    }
+    function pauseAni() {
+      lottieAniItem?.pause();
     }
 
     function loadLottie() {
       lottie.destroy();
-      _lottie = lottieCtn && lottie.loadAnimation({ ...props.option, container: lottieCtn });
+      nextTick(() => {
+        const lottieCtn = document.getElementById('lottie');
+        lottieAniItem =
+          lottieCtn && lottie.loadAnimation({ ...props.option, container: lottieCtn });
+      });
     }
 
-    onMounted(() => {
-      lottieCtn = document.getElementById('lottie');
-      loadLottie();
-    });
-    onUpdated(() => {
-      lottie.destroy();
-      loadLottie();
-    });
+    onMounted(() => loadLottie());
+    onUpdated(() => loadLottie());
 
     const boxStyle: StyleValue = {
       display: 'flex',
@@ -52,13 +55,15 @@ export const Lottie = defineComponent({
       justifyContent: 'center',
       width: '200px',
       height: '300px',
+      textAlign: 'center',
     };
 
     return () => (
       <div class="box" style={boxStyle}>
-        {props.option.path ? <div id="lottie"></div> : <h2>视图为空</h2>}
-        <button onClick={startFun}>播放</button>
-        <button onClick={suspendFun}>暂停</button>
+        {props.option.path ? <div id="lottie"></div> : <h2 class="empty">视图为空</h2>}
+        <button onClick={startAni}>播放</button>
+        <button onClick={pauseAni}>暂停</button>
+        <button onClick={stopAni}>停止</button>
       </div>
     );
   },

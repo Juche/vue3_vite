@@ -25,12 +25,8 @@
   });
 
   setTimeout(() => {
-    lottieOption.path = '/src/assets/json/titanic/shield.json';
-    // lottieOption = {
-    //   renderer: 'svg',
-    //   loop: true,
-    //   path: '/src/assets/json/titanic/shield.json',
-    // };
+    // lottieOption.path = '/src/assets/json/titanic/shield.json';
+    lottieOption.path = '';
   }, 2000);
 
   setTimeout(() => {
