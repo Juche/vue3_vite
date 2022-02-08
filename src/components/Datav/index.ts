@@ -6,6 +6,7 @@ import ThreeParticle from './ThreeParticle.vue';
 import ThreeSnow from './ThreeSnow.vue';
 import ThreeLoadModels from './ThreeLoadModels.vue';
 import Cesium01 from './Cesium01.vue';
+import VueCesium01 from './VueCesium01.vue';
 
 export {
   ThreeLine,
@@ -16,4 +17,5 @@ export {
   ThreeSnow,
   ThreeLoadModels,
   Cesium01,
+  VueCesium01,
 };
