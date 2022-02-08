@@ -15,11 +15,18 @@
     });
 
     const layers = viewer.scene.imageryLayers;
-    const blackMarble = layers.addImageryProvider(
-      new Cesium.TileMapServiceImageryProvider({
-        url: '//cesiumjs.org/tilesets/imagery/blackmarble',
-        maximumLevel: 8,
-        credit: 'Black Marble imagery courtesy NASA Earth Observatory',
+    // const blackMarble = layers.addImageryProvider(
+    //   new Cesium.TileMapServiceImageryProvider({
+    //     url: '//cesiumjs.org/tilesets/imagery/blackmarble',
+    //     maximumLevel: 8,
+    //     credit: 'Black Marble imagery courtesy NASA Earth Observatory',
+    //   }),
+    // );
+
+    layers.addImageryProvider(
+      new Cesium.SingleTileImageryProvider({
+        url: '/src/assets/images/logo.png',
+        rectangle: Cesium.Rectangle.fromDegrees(114.39, 30.49, 114.41, 30.51),
       }),
     );
 
