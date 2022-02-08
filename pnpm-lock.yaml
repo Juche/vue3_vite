@@ -7,6 +7,7 @@ specifiers:
   '@commitlint/config-conventional': ^16.0.0
   '@faker-js/faker': ^6.0.0-alpha.3
   '@iconify/vue': ^3.1.2
+  '@types/cesium': ^1.70.0
   '@types/jest': ^27.4.0
   '@types/node': ^17.0.8
   '@types/tailwindcss': ^3.0.3
@@ -23,6 +24,7 @@ specifiers:
   axios: ^0.24.0
   babel-jest: 26.*
   babel-preset-vite: ^1.0.4
+  cesium: ^1.90.0
   commitizen: ^4.2.4
   crypto-js: ^4.1.1
   dayjs: ^1.10.7
@@ -59,6 +61,7 @@ specifiers:
   typescript: ^4.5.4
   unplugin-vue-components: ^0.17.11
   vite: ^2.7.8
+  vite-plugin-cesium: ^1.2.13
   vivus: ^0.4.6
   vue: ^3.2.26
   vue-cesium: ^3.0.6
@@ -70,6 +73,7 @@ dependencies:
   '@iconify/vue': 3.1.2_vue@3.2.26
   ant-design-vue: 3.0.0-beta.3_ae87cbba5ec93a01f3fe1197df446ca3
   axios: 0.24.0
+  cesium: 1.90.0
   crypto-js: 4.1.1
   dayjs: 1.10.7
   echarts: 5.2.2
@@ -88,6 +92,7 @@ devDependencies:
   '@commitlint/cli': 16.0.2_@types+node@17.0.8
   '@commitlint/config-conventional': 16.0.0
   '@faker-js/faker': 6.0.0-alpha.3
+  '@types/cesium': 1.70.0
   '@types/jest': 27.4.0
   '@types/node': 17.0.8
   '@types/tailwindcss': 3.0.3
@@ -131,6 +136,7 @@ devDependencies:
   typescript: 4.5.4
   unplugin-vue-components: 0.17.11_vite@2.7.10+vue@3.2.26
   vite: 2.7.10_less@4.1.2
+  vite-plugin-cesium: 1.2.13_cesium@1.90.0
   vue-jest: 5.0.0-alpha.10_3e7290f8d2a66976a6e7777813a07b0f
   vue-tsc: 0.30.1_typescript@4.5.4
 
@@ -1924,6 +1930,17 @@ packages:
       '@babel/types': 7.16.8
     dev: true
 
+  /@types/cesium/1.70.0:
+    resolution: {integrity: sha512-awCNt8Exv6oT+GALMgorfLYw43H5/99ZdKpG4Ovtft7dKpaAPkLuqpD1AobSjjtJ7xaOKKTj5fzYj+JQnPuzAQ==}
+    deprecated: This is a stub types definition. cesium provides its own type definitions, so you do not need this installed.
+    dependencies:
+      cesium: 1.90.0
+    dev: true
+
+  /@types/estree/0.0.51:
+    resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
+    dev: true
+
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
@@ -2637,6 +2654,11 @@ packages:
     resolution: {integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=}
     dev: true
 
+  /at-least-node/1.0.0:
+    resolution: {integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==}
+    engines: {node: '>= 4.0.0'}
+    dev: true
+
   /atob/2.1.2:
     resolution: {integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==}
     engines: {node: '>= 4.5.0'}
@@ -3028,6 +3050,9 @@ packages:
     dependencies:
       rsvp: 4.8.5
     dev: true
+
+  /cesium/1.90.0:
+    resolution: {integrity: sha512-/Nzqu3OdtOd/0rHg7rVca1ht3gGRcFg0D8FWTm89oGnc1sqHGLffXMHa774Fev1L0EPwzZN4h9PmfFeJnMXMbw==}
 
   /chalk/2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -4728,6 +4753,16 @@ packages:
       universalify: 0.1.2
     dev: true
 
+  /fs-extra/9.1.0:
+    resolution: {integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==}
+    engines: {node: '>=10'}
+    dependencies:
+      at-least-node: 1.0.0
+      graceful-fs: 4.2.9
+      jsonfile: 6.1.0
+      universalify: 2.0.0
+    dev: true
+
   /fs.realpath/1.0.0:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
     dev: true
@@ -5448,6 +5483,12 @@ packages:
 
   /is-promise/2.2.2:
     resolution: {integrity: sha512-+lP4/6lKUBfQjZ2pdxThZvLUAafmZb8OAxFb8XXtiQmS35INgr85hdOGoEs124ez1FCnZJt6jau/T+alh58QFQ==}
+    dev: true
+
+  /is-reference/1.2.1:
+    resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
+    dependencies:
+      '@types/estree': 0.0.51
     dev: true
 
   /is-regex/1.1.4:
@@ -7807,6 +7848,17 @@ packages:
       glob: 7.2.0
     dev: true
 
+  /rollup-plugin-external-globals/0.6.1:
+    resolution: {integrity: sha512-mlp3KNa5sE4Sp9UUR2rjBrxjG79OyZAh/QC18RHIjM+iYkbBwNXSo8DHRMZWtzJTrH8GxQ+SJvCTN3i14uMXIA==}
+    peerDependencies:
+      rollup: ^2.25.0
+    dependencies:
+      '@rollup/pluginutils': 4.1.2
+      estree-walker: 2.0.2
+      is-reference: 1.2.1
+      magic-string: 0.25.7
+    dev: true
+
   /rollup/2.62.0:
     resolution: {integrity: sha512-cJEQq2gwB0GWMD3rYImefQTSjrPYaC6s4J9pYqnstVLJ1CHa/aZNVkD4Epuvg4iLeMA4KRiq7UM7awKK6j7jcw==}
     engines: {node: '>=10.0.0'}
@@ -8977,6 +9029,19 @@ packages:
   /vary/1.1.2:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=}
     engines: {node: '>= 0.8'}
+    dev: true
+
+  /vite-plugin-cesium/1.2.13_cesium@1.90.0:
+    resolution: {integrity: sha512-p7M+df+hVxPt7C8WQFg73SrHsJFK6pdb6jSvPiRiWnHzzNU+zLL0moztkBpfb2im6HnES7q3nEWHyjruZ/3o7g==}
+    peerDependencies:
+      cesium: ^1.88.0
+    dependencies:
+      cesium: 1.90.0
+      fs-extra: 9.1.0
+      rollup-plugin-external-globals: 0.6.1
+      serve-static: 1.14.2
+    transitivePeerDependencies:
+      - rollup
     dev: true
 
   /vite/2.7.10_less@4.1.2:
