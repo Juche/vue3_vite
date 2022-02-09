@@ -5,7 +5,9 @@ import ThreeLion from './ThreeLion.vue';
 import ThreeParticle from './ThreeParticle.vue';
 import ThreeSnow from './ThreeSnow.vue';
 import ThreeLoadModels from './ThreeLoadModels.vue';
-import Cesium01 from './Cesium01.vue';
+import Cesium01Entity from './Cesium01Entity.vue';
+import Cesium02Layer from './Cesium02Layer.vue';
+import Cesium03Camera from './Cesium03Camera.vue';
 import VueCesium01 from './VueCesium01.vue';
 
 export {
@@ -16,6 +18,8 @@ export {
   ThreeParticle,
   ThreeSnow,
   ThreeLoadModels,
-  Cesium01,
+  Cesium01Entity,
+  Cesium02Layer,
+  Cesium03Camera,
   VueCesium01,
 };
