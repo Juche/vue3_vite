@@ -11,7 +11,18 @@
       imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
         url: '//services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer',
       }),
-      baseLayerPicker: false,
+      geocoder: false, // 地理位置搜索
+      homeButton: false, // 默认位置
+      sceneModePicker: false, // 模式选择
+      baseLayerPicker: false, // 地球的底图
+      navigationHelpButton: false, // 帮助
+      animation: false, // 动画仪表盘
+      timeline: false, // 时间轴
+      fullscreenButton: false, // 全屏
+      selectionIndicator: false, // 选择指示器
+      infoBox: false, // 信息框
+      // vrButton: false, // VR
+      // automaticallyTrackDataSourceClocks: false, // 自动追踪数据源时钟
     });
 
     const layers = viewer.scene.imageryLayers;
