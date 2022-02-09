@@ -79,6 +79,12 @@ https://v3.cn.vuejs.org/guide/single-file-component.html#%E4%BD%BF%E7%94%A8-roll
 # https://www.cnblogs.com/fuckgiser/p/5706842.html
 # https://github.com/wangfeilong321/ExamplesforCesium
 # https://github.com/CesiumGS/cesium/releases/download/1.89/Cesium-1.89.zip
+# 线长度增长,视图切换
+http://localhost:8080/Apps/Sandcastle/index.html?src=Callback%20Property.html
+# picking
+https://cesium.com/learn/cesiumjs-learn/cesiumjs-creating-entities/
+https://cesium.com/learn/cesiumjs/ref-doc/Scene.html#pick
+https://cesium.com/learn/cesiumjs/ref-doc/Scene.html#drillPick
 ```
 
 ---
