@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-mini">
+  <div id="menuMini">
     <!-- <a-button
       v-for="item in routes"
       :type="item.name === route.name ? 'primary' : 'dashed'"
@@ -44,10 +44,10 @@
 </script>
 
 <style lang="less">
-  .menu-mini {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 9999;
-  }
+  // #menuMini {
+  //   // position: fixed;
+  //   // left: 0;
+  //   // top: 0;
+  //   z-index: 9999;
+  // }
 </style>

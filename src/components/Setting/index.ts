@@ -1,4 +1,9 @@
-import ColorMode from './ColorMode.vue';
-import MenuMini from './MenuMini.vue';
+// import ColorMode from './ColorMode.vue';
+// import MenuMini from './MenuMini.vue';
+import TopBar from './TopBar.vue';
 
-export { ColorMode, MenuMini };
+export {
+  // ColorMode,
+  // MenuMini,
+  TopBar,
+};

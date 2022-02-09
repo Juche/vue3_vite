@@ -1,5 +1,5 @@
 <template>
-  <div class="color-mode">
+  <div id="colorMode">
     <Icon :icon="ColorMode[modeIdx].icon" @click="switchColorMode" />
   </div>
 </template>
@@ -42,11 +42,11 @@
 </script>
 
 <style lang="less">
-  .color-mode {
-    position: fixed;
-    top: 5px;
-    right: 10px;
+  #colorMode {
+    // position: fixed;
+    // top: 5px;
+    // right: 10px;
     font-size: 24px;
-    z-index: 9999;
+    // z-index: 9999;
   }
 </style>
