@@ -25,7 +25,8 @@
 
     layers.addImageryProvider(
       new Cesium.SingleTileImageryProvider({
-        url: '/src/assets/images/logo.png',
+        // url: '/src/assets/logo.png',
+        url: '/logo.png',
         rectangle: Cesium.Rectangle.fromDegrees(114.39, 30.49, 114.41, 30.51),
       }),
     );
