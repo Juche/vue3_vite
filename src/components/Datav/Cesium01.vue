@@ -8,6 +8,7 @@
 
   onMounted(() => {
     const viewer = new Cesium.Viewer('cesiumContainer', {
+      // 地球街道图层
       imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
         url: '//services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer',
       }),
@@ -27,11 +28,13 @@
     });
 
     const layers = viewer.scene.imageryLayers;
-    const blackMarble = layers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3812 }));
 
+    // 地球夜景图层
+    const blackMarble = layers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3812 }));
     blackMarble.alpha = 0.5;
     blackMarble.brightness = 2.0;
 
+    // 图片贴图图层
     layers.addImageryProvider(
       new Cesium.SingleTileImageryProvider({
         // url: '/src/assets/logo.png',
@@ -40,6 +43,22 @@
       }),
     );
 
+    // 线
+    const entity = viewer.entities.add({
+      polyline: {
+        positions: Cesium.Cartesian3.fromDegreesArray([114, 30.5, 115, 30.5]),
+        width: 10,
+        material: Cesium.Color.RED,
+      },
+    });
+
+    const polyline = entity.polyline; // For upcoming examples
+    polyline.material = new Cesium.PolylineGlowMaterialProperty({
+      glowPower: 0.2,
+      color: Cesium.Color.BLUE,
+    });
+
+    // 多边形
     const wuhan = viewer.entities.add({
       name: 'Wuhan',
       polygon: {
@@ -53,21 +72,6 @@
         outline: true,
         outlineColor: Cesium.Color.GREEN,
       },
-    });
-
-    const entity = viewer.entities.add({
-      polyline: {
-        positions: Cesium.Cartesian3.fromDegreesArray([114, 30.5, 115, 30.5]),
-        width: 10,
-        material: Cesium.Color.RED,
-      },
-    });
-
-    const polyline = entity.polyline; // For upcoming examples
-
-    polyline.material = new Cesium.PolylineGlowMaterialProperty({
-      glowPower: 0.2,
-      color: Cesium.Color.BLUE,
     });
 
     viewer.zoomTo(wuhan);
