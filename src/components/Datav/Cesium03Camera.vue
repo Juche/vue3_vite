@@ -58,7 +58,7 @@
     const line = entities.add({
       name: 'Wuhan polyline',
       polyline: {
-        positions: Cesium.Cartesian3.fromDegreesArray([114, 30.5, 115, 30.5]),
+        positions: Cesium.Cartesian3.fromDegreesArray([114.35, 30.5, 114.45, 30.5]),
         width: 10,
         material: Cesium.Color.RED,
       },
@@ -96,21 +96,175 @@
     // Use the viewer.zoomTo command to view a particular entity. There is also a viewer.flyTo method that performs an animated camera flight to the entity. Both of these methods can be passed to an Entity, EntityCollection, a DataSource, or an array of entities.
     // Either method calculates a view of all provided entities. By default, the camera is oriented north and is looking down from a 45 degree angle. Customize this by passing in a HeadingPitchRange
 
+    const camera = viewer.camera;
     let heading = Cesium.Math.toRadians(30.0);
     let pitch = Cesium.Math.toRadians(-60.0);
 
     // zoomTo/flyTo 的目标是 entity 实体
     // viewer.zoomTo(gon, new Cesium.HeadingPitchRange(heading, pitch, 10000));
     viewer
-      .flyTo(gon, {
+      .flyTo(entities, {
         duration: 5,
-        offset: new Cesium.HeadingPitchRange(heading, pitch, 10000),
+        offset: new Cesium.HeadingPitchRange(heading, pitch, 20000),
       })
       .then((result) => {
         // 在flyTo完成后执行
         console.log(`🚀 ~ .then ~ result`, result);
         viewer.selectedEntity = gon;
+
+        setTimeout(() => {
+          // gon.position = Cesium.Cartesian3.fromDegrees(114.39, 30.49, 2200);
+          // viewer.trackedEntity = gon;
+
+          // setView 设置相机的位置和方向
+          camera.setView({
+            destination: Cesium.Cartesian3.fromDegrees(114.38, 30.46, 10000),
+            orientation: {
+              heading: Cesium.Math.toRadians(30.0),
+              pitch: Cesium.Math.toRadians(-60.0),
+              roll: 0.0,
+            },
+          });
+        }, 2000);
       });
+
+    const scene = viewer.scene;
+    const canvas = scene.canvas;
+    const ellipsoid = scene.globe.ellipsoid;
+
+    canvas.setAttribute('tabindex', '0'); // needed to put focus on the canvas
+    canvas.onclick = function () {
+      canvas.focus();
+    };
+
+    // 使用默认的事件处理器，可以使用viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK)移除默认的点击事件
+
+    // ScreenSpaceCameraController将用户输入（如鼠标和触摸）从窗口坐标转换为Camera运动
+    // 包含用于启用和禁用不同类型输入、修改惯性量以及最小和最大缩放距离的属性。
+    // disable the default event handlers
+    // scene.screenSpaceCameraController.enableRotate = false;
+    // scene.screenSpaceCameraController.enableTranslate = false;
+    // scene.screenSpaceCameraController.enableZoom = false;
+    // scene.screenSpaceCameraController.enableTilt = false;
+    // scene.screenSpaceCameraController.enableLook = false;
+    scene.screenSpaceCameraController.minimumZoomDistance = 1000;
+    scene.screenSpaceCameraController.maximumZoomDistance = 50000;
+    console.log(
+      `🚀 ~ onMounted ~ scene.screenSpaceCameraController`,
+      scene.screenSpaceCameraController,
+    );
+
+    // 创建变量记录当前鼠标位置，然后标记并跟随Camera移动轨迹
+    let startMousePosition = null,
+      mousePosition = null,
+      flags = {
+        looking: false,
+        moveForward: false,
+        moveBackward: false,
+        moveLeft: false,
+        moveRight: false,
+        moveUp: false,
+        moveDown: false,
+      };
+
+    // 添加一个事件控制用户设置标记, 当鼠标左键点击时, 记录当前鼠标位置
+    const handler = new Cesium.ScreenSpaceEventHandler(canvas);
+
+    handler.setInputAction((movement) => {
+      flags.looking = true;
+      mousePosition = startMousePosition = Cesium.Cartesian3.clone(movement.position);
+    }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+
+    handler.setInputAction((movement) => {
+      mousePosition = movement.endPosition;
+    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+    handler.setInputAction((position) => {
+      flags.looking = false;
+    }, Cesium.ScreenSpaceEventType.LEFT_UP);
+
+    // 创建键盘事件控制用户切换 Camera 移动标记
+    // w: 前/ s: 后/ a: 左/ d: 右/ q: 上/ e: 下
+    function getFlagForKeyCode(keyCode: number) {
+      switch (keyCode) {
+        case 87: // w
+          return 'moveForward';
+        case 83: // s
+          return 'moveBackward';
+        case 65: // a
+          return 'moveLeft';
+        case 68: // d
+          return 'moveRight';
+        case 81: // q
+          return 'moveUp';
+        case 69: // e
+          return 'moveDown';
+        default:
+          return undefined;
+      }
+    }
+
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        const flag = getFlagForKeyCode(e.keyCode);
+        if (flag) {
+          flags[flag] = true;
+        }
+      },
+      false,
+    );
+
+    document.addEventListener(
+      'keyup',
+      (e) => {
+        const flag = getFlagForKeyCode(e.keyCode);
+        // console.log(`🚀 ~ onMounted ~ e.keyCode`, e.keyCode);
+        // console.log(`🚀 ~ onMounted ~ flag`, flag);
+        if (flag) {
+          flags[flag] = false;
+        }
+      },
+      false,
+    );
+
+    viewer.clock.onTick.addEventListener((clock) => {
+      const camera = viewer.camera;
+
+      // 将鼠标点击位置作为坐标点 Coordinate (0.0, 0.0), 地球的变换有别与默认形式
+      // if (flags.looking) {
+      //   let width = canvas.clientWidth;
+      //   let height = canvas.clientHeight;
+      //   let x = (mousePosition.x - startMousePosition.x) / width;
+      //   let y = -(mousePosition.y - startMousePosition.y) / height;
+      //   let lookFactor = 0.05;
+      //   camera.lookRight(x * lookFactor);
+      //   camera.lookUp(y * lookFactor);
+      // }
+
+      // Change movement speed base on the distance of camera to surface of ellipsoid.
+      let cameraHeight = ellipsoid.cartesianToCartographic(camera.position).height;
+      let moveRate = cameraHeight / 100.0;
+
+      if (flags.moveForward) {
+        camera.moveForward(moveRate);
+      }
+      if (flags.moveBackward) {
+        camera.moveBackward(moveRate);
+      }
+      if (flags.moveUp) {
+        camera.moveUp(moveRate);
+      }
+      if (flags.moveDown) {
+        camera.moveDown(moveRate);
+      }
+      if (flags.moveLeft) {
+        camera.moveLeft(moveRate);
+      }
+      if (flags.moveRight) {
+        camera.moveRight(moveRate);
+      }
+    });
   });
 </script>
 
