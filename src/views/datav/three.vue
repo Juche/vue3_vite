@@ -1,8 +1,8 @@
 <template>
   <!-- <ThreeLine /> -->
-  <ThreeText />
+  <!-- <ThreeText /> -->
   <!-- <ThreeCube /> -->
-  <!-- <ThreeLion /> -->
+  <ThreeLion />
   <!-- <ThreeParticle /> -->
   <!-- <ThreeSnow /> -->
   <!-- <ThreeLoadModels /> -->
