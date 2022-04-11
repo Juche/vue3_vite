@@ -30,14 +30,15 @@
       }
 
       function initCamera() {
-        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
-        camera.position.set(100, 200, 300);
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // camera.position.set(100, 200, 300);
+        camera.position.set(0, 0.5, 3);
       }
 
       function initScene() {
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xa0a0a0);
-        scene.fog = new THREE.Fog(0xa0a0a0, 200, 1000);
+        // scene.background = new THREE.Color(0xa0a0a0);
+        // scene.fog = new THREE.Fog(0xa0a0a0, 20, 100);
       }
 
       //初始化dat.GUI简化试验流程
@@ -55,21 +56,83 @@
       }
 
       function initLight() {
-        scene.add(new THREE.AmbientLight(0x444444));
+        // #444a4f
+        // #bdae4e
 
-        light = new THREE.DirectionalLight(0xffffff);
-        light.position.set(0, 200, 100);
+        scene.add(new THREE.AmbientLight(0x444a4f, 1));
+        // scene.add(new THREE.AmbientLight(0xffffff, 1));
 
-        light.castShadow = true;
-        light.shadow.camera.top = 180;
-        light.shadow.camera.bottom = -100;
-        light.shadow.camera.left = -120;
-        light.shadow.camera.right = 120;
+        // light = new THREE.DirectionalLight(0xffffff);
+        // light.position.set(0, 20, 10);
 
-        //告诉平行光需要开启阴影投射
-        light.castShadow = true;
+        // light.shadow.camera.top = 18;
+        // light.shadow.camera.bottom = -10;
+        // light.shadow.camera.left = -12;
+        // light.shadow.camera.right = 12;
 
-        scene.add(light);
+        // //告诉平行光需要开启阴影投射
+        // light.castShadow = true;
+        // scene.add(light);
+
+        let spotLight1 = new THREE.SpotLight(0xffffff, 1.8);
+        spotLight1.name = 'Spot Light1';
+        spotLight1.angle = Math.PI / 5;
+        spotLight1.penumbra = 0.3;
+        spotLight1.position.set(0, 80, -80);
+        spotLight1.shadow.camera.near = 0.1;
+        spotLight1.shadow.camera.far = 350;
+        spotLight1.shadow.mapSize.width = 1000;
+        spotLight1.shadow.mapSize.height = 1000;
+        spotLight1.castShadow = true;
+        spotLight1.shadowCameraVisible = true; // 在老版本的threejs库中才支持，新版本已废除
+        // spotLight1.target = fbxModel;
+        scene.add(spotLight1);
+        // scene.add(new THREE.CameraHelper(spotLight1.shadow.camera));
+
+        let spotLight2 = new THREE.SpotLight(0xffffff, 2);
+        spotLight2.name = 'Spot Light1';
+        spotLight2.angle = Math.PI / 5;
+        spotLight2.penumbra = 0.3;
+        spotLight2.position.set(0, 80, 80);
+        spotLight2.shadow.camera.near = 0.1;
+        spotLight2.shadow.camera.far = 350;
+        spotLight2.shadow.mapSize.width = 1000;
+        spotLight2.shadow.mapSize.height = 1000;
+        spotLight2.castShadow = true;
+        spotLight2.shadowCameraVisible = true; // 在老版本的threejs库中才支持，新版本已废除
+        // spotLight2.target = fbxModel;
+        scene.add(spotLight2);
+        // scene.add(new THREE.CameraHelper(spotLight2.shadow.camera));
+
+        let spotLight3 = new THREE.SpotLight(0xbdae4e, 2);
+        spotLight3.name = 'Spot Light1';
+        spotLight3.angle = Math.PI / 5;
+        spotLight3.penumbra = 0.3;
+        spotLight3.position.set(0, 50, 0);
+        spotLight3.shadow.camera.near = 0.1;
+        spotLight3.shadow.camera.far = 350;
+        spotLight3.shadow.mapSize.width = 1000;
+        spotLight3.shadow.mapSize.height = 1000;
+        spotLight3.castShadow = true;
+        spotLight3.shadowCameraVisible = true; // 在老版本的threejs库中才支持，新版本已废除
+        // spotLight3.target = fbxModel;
+        scene.add(spotLight3);
+        // scene.add(new THREE.CameraHelper(spotLight3.shadow.camera));
+
+        let spotLight4 = new THREE.SpotLight(0xffffff, 1.8);
+        spotLight4.name = 'Spot Light1';
+        spotLight4.angle = Math.PI / 5;
+        spotLight4.penumbra = 0.3;
+        spotLight4.position.set(-10, 0, 0);
+        spotLight4.shadow.camera.near = 0.1;
+        spotLight4.shadow.camera.far = 350;
+        spotLight4.shadow.mapSize.width = 1000;
+        spotLight4.shadow.mapSize.height = 1000;
+        spotLight4.castShadow = true;
+        spotLight4.shadowCameraVisible = true; // 在老版本的threejs库中才支持，新版本已废除
+        // spotLight4.target = fbxModel;
+        scene.add(spotLight4);
+        // scene.add(new THREE.CameraHelper(spotLight4.shadow.camera));
       }
 
       function initModel() {
@@ -78,16 +141,17 @@
         scene.add(helper);
 
         // 地板
-        var mesh = new THREE.Mesh(
-          new THREE.PlaneBufferGeometry(2000, 2000),
+        let floorSize = 20;
+        var floor = new THREE.Mesh(
+          new THREE.PlaneBufferGeometry(floorSize, floorSize),
           new THREE.MeshPhongMaterial({ color: 0xffffff, depthWrite: false }),
         );
-        mesh.rotation.x = -Math.PI / 2;
-        mesh.receiveShadow = true;
-        scene.add(mesh);
+        floor.rotation.x = -Math.PI / 2;
+        floor.receiveShadow = true;
+        scene.add(floor);
 
         //添加地板割线
-        var grid = new THREE.GridHelper(2000, 20, 0x000000, 0x000000);
+        var grid = new THREE.GridHelper(floorSize, 10, 0x000000, 0x000000);
         grid.material.opacity = 0.2;
         grid.material.transparent = true;
         scene.add(grid);
@@ -114,6 +178,65 @@
               child.receiveShadow = true;
             }
           });
+
+          // TODO: 处理模型材质相关的设置
+          // 给贴图调整相关的属性
+          // SkinnedMesh
+          // material
+          // 反射率: reflectivity: 0.5
+          // 透明度: opacity: 0.5
+          // 光泽度: shininess: 0.5
+          // normalScale.set(0.1, -0.1);
+          let SkinnedMesh = mesh.children.filter((obj) => {
+            return obj.type === 'SkinnedMesh';
+          });
+          console.log(`🚀 ~ zThree ~ loadModel ~ SkinnedMesh`, SkinnedMesh);
+          // 法线问题 => 修改法线强度
+          SkinnedMesh.forEach((obj) => {
+            // Object.prototype.toString.call(obj) === '[object Array]'
+            if (obj && Array.isArray(obj)) {
+              obj.material.forEach((m) => {
+                // m.normalScale.set(0.5, 0.5);
+                // m.normalScale.set(0.1, -0.1);
+                // m.bumpScale = 0.01;
+                m.bumpScale *= 0.3;
+                // m.reflectivity = 0;
+                // m.opacity = 0.5;
+                // m.shininess = 0.3;
+                // m.roughness = 0.5;
+                // m.metalness = 1;
+                // if (m.name === 'YIFU') {
+                //   m.normalMap = `${this.assets}/models/bulu/QIUBITE_Normal_OpenGL-1.png`;
+                // }
+              });
+            }
+            if (obj?.material?.bumpScale) {
+              // obj.material.normalScale.set(0.1, -0.1);
+              // obj.material.bumpScale = 0.01;
+              obj.material.bumpScale *= 0.3;
+            }
+          });
+
+          // 按时长排序动画顺序
+          mesh.animations.sort((a, b) => a.duration - b.duration);
+          let time = 0;
+          const durationArr = mesh.animations.map((ani) => ani.duration);
+          mesh.animations.forEach((item, index) => {
+            item.tracks.forEach((tracks) => {
+              tracks.times = tracks.times.map((t) => {
+                // let x = time ? time - 2.5 : 0;
+                // let x = time ? time - 2 : 0;
+                let x = time ? time : 0;
+                x = x < 0 ? 0 : x;
+                return t - x;
+              });
+            });
+            time = item.duration;
+            // 解决模型动画衔接卡顿的问题
+            // ? item.duration - (durationArr[index - 1] || 0) + 2.2
+            item.duration = !!index ? item.duration - (durationArr[index - 1] || 0) : item.duration;
+          });
+          console.log(`🚀 ~ zThree ~ mesh.animations.forEach ~ mesh.animations`, mesh.animations);
 
           //AnimationMixer是场景中特定对象的动画播放器。当场景中的多个对象独立动画时，可以为每个对象使用一个AnimationMixer
           mixer = mesh.mixer = new THREE.AnimationMixer(mesh);
@@ -155,7 +278,7 @@
 
           datGui.add(gui, 'stop');
 
-          mesh.position.y += 100;
+          // mesh.position.y += 100;
 
           scene.add(mesh);
         });
