@@ -14,7 +14,7 @@
     display: flex;
     justify-content: space-between;
     position: relative;
-    z-index: 9999;
+    // z-index: 9999;
     padding: 5px 10px;
     width: 100%;
   }

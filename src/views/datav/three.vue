@@ -2,10 +2,11 @@
   <!-- <ThreeLine /> -->
   <!-- <ThreeText /> -->
   <!-- <ThreeCube /> -->
-  <ThreeLion />
+  <!-- <ThreeLion /> -->
   <!-- <ThreeParticle /> -->
   <!-- <ThreeSnow /> -->
   <!-- <ThreeLoadModels /> -->
+  <ThreeLoadFbx />
 </template>
 
 <script setup lang="ts">
@@ -17,5 +18,6 @@
     ThreeParticle,
     ThreeSnow,
     ThreeLoadModels,
+    ThreeLoadFbx,
   } from '/@/components/Datav';
 </script>
