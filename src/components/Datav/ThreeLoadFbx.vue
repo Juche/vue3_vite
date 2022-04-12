@@ -40,26 +40,36 @@
         ...initOpts,
         ...opts,
       };
-      this.clock = null;
-      this.renderer = null;
-      this.mixer = null;
+      this.canvas = null;
       this.fbxModel = null;
-      this.AnimationAction = null;
+      this.renderer = null;
       this.scene = null;
       this.camera = null;
+      this.mixer = null;
+      this.clock = null;
       this.controls = null;
+      this.raycaster = null;
+      this.mouse = null;
+      this.AnimationAction = null;
       this.disposing = false;
       this.frameId = null;
-      this.canvas = null;
-      this.platform = null;
+      // this.platform = null;
       this.actionFinish = true;
       this.loadFinish = null;
+
+      this.gui = null;
+      this.datGui = null;
+      this.light = null;
+      this.stats = null;
+      this.meshHelper = null;
+      this.action = null;
       // this.onLoad = (fn) => {
       //   fn;
       // };
-
       this.init(canvas);
     }
+
+    // let renderer, camera, scene, gui, light, stats, controls, meshHelper, mixer, action, datGui;
 
     // 初始化环境
     // TODO: 材质问题 & 灯光位置固定 & 动画锁 & 模型禁止缩放
@@ -74,29 +84,86 @@
       // console.log('init');
       this.canvas = canvas;
 
-      this.initPlatform();
+      // 创建一个时钟对象 Clock
+      this.clock = new THREE.Clock();
+      this.raycaster = new THREE.Raycaster();
+      this.mouse = new THREE.Vector2();
+
+      // this.initPlatform();
+
+      //兼容性判断
+      if (!Detector.webgl) Detector.addGetWebGLMessage();
+      this.initGui();
+      // this.initRender();
+      // this.initScene();
+      // this.initCamera();
+      // this.initLight();
+      // this.initModel();
+      // this.initControls();
+      // this.initStats();
+      // this.animate();
+      // // window.onresize = onWindowResize;
+
+      this.initRenderer();
       this.initScene();
       this.initCamera();
-      if (this.opts.addModel) this.addModel(); // 加载绘制的模型
-      if (this.opts.modelSrc) this.loadModel(); // 加载外部模型
       if (this.opts.addLight) this.addLight();
       if (this.opts.addGround) this.addGround();
+      if (this.opts.modelSrc) this.loadModel(); // 加载外部模型
+      if (this.opts.addModel) this.addModel(); // 加载绘制的模型
       // this.addModel();
       // this.addModel2();
       // this.addGround();
       // // this.addLight();
       // this.addLight2();
       // // this.loadShadow();
-      this.initRenderer();
+      this.initControls();
       this.render();
     }
-    initPlatform() {
-      const platform = new WechatPlatform(this.canvas); // webgl canvas
-      THREE.PLATFORM.set(platform);
-      this.platform = platform;
+    // initPlatform() {
+    //   const platform = new WechatPlatform(this.canvas); // webgl canvas
+    //   THREE.PLATFORM.set(platform);
+    //   this.platform = platform;
+    // }
+    initGui() {
+      //声明一个保存需求修改的相关数据的对象
+      this.gui = {
+        helper: true, //模型辅助线
+      };
+      this.datGui = new dat.GUI();
+      //将设置属性添加到gui当中，gui.add(对象，属性，最小值，最大值）
+
+      this.datGui.add(this.gui, 'helper').onChange(function (e) {
+        meshHelper.visible = e;
+      });
+    }
+    // 创建渲染器
+    initRenderer() {
+      console.log(`🚀 ~ zThree ~ initRenderer ~ initRenderer`);
+      const renderer = new THREE.WebGL1Renderer({
+        canvas: this.canvas,
+        antialias: true,
+        alpha: true,
+      });
+
+      renderer.setSize(this.canvas.width, this.canvas.height); //设置渲染区域尺寸
+      // 背景透明
+      renderer.setClearAlpha(0);
+      // renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
+      renderer.setPixelRatio(THREE.$window.devicePixelRatio);
+      // renderer.shadowMapEnabled = true; // 允许阴影投射
+      renderer.shadowMap.enabled = true; // 允许阴影投射
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap; // 默认的是，没有设置的这个清晰 THREE.PCFShadowMap
+      renderer.gammaInput = true;
+      renderer.gammaOutput = true;
+
+      console.log(THREE.$window.devicePixelRatio, 'THREE.$window.devicePixelRatio');
+      this.renderer = renderer;
     }
     initScene() {
       this.scene = new THREE.Scene();
+      // this.scene.background = new THREE.Color(0xa0a0a0);
+      // this.scene.fog = new THREE.Fog(0xa0a0a0, 20, 100);
     }
     initCamera() {
       //创建相机对象
@@ -111,55 +178,6 @@
 
       // this.camera.position.set(0, 40, 100);
       // this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-    }
-    addLight0() {
-      //环境光
-      this.scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-      this.scene.add(new THREE.AmbientLight(0x666666));
-      // TODO: 光源控制阴影
-      const light = new THREE.DirectionalLight(0xffffff, 0.5);
-      // const light = new THREE.PointLight(0xff0000, 0.5);
-      light.position.set(100, 50, 60); //点光源位置
-      // light.position.set(-500, 500, 500); //点光源位置
-      light.castShadow = true; // 允许阴影投射
-      light.shadowCameraVisible = true;
-      this.scene.add(light); //点光源添加到场景中
-      const light1 = new THREE.DirectionalLight(0xffffff, 0.5);
-      // const light1 = new THREE.PointLight(0x00ffff, 0.5);
-      light1.position.set(-100, -50, -60); //点光源位置
-      // light1.position.set(-800, 800, 800); //点光源位置
-      light1.castShadow = true; // 允许阴影投射
-      light1.shadowCameraVisible = true;
-      this.scene.add(light1); //点光源添加到场景中
-
-      let spotLight = new THREE.SpotLight(0xffffff, 2);
-      // let spotLight = new THREE.SpotLight(0xffffff, 1);
-      spotLight.name = 'Spot Light';
-      spotLight.angle = Math.PI / 5;
-      spotLight.penumbra = 0.3;
-      // ##########
-      // spotLight.position.set(-120, 220, -120); // 单个
-      spotLight.position.set(80, 80, 80); // 单个
-      spotLight.shadow.camera.near = 0.1;
-      spotLight.shadow.camera.far = 350;
-      spotLight.shadow.mapSize.width = 1000;
-      spotLight.shadow.mapSize.height = 1000;
-      // ##########
-      // spotLight.position.set(0, 80, 60); // 一堆
-      // spotLight.shadow.camera.near = 0.1;
-      // spotLight.shadow.camera.far = 120;
-      // spotLight.shadow.mapSize.width = 300;
-      // spotLight.shadow.mapSize.height = 300;
-      // ##########
-      // spotLight.position.set(0, 20, 20); // 开盒
-      // spotLight.shadow.camera.near = 0.1;
-      // spotLight.shadow.camera.far = 80;
-      // spotLight.shadow.mapSize.width = 300;
-      // spotLight.shadow.mapSize.height = 300;
-      spotLight.castShadow = true;
-      spotLight.shadowCameraVisible = true; // 在老版本的threejs库中才支持，新版本已废除
-      this.scene.add(spotLight);
-      // this.scene.add(new THREE.CameraHelper(spotLight.shadow.camera));
     }
     addLight() {
       // #444a4f
@@ -260,6 +278,55 @@
       // this.scene.add(dirLight);
       // this.scene.add(new THREE.CameraHelper(dirLight.shadow.camera));
     }
+    addLight0() {
+      //环境光
+      this.scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+      this.scene.add(new THREE.AmbientLight(0x666666));
+      // TODO: 光源控制阴影
+      const light = new THREE.DirectionalLight(0xffffff, 0.5);
+      // const light = new THREE.PointLight(0xff0000, 0.5);
+      light.position.set(100, 50, 60); //点光源位置
+      // light.position.set(-500, 500, 500); //点光源位置
+      light.castShadow = true; // 允许阴影投射
+      light.shadowCameraVisible = true;
+      this.scene.add(light); //点光源添加到场景中
+      const light1 = new THREE.DirectionalLight(0xffffff, 0.5);
+      // const light1 = new THREE.PointLight(0x00ffff, 0.5);
+      light1.position.set(-100, -50, -60); //点光源位置
+      // light1.position.set(-800, 800, 800); //点光源位置
+      light1.castShadow = true; // 允许阴影投射
+      light1.shadowCameraVisible = true;
+      this.scene.add(light1); //点光源添加到场景中
+
+      let spotLight = new THREE.SpotLight(0xffffff, 2);
+      // let spotLight = new THREE.SpotLight(0xffffff, 1);
+      spotLight.name = 'Spot Light';
+      spotLight.angle = Math.PI / 5;
+      spotLight.penumbra = 0.3;
+      // ##########
+      // spotLight.position.set(-120, 220, -120); // 单个
+      spotLight.position.set(80, 80, 80); // 单个
+      spotLight.shadow.camera.near = 0.1;
+      spotLight.shadow.camera.far = 350;
+      spotLight.shadow.mapSize.width = 1000;
+      spotLight.shadow.mapSize.height = 1000;
+      // ##########
+      // spotLight.position.set(0, 80, 60); // 一堆
+      // spotLight.shadow.camera.near = 0.1;
+      // spotLight.shadow.camera.far = 120;
+      // spotLight.shadow.mapSize.width = 300;
+      // spotLight.shadow.mapSize.height = 300;
+      // ##########
+      // spotLight.position.set(0, 20, 20); // 开盒
+      // spotLight.shadow.camera.near = 0.1;
+      // spotLight.shadow.camera.far = 80;
+      // spotLight.shadow.mapSize.width = 300;
+      // spotLight.shadow.mapSize.height = 300;
+      spotLight.castShadow = true;
+      spotLight.shadowCameraVisible = true; // 在老版本的threejs库中才支持，新版本已废除
+      this.scene.add(spotLight);
+      // this.scene.add(new THREE.CameraHelper(spotLight.shadow.camera));
+    }
     addLight2() {
       //立方体
       // const geometry1 = new THREE.BufferGeometry(10, 10, 10);
@@ -329,6 +396,164 @@
       // ground.castShadow = false;
       // ground.receiveShadow = true;
       // this.scene.add(ground);
+    }
+    // 加载全部模型
+    async loadModel() {
+      try {
+        // 一分钟未获加载到模型
+        let timer = setTimeout(function () {
+          uni.hideLoading();
+          // this.loadFinish && this.loadFinish();
+          uni.showToast({
+            title: '模型加载超时',
+            icon: 'error',
+          });
+        }, 60000);
+        this.fbxModel = await this.loadFBXModel(this.opts.modelSrc);
+        console.log(`🚀 ~ zThree ~ this.loadFBXModel ~ this.fbxModel`, this.fbxModel);
+
+        clearTimeout(timer);
+        timer = null;
+
+        // TODO: 处理模型材质相关的设置
+        // 给贴图调整相关的属性
+        // SkinnedMesh
+        // material
+        // 反射率: reflectivity: 0.5
+        // 透明度: opacity: 0.5
+        // 光泽度: shininess: 0.5
+        // normalScale.set(0.1, -0.1);
+        let SkinnedMesh = this.fbxModel.children.filter((obj) => {
+          return obj.type === 'SkinnedMesh';
+        });
+        console.log(`🚀 ~ zThree ~ loadModel ~ SkinnedMesh`, SkinnedMesh);
+
+        // 法线问题 => 修改法线强度
+        SkinnedMesh.forEach((obj) => {
+          // Object.prototype.toString.call(obj) === '[object Array]'
+          if (obj && Array.isArray(obj)) {
+            obj.material.forEach((m) => {
+              // m.normalScale.set(0.5, 0.5);
+              // m.normalScale.set(0.1, -0.1);
+              // m.bumpScale = 0.01;
+              m.bumpScale *= 0.3;
+              // m.reflectivity = 0;
+              // m.opacity = 0.5;
+              // m.shininess = 0.3;
+              // m.roughness = 0.5;
+              // m.metalness = 1;
+              // if (m.name === 'YIFU') {
+              //   m.normalMap = `${this.assets}/models/bulu/QIUBITE_Normal_OpenGL-1.png`;
+              // }
+            });
+          }
+          if (obj?.material?.bumpScale) {
+            // obj.material.normalScale.set(0.1, -0.1);
+            // obj.material.bumpScale = 0.01;
+            obj.material.bumpScale *= 0.3;
+          }
+        });
+
+        console.log(`🚀 ~ zThree ~ this.loadFBXModel ~ this.fbxModel`, this.fbxModel);
+
+        if (this.opts.addShadow) {
+          this.addLight2();
+          this.loadShadow();
+        }
+        this.sceneAddFBX();
+        uni.hideLoading();
+        // this.loadFinish && this.loadFinish();
+        console.log(`🚀 ~ zThree ~ loadModel ~ this.loadFinish`, this.loadFinish);
+      } catch (error) {
+        uni.hideLoading();
+        // this.loadFinish && this.loadFinish();
+        console.log(`🚀 ~ zThree ~ loadModel ~ this.loadFinish`, this.loadFinish);
+        uni.showToast({
+          icon: 'none',
+          title: error,
+        });
+      }
+    }
+    // 加载FBX模型
+    loadFBXModel(url) {
+      this.mixer = null;
+      return new Promise((resolve, reject) => {
+        if (url.toLocaleLowerCase().indexOf('.fbx') === -1) {
+          reject('没匹配到正确格式的模型');
+        }
+        var loader = new FBXLoader();
+        loader.load(url, (obj) => {
+          // obj.scale.set(8, 8, 8);
+
+          // 按时长排序动画顺序
+          obj.animations.sort((a, b) => a.duration - b.duration);
+          let time = 0;
+          const durationArr = obj.animations.map((ani) => ani.duration);
+          obj.animations.forEach((item, index) => {
+            item.tracks.forEach((tracks) => {
+              tracks.times = tracks.times.map((t) => {
+                // let x = time ? time - 2.5 : 0;
+                let x = time ? time - 2 : 0;
+                x = x < 0 ? 0 : x;
+                return t - x;
+              });
+            });
+            time = item.duration;
+            // 解决模型动画衔接卡顿的问题
+            item.duration = !!index
+              ? item.duration - (durationArr[index - 1] || 0) + 2.2
+              : item.duration;
+          });
+          console.log(`🚀 ~ zThree ~ obj.animations.forEach ~ obj.animations`, obj.animations);
+
+          // obj.children.forEach((item) => {
+          //   this.createCrashObject(item);
+          // });
+          // console.log(obj, 'xxxxxxxxxxxxxxxxxxxxxx');
+          resolve(obj);
+          // 模型加载完成,关闭加载提示
+        });
+      });
+    }
+    createCrashObject(crashObject) {
+      if (crashObject.name.indexOf('Index_') === 0) {
+        console.log(`🚀 ~ zThree ~ createCrashObject ~ crashObject`, crashObject);
+
+        // 创建他的包围盒的辅助线
+        let boxHelper = new THREE.BoxHelper(crashObject, 0xff0000);
+        // 创建包围盒
+        // let box3d = new THREE.Box3().setFromObject(crashObject);
+        // this.scene.add(crashObject, boxHelper);
+        this.scene.add(boxHelper);
+        // this.scene.add(crashObject);
+      }
+    }
+    loadShadow() {
+      // 解决外部模型无法投射阴影的问题
+      for (const key in this.fbxModel.children) {
+        this.fbxModel.children[key].castShadow = true;
+        this.fbxModel.children[key].receiveShadow = true;
+      }
+    }
+    // 添加模型到场景
+    sceneAddFBX(opts) {
+      opts = {
+        // aniIdx: 0,
+        // modelPos: [0, 0, 0],
+        // cameraPos: [0, 0, 0],
+        ...this.opts,
+        ...opts,
+      };
+      console.log(`🚀 ~ zThree ~ sceneAddFBX ~ opts`, opts);
+      this.fbxModel.position.set(...opts.modelPos);
+      // this.fbxModel.receiveShadow = true; // 模型接受阴影
+      this.fbxModel.castShadow = true; // 模型投射阴影
+      this.scene.add(this.fbxModel);
+      this.camera.position.set(...opts.cameraPos);
+      // this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+      this.camera.lookAt(this.fbxModel.position);
+      // 是否自动播放动画
+      if (this.opts.aniAutoPlay) this.startAni(opts.aniIdx);
     }
     addModel() {
       //辅助工具
@@ -462,190 +687,7 @@
       //   }
       // }
     }
-    // 加载全部模型
-    async loadModel() {
-      try {
-        // 一分钟未获加载到模型
-        let timer = setTimeout(function () {
-          uni.hideLoading();
-          // this.loadFinish && this.loadFinish();
-          uni.showToast({
-            title: '模型加载超时',
-            icon: 'error',
-          });
-        }, 60000);
-        this.fbxModel = await this.loadFBXModel(this.opts.modelSrc);
-        console.log(`🚀 ~ zThree ~ this.loadFBXModel ~ this.fbxModel`, this.fbxModel);
-
-        clearTimeout(timer);
-        timer = null;
-
-        // TODO: 处理模型材质相关的设置
-        // 给贴图调整相关的属性
-        // SkinnedMesh
-        // material
-        // 反射率: reflectivity: 0.5
-        // 透明度: opacity: 0.5
-        // 光泽度: shininess: 0.5
-        // normalScale.set(0.1, -0.1);
-        let SkinnedMesh = this.fbxModel.children.filter((obj) => {
-          return obj.type === 'SkinnedMesh';
-        });
-        console.log(`🚀 ~ zThree ~ loadModel ~ SkinnedMesh`, SkinnedMesh);
-
-        // 法线问题 => 修改法线强度
-        SkinnedMesh.forEach((obj) => {
-          // Object.prototype.toString.call(obj) === '[object Array]'
-          if (obj && Array.isArray(obj)) {
-            obj.material.forEach((m) => {
-              // m.normalScale.set(0.5, 0.5);
-              // m.normalScale.set(0.1, -0.1);
-              // m.bumpScale = 0.01;
-              m.bumpScale *= 0.3;
-              // m.reflectivity = 0;
-              // m.opacity = 0.5;
-              // m.shininess = 0.3;
-              // m.roughness = 0.5;
-              // m.metalness = 1;
-              // if (m.name === 'YIFU') {
-              //   m.normalMap = `${this.assets}/models/bulu/QIUBITE_Normal_OpenGL-1.png`;
-              // }
-            });
-          }
-          if (obj?.material?.bumpScale) {
-            // obj.material.normalScale.set(0.1, -0.1);
-            // obj.material.bumpScale = 0.01;
-            obj.material.bumpScale *= 0.3;
-          }
-        });
-
-        console.log(`🚀 ~ zThree ~ this.loadFBXModel ~ this.fbxModel`, this.fbxModel);
-
-        if (this.opts.addShadow) {
-          this.addLight2();
-          this.loadShadow();
-        }
-        this.sceneAddFBX();
-        uni.hideLoading();
-        // this.loadFinish && this.loadFinish();
-        console.log(`🚀 ~ zThree ~ loadModel ~ this.loadFinish`, this.loadFinish);
-      } catch (error) {
-        uni.hideLoading();
-        // this.loadFinish && this.loadFinish();
-        console.log(`🚀 ~ zThree ~ loadModel ~ this.loadFinish`, this.loadFinish);
-        uni.showToast({
-          icon: 'none',
-          title: error,
-        });
-      }
-    }
-    // 加载FBX模型
-    loadFBXModel(url) {
-      this.mixer = null;
-      return new Promise((resolve, reject) => {
-        if (url.toLocaleLowerCase().indexOf('.fbx') === -1) {
-          reject('没匹配到正确格式的模型');
-        }
-        var loader = new FBXLoader();
-        loader.load(url, (obj) => {
-          // obj.scale.set(8, 8, 8);
-
-          // 按时长排序动画顺序
-          obj.animations.sort((a, b) => a.duration - b.duration);
-          let time = 0;
-          const durationArr = obj.animations.map((ani) => ani.duration);
-          obj.animations.forEach((item, index) => {
-            item.tracks.forEach((tracks) => {
-              tracks.times = tracks.times.map((t) => {
-                // let x = time ? time - 2.5 : 0;
-                let x = time ? time - 2 : 0;
-                x = x < 0 ? 0 : x;
-                return t - x;
-              });
-            });
-            time = item.duration;
-            // 解决模型动画衔接卡顿的问题
-            item.duration = !!index
-              ? item.duration - (durationArr[index - 1] || 0) + 2.2
-              : item.duration;
-          });
-          console.log(`🚀 ~ zThree ~ obj.animations.forEach ~ obj.animations`, obj.animations);
-
-          // obj.children.forEach((item) => {
-          //   this.createCrashObject(item);
-          // });
-          // console.log(obj, 'xxxxxxxxxxxxxxxxxxxxxx');
-          resolve(obj);
-          // 模型加载完成,关闭加载提示
-        });
-      });
-    }
-
-    createCrashObject(crashObject) {
-      if (crashObject.name.indexOf('Index_') === 0) {
-        console.log(`🚀 ~ zThree ~ createCrashObject ~ crashObject`, crashObject);
-
-        // 创建他的包围盒的辅助线
-        let boxHelper = new THREE.BoxHelper(crashObject, 0xff0000);
-        // 创建包围盒
-        // let box3d = new THREE.Box3().setFromObject(crashObject);
-        // this.scene.add(crashObject, boxHelper);
-        this.scene.add(boxHelper);
-        // this.scene.add(crashObject);
-      }
-    }
-    loadShadow() {
-      // 解决外部模型无法投射阴影的问题
-      for (const key in this.fbxModel.children) {
-        this.fbxModel.children[key].castShadow = true;
-        this.fbxModel.children[key].receiveShadow = true;
-      }
-    }
-    // 添加模型到场景
-    sceneAddFBX(opts) {
-      opts = {
-        // aniIdx: 0,
-        // modelPos: [0, 0, 0],
-        // cameraPos: [0, 0, 0],
-        ...this.opts,
-        ...opts,
-      };
-      console.log(`🚀 ~ zThree ~ sceneAddFBX ~ opts`, opts);
-      this.fbxModel.position.set(...opts.modelPos);
-      // this.fbxModel.receiveShadow = true; // 模型接受阴影
-      this.fbxModel.castShadow = true; // 模型投射阴影
-      this.scene.add(this.fbxModel);
-      this.camera.position.set(...opts.cameraPos);
-      // this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-      this.camera.lookAt(this.fbxModel.position);
-      // 是否自动播放动画
-      if (this.opts.aniAutoPlay) this.startAni(opts.aniIdx);
-    }
-    // 创建渲染器
-    initRenderer() {
-      console.log(`🚀 ~ zThree ~ initRenderer ~ initRenderer`);
-      const renderer = new THREE.WebGL1Renderer({
-        canvas: this.canvas,
-        antialias: true,
-        alpha: true,
-      });
-
-      renderer.setSize(this.canvas.width, this.canvas.height); //设置渲染区域尺寸
-      // 背景透明
-      renderer.setClearAlpha(0);
-      // renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
-      renderer.setPixelRatio(THREE.$window.devicePixelRatio);
-      // renderer.shadowMapEnabled = true; // 允许阴影投射
-      renderer.shadowMap.enabled = true; // 允许阴影投射
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap; // 默认的是，没有设置的这个清晰 THREE.PCFShadowMap
-      renderer.gammaInput = true;
-      renderer.gammaOutput = true;
-
-      console.log(THREE.$window.devicePixelRatio, 'THREE.$window.devicePixelRatio');
-      // 创建一个时钟对象Clock
-      this.clock = new THREE.Clock();
-      this.renderer = renderer;
-
+    initControls() {
       const controls = new OrbitControls(this.camera, this.canvas);
       // TODO: ios 禁止缩放 & 安卓控制缩放级别
       const platform = uni.$vuex.get('systemInfo').platform;
@@ -1219,9 +1261,52 @@
   export default {
     data() {},
     mounted() {
-      draw();
+      // draw();
+      this.$nextTick(function () {
+        this.init();
+      });
     },
     methods: {
+      init() {
+        const canvas = document.getElementById('webgl');
+        threeModel = new zThree(canvas, {
+          modelPos: [0, -0.3, 0],
+          cameraPos: [0, 0, 2.2],
+          // modelPos: [0, -0.5, 0],
+          // cameraPos: [0, 0, 3],
+          // modelSrc: this.modelSrc,
+          // modelSrc: "/src/assets/threejs/models/fbx/Naruto.fbx",
+          // modelSrc: "/src/assets/threejs/models/fbx/Samba Dancing.fbx",
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu.fbx',
+          // modelSrc: '/src/assets/threejs/models/fbx/ds.fbx',
+          // modelSrc: "/src/assets/threejs/models/fbx/shaoqing.fbx",
+          // modelSrc: '/src/assets/threejs/models/fbx/spaceman.fbx',
+
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu04121009.fbx',
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu04121026.fbx',
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu04121057.fbx',
+
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7.fbx',
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-1.fbx',
+          modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-2.fbx',
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-3.fbx',
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-4.fbx',
+
+          // modelPos: [0, 0, 0],
+          // cameraPos: [0, 0, 25],
+          // modelSrc: `${this.assets}/models/gou_bai.fbx`,
+          // modelSrc: `${this.assets}/models/gou_ds.fbx`,
+          // modelSrc: `${this.assets}/models/bulu/bulu-7-3.fbx`, // 这两个模型翅膀一直完整
+          // modelSrc: `${this.assets}/models/spaceman.fbx`, // 太空人模型
+          // modelSrc: `${this.assets}/models/bulu.fbx`, // 这个无法线,效果较好
+
+          // modelSrc: `${this.assets}/models/03fx/FX366.fbx`, // 方块
+          // modelSrc: `${this.assets}/models/03fx/323WFS.fbx`,
+          // modelSrc: `${this.assets}/models/03fx/323.fbx`, // 当前效果最好的模型
+          // modelSrc: `${this.assets}/models/03fx/323YB3.FBX`,
+        });
+        console.log(`🚀 ~ query.node ~ threeModel`, threeModel);
+      },
       onTX(e) {
         // 模型手势交互 Raycaster
         console.log(`🚀 ~ onTX ~ e`, e);
