@@ -7,7 +7,8 @@
   <!-- <ThreeSnow /> -->
   <!-- <ThreeLoadModels /> -->
   <!-- <ThreeLoadFbx /> -->
-  <SingleBox />
+  <!-- <SingleBox /> -->
+  <MultiBox />
 </template>
 
 <script setup lang="ts">
@@ -21,5 +22,6 @@
     ThreeLoadModels,
     ThreeLoadFbx,
     SingleBox,
+    MultiBox,
   } from '/@/components/Datav';
 </script>

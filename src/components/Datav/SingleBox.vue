@@ -7,7 +7,11 @@
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
   import { onMounted } from 'vue';
 
-  let renderer, scene, camera, cube, controls;
+  let renderer: THREE.WebGLRenderer,
+    scene: THREE.Scene,
+    camera: THREE.PerspectiveCamera | THREE.Camera,
+    controls: OrbitControls,
+    cube;
 
   function init() {
     const width = window.innerWidth;
