@@ -7,7 +7,7 @@
     @touchstart="onTX"
     @touchmove="onTX"
     @touchend="onTX"
-  />
+  ></canvas>
 </template>
 
 <script>
@@ -32,14 +32,14 @@
       init() {
         const canvas = document.getElementById('webgl');
         threeModel = new zThree(canvas, {
-          modelPos: [0, -0.3, 0],
+          modelPos: [0, 0, 0],
           cameraPos: [0, 0, 2.2],
           // modelPos: [0, -0.5, 0],
           // cameraPos: [0, 0, 3],
           // modelSrc: this.modelSrc,
           // modelSrc: "/src/assets/threejs/models/fbx/Naruto.fbx",
           // modelSrc: "/src/assets/threejs/models/fbx/Samba Dancing.fbx",
-          // modelSrc: '/src/assets/threejs/models/fbx/bulu.fbx',
+          modelSrc: '/src/assets/threejs/models/fbx/bulu.fbx',
           // modelSrc: '/src/assets/threejs/models/fbx/ds.fbx',
           // modelSrc: "/src/assets/threejs/models/fbx/shaoqing.fbx",
           // modelSrc: '/src/assets/threejs/models/fbx/spaceman.fbx',
@@ -50,7 +50,7 @@
 
           // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7.fbx',
           // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-1.fbx',
-          modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-2.fbx',
+          // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-2.fbx',
           // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-3.fbx',
           // modelSrc: '/src/assets/threejs/models/fbx/bulu/bulu-7-4.fbx',
 

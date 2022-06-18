@@ -363,7 +363,7 @@ export default class zThree {
     var loader = new FBXLoader();
     // const model = "/src/assets/threejs/models/fbx/Naruto.fbx";
     // const model = "/src/assets/threejs/models/fbx/Samba Dancing.fbx";
-    // const model = '/src/assets/threejs/models/fbx/bulu.fbx';
+    const model = '/src/assets/threejs/models/fbx/bulu.fbx';
     // const model = '/src/assets/threejs/models/fbx/ds.fbx';
     // const model = "/src/assets/threejs/models/fbx/shaoqing.fbx";
     // const model = '/src/assets/threejs/models/fbx/spaceman.fbx';
@@ -374,7 +374,7 @@ export default class zThree {
 
     // const model = '/src/assets/threejs/models/fbx/bulu/bulu-7.fbx';
     // const model = '/src/assets/threejs/models/fbx/bulu/bulu-7-1.fbx';
-    const model = '/src/assets/threejs/models/fbx/bulu/bulu-7-2.fbx';
+    // const model = '/src/assets/threejs/models/fbx/bulu/bulu-7-2.fbx';
     // const model = '/src/assets/threejs/models/fbx/bulu/bulu-7-3.fbx';
     // const model = '/src/assets/threejs/models/fbx/bulu/bulu-7-4.fbx';
 
