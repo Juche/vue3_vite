@@ -15,10 +15,14 @@
 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
+    const canvas = document?.getElementById('canvasBox') ?? document.createElement('canvas');
     renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById('canvasBox'),
+      canvas: canvas,
+      antialias: true, // 开启抗锯齿
+      alpha: true,
     });
     renderer.setSize(width, height);
+    renderer.setClearColor(0xeeeeee, 1); // 设置背景颜色
 
     const textureLoader = new THREE.TextureLoader();
     // const texture = textureLoader.load('/src/assets/images/box/top.png');
@@ -51,13 +55,13 @@
     const ambientLight = new THREE.AmbientLight(0xffffff, 1); //环境光的颜色以及强弱
     // 点光
     const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(2, 20, -2);
+    pointLight.position.set(100, 100, 100);
     pointLight.castShadow = true;
     pointLight.shadow.camera.near = 0.1;
-    pointLight.shadow.camera.far = 25;
+    pointLight.shadow.camera.far = 1000;
 
-    scene.add(ambientLight);
-    scene.add(pointLight);
+    // scene.add(ambientLight);
+    // scene.add(pointLight);
 
     // camera.position.set(10, 10, 20);
     camera.position.set(20, 10, 10);

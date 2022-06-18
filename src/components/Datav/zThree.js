@@ -1016,7 +1016,7 @@ function initRender() {
   // renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    antialias: true,
+    antialias: true, // 开启抗锯齿
     alpha: true,
   });
 

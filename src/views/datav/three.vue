@@ -7,7 +7,7 @@
   <!-- <ThreeSnow /> -->
   <!-- <ThreeLoadModels /> -->
   <!-- <ThreeLoadFbx /> -->
-  <OpenBox />
+  <SingleBox />
 </template>
 
 <script setup lang="ts">
@@ -20,6 +20,6 @@
     ThreeSnow,
     ThreeLoadModels,
     ThreeLoadFbx,
-    OpenBox,
+    SingleBox,
   } from '/@/components/Datav';
 </script>
