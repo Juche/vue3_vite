@@ -7,13 +7,15 @@
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
   import { onMounted } from 'vue';
 
+  let renderer, scene, camera, cube, controls;
+
   function init() {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
-    const renderer = new THREE.WebGLRenderer({
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
+    renderer = new THREE.WebGLRenderer({
       canvas: document.getElementById('canvasBox'),
     });
     renderer.setSize(width, height);
@@ -41,7 +43,7 @@
     //   map: texture,
     //   // color: 0xff0000,
     // });
-    const cube = new THREE.Mesh(geometry, materials);
+    cube = new THREE.Mesh(geometry, materials);
 
     scene.add(cube);
 
@@ -57,26 +59,50 @@
     scene.add(ambientLight);
     scene.add(pointLight);
 
-    camera.position.set(10, 10, 10);
+    // camera.position.set(10, 10, 20);
+    camera.position.set(20, 10, 10);
     // camera.up.set(0, 1, 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-    const controls = new OrbitControls(camera, renderer.domElement);
+    controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, 0);
-    controls.update();
-    controls.addEventListener('change', animate);
+
+    // controls.enableDamping = true;
+    //设置控制器的中心点
+    // controls.target.set( 0, 100, 0 );
+    // 如果使用animate方法时，将此函数删除
+    //controls.addEventListener( 'change', render );
+    // 使动画循环使用时阻尼或自转 意思是否有惯性
+    controls.enableDamping = true;
+    //动态阻尼系数 就是鼠标拖拽旋转灵敏度
+    //controls.dampingFactor = 0.25;
+    //是否可以缩放
+    controls.enableZoom = true;
+    // //是否自动旋转
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 10;
+    //设置相机距离原点的最近距离
+    controls.minDistance = 10;
+    //设置相机距离原点的最远距离
+    controls.maxDistance = 30;
+    // //是否开启右键拖拽
+    // controls.enablePan = true;
+
+    // controls.update();
+    // controls.addEventListener('change', animate);
+
     // window.addEventListener('resize', onWindowResize);
-
-    function animate() {
-      // requestAnimationFrame(animate);
-
-      // cube.rotation.x += 0.01;
-      // cube.rotation.y += 0.01;
-
-      renderer.render(scene, camera);
-    }
-
     animate();
+    // setTimeout(() => {
+    //   animate();
+    // }, 500);
+  }
+  function animate() {
+    controls.update();
+    requestAnimationFrame(animate);
+    // cube.rotation.x += 0.01;
+    // cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
   }
 
   onMounted(() => {
