@@ -1,5 +1,8 @@
 import {
+  AmbientLight,
+  AxesHelper,
   BoxBufferGeometry,
+  GridHelper,
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
@@ -24,6 +27,7 @@ export class $T {
 
     // 2.0 创建场景和相机
     this.scene = new Scene();
+    // 2.1 创建相机
     this.camera = new PerspectiveCamera(45, dom.offsetWidth / dom.offsetHeight, 1, 1000);
 
     // 相机如果设置不对会看不到场景里的模型
@@ -36,13 +40,18 @@ export class $T {
 
     // 3.0 创建一个立方体
     const geometry: BoxBufferGeometry = new BoxBufferGeometry(3, 3, 3);
-    // MeshStandardMaterial 材质设置颜色无效
+    // MeshStandardMaterial 材质设置颜色不会直接生效(需要通过灯光点亮,不设置颜色会随灯光颜色,设置颜色显示设置的颜色)
     // const material: MeshStandardMaterial = new MeshStandardMaterial();
-    const material: MeshBasicMaterial = new MeshBasicMaterial({ color: 0x00ff00 });
+    const material: MeshStandardMaterial = new MeshStandardMaterial({ color: 0x00ff00 });
+    // const material: MeshBasicMaterial = new MeshBasicMaterial({ color: 0x00ff00 });
     const cube: Mesh = new Mesh(geometry, material);
+    // 6.0 添加环境光
+    const ambientLight: AmbientLight = new AmbientLight(0xffffff, 1);
 
     // 3.1 将立方体添加到场景中
     this.scene.add(cube);
+    // 6.1 将环境光添加到场景中
+    this.scene.add(ambientLight);
 
     // 对于动态场景的渲染，需要每次更新场景
     // 5.0 设置清空颜色，可以给场景设置背景色(默认是黑色)
