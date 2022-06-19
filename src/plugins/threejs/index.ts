@@ -6,6 +6,7 @@ import {
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
+  MOUSE,
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
@@ -52,10 +53,23 @@ export class $T {
     const axesHelper: AxesHelper = new AxesHelper(10);
     // 8.0 创建场地网格辅助
     const gridHelper: GridHelper = new GridHelper(50, 50, 0x888888, 0x888888);
-    // 9.0 创建控制器
+    // 9.0 创建轨道控制器
     const controls: OrbitControls = new OrbitControls(this.camera, this.renderer.domElement);
-    // 9.1 设置控制器坐标系
+    // 9.1 设置轨道控制器坐标系
     controls.target.set(0, 0, 0);
+    // 9.3 设置轨道控制器自动旋转
+    controls.autoRotate = true;
+    // 9.4 设置轨道控制器自动旋转速度
+    controls.autoRotateSpeed = 0.5;
+    // 9.5 设置轨道控制器惯性
+    controls.enableDamping = true;
+    // 9.6 设置轨道控制器按键绑定
+    controls.mouseButtons = {
+      // 默认设置
+      LEFT: MOUSE.ROTATE,
+      MIDDLE: MOUSE.DOLLY,
+      RIGHT: MOUSE.PAN,
+    };
     // 11.0 创建性能监视器(States 是函数,直接调用)
     const stats: Stats = Stats();
     // 11.1 设置性能监视器位置
@@ -89,15 +103,18 @@ export class $T {
 
     // 10.0 动态更新场景
     const animate = () => {
+      requestAnimationFrame(animate);
+      // 设置立方体在 x 轴移动
       // cube.position.y += 0.01;
-      cube.rotation.y += 0.01;
-      this.camera.position.x += 0.01;
-      // 9.2 动态更新控制器
+      // 设置立方体在 y 轴上旋转
+      // cube.rotation.y += 0.01;
+      // 设置相机在 x 轴移动
+      // this.camera.position.x += 0.01;
+      // 9.2 动态更新轨道控制器
       controls.update();
       // 11.2 动态更新性能监视器
       stats.update();
       this.renderer.render(this.scene, this.camera);
-      requestAnimationFrame(animate);
     };
     animate();
   }
