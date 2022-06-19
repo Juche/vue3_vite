@@ -3,6 +3,7 @@ import {
   AxesHelper,
   BoxBufferGeometry,
   BufferGeometry,
+  CameraHelper,
   GridHelper,
   Material,
   Mesh,
@@ -11,6 +12,7 @@ import {
   MOUSE,
   Object3D,
   PerspectiveCamera,
+  PointLight,
   Scene,
   WebGLRenderer,
 } from 'three';
@@ -55,11 +57,31 @@ export class $T {
     // const cube: Mesh = new Mesh(geometry, material);
 
     // 6.0 创建环境光
-    const ambientLight: AmbientLight = new AmbientLight(0xffffff, 1);
+    const ambientLight: AmbientLight = new AmbientLight(0xffffff, 0.5); // 强度设为 1 导致点光源不能产生强度衰减效果!!!
+    // 13.0 创建点光源
+    const pointLight: PointLight = new PointLight(0xffffff, 0.5, 20, 0.1);
+    // 13.1 设置点光源位置
+    pointLight.position.set(5, 5, 5);
+    // 13.2 设置点光源聚光范围
+    // pointLight.shadow.camera.near = 1;
+    // pointLight.shadow.camera.far = 20;
+    // pointLight.shadow.camera.fov = 90;
+    // 13.3 设置点光源聚光投射面
+    // pointLight.shadow.mapSize.width = 1024;
+    // pointLight.shadow.mapSize.height = 1024;
+    // 13.4 设置点光源聚光投射面的偏移
+    // pointLight.shadow.bias = 0.001;
+    // pointLight.shadow.radius = 1;
+    // 13.5 设置点光源投射阴影
+    // pointLight.castShadow = true;
+    // pointLight.target = ;
+
     // 7.0 创建场景坐标辅助
     const axesHelper: AxesHelper = new AxesHelper(10);
     // 8.0 创建场地网格辅助
     const gridHelper: GridHelper = new GridHelper(100, 100, 0x888888, 0x888888);
+    // 8.1 设置场地网格辅助的偏移
+    gridHelper.position.set(0, -4, 0);
     // 9.0 创建轨道控制器
     const controls: OrbitControls = new OrbitControls(this.camera, this.renderer.domElement);
     // 9.1 设置轨道控制器坐标系
@@ -87,10 +109,14 @@ export class $T {
 
     // 3.1 将立方体添加到场景中
     // this.scene.add(cube);
-    // 12.0 将 3D 对象的创建提取到单独的文件中,在这里统一添加到场景中
+    // 12.1 使用 addObjs 方法将 3D 对象统一添加到场景中
     // this.addObjs(cube, sphere);
     // 6.1 将环境光添加到场景中
     this.scene.add(ambientLight);
+    // 13.5 将点光源添加到场景中
+    this.scene.add(pointLight);
+    // 13.6 添加灯光辅助
+    // this.scene.add(new CameraHelper(pointLight.shadow.camera));
     // 7.1 将辅助添加到场景中
     this.scene.add(axesHelper);
     // 8.1 将网格辅助添加到场景中
@@ -128,6 +154,7 @@ export class $T {
     animate();
   }
 
+  // 12.0 将 3D 对象的创建提取到单独的文件中, addObjs 方法用来添加 3D 对象到场景中
   addObjs(...objs: Object3D[]): void {
     console.log(`🚀 ~ $T ~ addObjs ~ objs`, objs);
     objs.forEach((obj) => {
