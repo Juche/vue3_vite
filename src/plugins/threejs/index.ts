@@ -40,7 +40,7 @@ export class $T {
 
     // 相机如果设置不对会看不到场景里的模型
     // 4.0 设置相机位置
-    this.camera.position.set(10, 10, 10);
+    this.camera.position.set(20, 20, 20);
     // 4.1 设置相机目标位置
     this.camera.lookAt(0, 0, 0);
     // 4.2 设置相机的方向
@@ -59,7 +59,7 @@ export class $T {
     // 7.0 创建场景坐标辅助
     const axesHelper: AxesHelper = new AxesHelper(10);
     // 8.0 创建场地网格辅助
-    const gridHelper: GridHelper = new GridHelper(50, 50, 0x888888, 0x888888);
+    const gridHelper: GridHelper = new GridHelper(100, 100, 0x888888, 0x888888);
     // 9.0 创建轨道控制器
     const controls: OrbitControls = new OrbitControls(this.camera, this.renderer.domElement);
     // 9.1 设置轨道控制器坐标系
