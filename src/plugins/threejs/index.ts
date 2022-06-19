@@ -10,6 +10,7 @@ import {
   Scene,
   WebGLRenderer,
 } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export class $T {
   private dom: HTMLElement;
@@ -42,15 +43,18 @@ export class $T {
     const geometry: BoxBufferGeometry = new BoxBufferGeometry(3, 3, 3);
     // MeshStandardMaterial 材质设置颜色不会直接生效(需要通过灯光点亮,不设置颜色会随灯光颜色,设置颜色显示设置的颜色)
     // const material: MeshStandardMaterial = new MeshStandardMaterial();
-    const material: MeshStandardMaterial = new MeshStandardMaterial({ color: 0x00ff00 });
+    const material: MeshStandardMaterial = new MeshStandardMaterial({ color: 0xff0000 });
     // const material: MeshBasicMaterial = new MeshBasicMaterial({ color: 0x00ff00 });
     const cube: Mesh = new Mesh(geometry, material);
-    // 6.0 添加环境光
+    // 6.0 创建环境光
     const ambientLight: AmbientLight = new AmbientLight(0xffffff, 1);
-    // 7.0 添加场景坐标辅助
+    // 7.0 创建场景坐标辅助
     const axesHelper: AxesHelper = new AxesHelper(10);
-    // 8.0 添加场地网格辅助
+    // 8.0 创建场地网格辅助
     const gridHelper: GridHelper = new GridHelper(50, 50, 0x888888, 0x888888);
+    // 9.0 创建控制器 & 设置控制器配置
+    const controls: OrbitControls = new OrbitControls(this.camera, this.renderer.domElement);
+    controls.target.set(0, 0, 0);
 
     // 3.1 将立方体添加到场景中
     this.scene.add(cube);
@@ -68,6 +72,15 @@ export class $T {
     // this.renderer.clearColor();
 
     // 2.1 将场景和相机挂载到渲染器上
-    this.renderer.render(this.scene, this.camera);
+    // this.renderer.render(this.scene, this.camera);
+
+    // 10.0 动态更新场景
+    const animate = () => {
+      cube.position.y += 0.01;
+      controls.update();
+      this.renderer.render(this.scene, this.camera);
+      requestAnimationFrame(animate);
+    };
+    animate();
   }
 }
