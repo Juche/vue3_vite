@@ -50,7 +50,7 @@ export class $T {
     // 7.0 添加场景坐标辅助
     const axesHelper: AxesHelper = new AxesHelper(10);
     // 8.0 添加场地网格辅助
-    const gridHelper: GridHelper = new GridHelper(50, 50, 0xeeeeee, 0xeeeeee);
+    const gridHelper: GridHelper = new GridHelper(50, 50, 0x888888, 0x888888);
 
     // 3.1 将立方体添加到场景中
     this.scene.add(cube);
@@ -63,9 +63,9 @@ export class $T {
 
     // 对于动态场景的渲染，需要每次更新场景
     // 5.0 设置清空颜色，可以给场景设置背景色(默认是黑色)
-    this.renderer.setClearColor(0xffffff, 1);
+    // this.renderer.setClearColor(0xffffff, 1);
     // 5.1 清空渲染器颜色
-    this.renderer.clearColor();
+    // this.renderer.clearColor();
 
     // 2.1 将场景和相机挂载到渲染器上
     this.renderer.render(this.scene, this.camera);
