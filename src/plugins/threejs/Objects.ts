@@ -12,6 +12,8 @@ const cube: Mesh = new Mesh(boxGeometry, boxMaterial);
 const sphereGeometry = new SphereGeometry(1, 100, 100);
 const sphereMaterial = new MeshStandardMaterial({ color: 0x00ff00 });
 const sphere = new Mesh(sphereGeometry, sphereMaterial);
-sphere.position.set(0, 3, 0);
+sphere.position.set(3, 0, 0);
 
-export { cube, sphere };
+export const objs: Object3D[] = [cube, sphere];
+
+// export { cube, sphere };
