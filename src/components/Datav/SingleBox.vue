@@ -69,7 +69,7 @@
 
     // camera.position.set(10, 10, 20);
     camera.position.set(20, 10, 10);
-    // camera.up.set(0, 1, 0);
+    camera.up.set(0, 1, 0);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     controls = new OrbitControls(camera, renderer.domElement);
