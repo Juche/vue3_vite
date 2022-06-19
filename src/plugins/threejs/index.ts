@@ -23,7 +23,9 @@ export class $T {
     console.log(`🚀 ~ $T dom`, dom);
     this.dom = dom;
     // 1.0 创建渲染器
-    this.renderer = new WebGLRenderer();
+    this.renderer = new WebGLRenderer({
+      antialias: true, // 抗锯齿
+    });
     // 1.2 初始化渲染器尺寸
     this.renderer.setSize(dom.offsetWidth, dom.offsetHeight);
 
