@@ -2,17 +2,21 @@ import {
   AmbientLight,
   AxesHelper,
   BoxBufferGeometry,
+  BufferGeometry,
   GridHelper,
+  Material,
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
   MOUSE,
+  Object3D,
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Stats from 'three/examples/jsm/libs/stats.module';
+import { cube, sphere } from './Objects';
 
 export class $T {
   private dom: HTMLElement;
@@ -42,13 +46,14 @@ export class $T {
     // 4.2 设置相机的方向
     this.camera.up.set(0, 1, 0);
 
-    // 3.0 创建一个立方体
-    const geometry: BoxBufferGeometry = new BoxBufferGeometry(3, 3, 3);
-    // MeshStandardMaterial 材质设置颜色不会直接生效(需要通过灯光点亮,不设置颜色会随灯光颜色,设置颜色显示设置的颜色)
-    // const material: MeshStandardMaterial = new MeshStandardMaterial();
-    const material: MeshStandardMaterial = new MeshStandardMaterial({ color: 0xff0000 });
-    // const material: MeshBasicMaterial = new MeshBasicMaterial({ color: 0x00ff00 });
-    const cube: Mesh = new Mesh(geometry, material);
+    // // 3.0 创建一个立方体
+    // const geometry: BoxBufferGeometry = new BoxBufferGeometry(3, 3, 3);
+    // // MeshStandardMaterial 材质设置颜色不会直接生效(需要通过灯光点亮,不设置颜色会随灯光颜色,设置颜色显示设置的颜色)
+    // // const material: MeshStandardMaterial = new MeshStandardMaterial();
+    // const material: MeshStandardMaterial = new MeshStandardMaterial({ color: 0xff0000 });
+    // // const material: MeshBasicMaterial = new MeshBasicMaterial({ color: 0x00ff00 });
+    // const cube: Mesh = new Mesh(geometry, material);
+
     // 6.0 创建环境光
     const ambientLight: AmbientLight = new AmbientLight(0xffffff, 1);
     // 7.0 创建场景坐标辅助
@@ -80,8 +85,10 @@ export class $T {
     statsDom.style.top = '50px';
     statsDom.style.left = '0';
 
-    // 3.1 将立方体添加到场景中
-    this.scene.add(cube);
+    // // 3.1 将立方体添加到场景中
+    // this.scene.add(cube);
+    // 12.0 将 3D 对象的创建提取到单独的文件中,在这里统一添加到场景中
+    this.addObjs(cube, sphere);
     // 6.1 将环境光添加到场景中
     this.scene.add(ambientLight);
     // 7.1 将辅助添加到场景中
@@ -119,5 +126,12 @@ export class $T {
       this.renderer.render(this.scene, this.camera);
     };
     animate();
+  }
+
+  addObjs(...objs: Object3D[]): void {
+    console.log(`🚀 ~ $T ~ addObjs ~ objs`, objs);
+    objs.forEach((obj) => {
+      this.scene.add(obj);
+    });
   }
 }
