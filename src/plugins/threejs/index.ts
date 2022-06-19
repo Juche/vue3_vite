@@ -76,7 +76,9 @@ export class $T {
 
     // 10.0 动态更新场景
     const animate = () => {
-      cube.position.y += 0.01;
+      // cube.position.y += 0.01;
+      cube.rotation.y += 0.01;
+      this.camera.position.x += 0.01;
       controls.update();
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(animate);
