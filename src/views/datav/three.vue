@@ -7,7 +7,7 @@
   <!-- <ThreeSnow /> -->
   <!-- <ThreeLoadModels /> -->
   <!-- <ThreeLoadFbx /> -->
-  <SingleBox />
+  <!-- <SingleBox /> -->
   <MultiBox />
 </template>
 
