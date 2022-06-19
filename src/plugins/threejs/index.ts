@@ -47,11 +47,19 @@ export class $T {
     const cube: Mesh = new Mesh(geometry, material);
     // 6.0 添加环境光
     const ambientLight: AmbientLight = new AmbientLight(0xffffff, 1);
+    // 7.0 添加场景坐标辅助
+    const axesHelper: AxesHelper = new AxesHelper(10);
+    // 8.0 添加场地网格辅助
+    const gridHelper: GridHelper = new GridHelper(50, 50, 0xeeeeee, 0xeeeeee);
 
     // 3.1 将立方体添加到场景中
     this.scene.add(cube);
     // 6.1 将环境光添加到场景中
     this.scene.add(ambientLight);
+    // 7.1 将辅助添加到场景中
+    this.scene.add(axesHelper);
+    // 8.1 将网格辅助添加到场景中
+    this.scene.add(gridHelper);
 
     // 对于动态场景的渲染，需要每次更新场景
     // 5.0 设置清空颜色，可以给场景设置背景色(默认是黑色)
