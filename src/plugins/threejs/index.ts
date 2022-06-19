@@ -11,6 +11,7 @@ import {
   WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import Stats from 'three/examples/jsm/libs/stats.module';
 
 export class $T {
   private dom: HTMLElement;
@@ -19,11 +20,10 @@ export class $T {
   private camera: PerspectiveCamera;
   constructor(dom: HTMLElement) {
     console.log(`🚀 ~ $T dom`, dom);
-    // 1.0 将渲染器挂载到指定dom上
     this.dom = dom;
+    // 1.0 创建渲染器
     this.renderer = new WebGLRenderer();
-    this.dom.appendChild(this.renderer.domElement);
-    // 1.1 初始化渲染器尺寸
+    // 1.2 初始化渲染器尺寸
     this.renderer.setSize(dom.offsetWidth, dom.offsetHeight);
 
     // 2.0 创建场景和相机
@@ -52,9 +52,17 @@ export class $T {
     const axesHelper: AxesHelper = new AxesHelper(10);
     // 8.0 创建场地网格辅助
     const gridHelper: GridHelper = new GridHelper(50, 50, 0x888888, 0x888888);
-    // 9.0 创建控制器 & 设置控制器配置
+    // 9.0 创建控制器
     const controls: OrbitControls = new OrbitControls(this.camera, this.renderer.domElement);
+    // 9.1 设置控制器坐标系
     controls.target.set(0, 0, 0);
+    // 11.0 创建性能监视器(States 是函数,直接调用)
+    const stats: Stats = Stats();
+    // 11.1 设置性能监视器位置
+    const statsDom: HTMLElement = stats.domElement;
+    statsDom.style.position = 'fixed';
+    statsDom.style.top = '50px';
+    statsDom.style.left = '0';
 
     // 3.1 将立方体添加到场景中
     this.scene.add(cube);
@@ -71,6 +79,11 @@ export class $T {
     // 5.1 清空渲染器颜色
     // this.renderer.clearColor();
 
+    // 1.1 将渲染器挂载到指定dom上
+    this.dom.appendChild(this.renderer.domElement);
+    // 11.2 将性能监视器添加到dom中
+    this.dom.appendChild(statsDom);
+
     // 2.1 将场景和相机挂载到渲染器上
     // this.renderer.render(this.scene, this.camera);
 
@@ -79,7 +92,10 @@ export class $T {
       // cube.position.y += 0.01;
       cube.rotation.y += 0.01;
       this.camera.position.x += 0.01;
+      // 9.2 动态更新控制器
       controls.update();
+      // 11.2 动态更新性能监视器
+      stats.update();
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(animate);
     };
