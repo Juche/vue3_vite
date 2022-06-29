@@ -6,6 +6,7 @@ import Three from '/@/views/datav/three.vue';
 import Cesium from '/@/views/datav/cesium.vue';
 import Demo from '/@/views/demo/index.vue';
 import UI from '/@/views/ui/index.vue';
+import Mock from '/@/views/mock/index.vue';
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
@@ -14,6 +15,7 @@ const routes = [
   { path: '/cesium', component: Cesium, name: 'Cesium' },
   { path: '/demo', component: Demo, name: 'Demo' },
   { path: '/ui', component: UI, name: 'UI' },
+  { path: '/mock', component: Mock, name: 'Mock' },
 ];
 
 // 3. 创建路由实例并传递 `routes` 配置

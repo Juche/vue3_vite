@@ -11,7 +11,7 @@ import {
 } from 'three';
 
 /**
- * Mesh 网状网
+ * Mesh 网状物
  * XxxBufferGeometry Xxx几何体缓存
  * MeshXxxMaterial 网格Xxx材质
  */
