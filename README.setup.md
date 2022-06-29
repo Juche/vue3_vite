@@ -195,13 +195,15 @@ window.matchMedia("(prefers-color-scheme: dark)").matches;
 - 引入 svg 指定部分(使用动画) `<use href="http://example.com/someDrawing.svg#Lamppost" />`
 - icon 过渡动画 `titanic` `lottie`
 
-day/big/qs/file-saver/js-xlsx/
+day/big/qs/file-saver/js-xlsx/NProcess
 
 ### node 脚本生成对应的文件/组件/页面数据
 
 ### faker/mockjs/json-server
 
-代理模拟数据
+- [faker](https://fakerjs.dev/guide/)
+- [mock](https://github.com/nuysoft/Mock/wiki/Getting-Started)
+- [json-server](https://github.com/typicode/json-server#getting-started)
 
 ### color 相关依赖
 
@@ -210,6 +212,12 @@ day/big/qs/file-saver/js-xlsx/
 ### 按插件使用拆分案例组件
 
 ### 动态路由生成导航菜单
+
+- layout 抽取
+- 路由拦截
+- 脚本获取路由表
+
+### 项目/页面配置化开发
 
 ### vue
 

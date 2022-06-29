@@ -91,6 +91,11 @@ https://cesium.com/learn/cesiumjs/ref-doc/Scene.html#drillPick
 
 ## 一些思考
 
+- 前端配置化开发
+
+  - 页面功能/数据/接口...
+  - 控制项目模块
+
 - 主题配色
 
 ```js

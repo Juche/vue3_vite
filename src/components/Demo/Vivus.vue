@@ -1,6 +1,7 @@
 <template>
   <!-- Head: HI THERE -->
   <div class="bloc bloc-head">
+    <img :src="close" alt="" />
     <!--
     <img :src="hiThere" alt="" />
     <ImgSvg />

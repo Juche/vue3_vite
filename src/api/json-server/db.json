@@ -3,3 +3,7 @@
   "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
   "profile": { "name": "typicode" }
 }
+
+// usage:
+// pnpm install -g json-server
+// json-server --watch .\src\api\json-server\db.json
