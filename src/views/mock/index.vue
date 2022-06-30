@@ -9,11 +9,25 @@
 </template>
 
 <script lang="ts" setup>
+  import { onMounted } from 'vue';
   import { users } from '/@/api/faker';
   import { testList1, testList2 } from '/@/api/mock';
+
   // console.log(`🚀 ~ users`, users);
   console.log(`🚀 ~ testList1`, testList1);
   console.log(`🚀 ~ testList2`, testList2());
+
+  // Mock 只支持ajax,不支持fetch;
+  // import '/@/api/mock';
+  // async function fetchData() {
+  //   const res = (await fetch('/getList')).json();
+  //   return res;
+  // }
+
+  onMounted(() => {
+    // const list = fetchData();
+    // console.log(`🚀 ~ onMounted ~ list`, list);
+  });
 </script>
 
 <style lang="less" scoped>

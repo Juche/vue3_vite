@@ -205,6 +205,12 @@ day/big/qs/file-saver/js-xlsx/NProcess
 - [mock](https://github.com/nuysoft/Mock/wiki/Getting-Started)
 - [json-server](https://github.com/typicode/json-server#getting-started)
 
+```sh
+# usage:
+pnpm install -g json-server
+json-server --watch ./src/api/json-server/db.json
+```
+
 ### color 相关依赖
 
 ### 项目配色表(主题色切换)

@@ -11,6 +11,8 @@ import { createPinia } from 'pinia';
 import VueCesium from 'vue-cesium';
 import 'vue-cesium/dist/index.css';
 
+import '/@/api/mock';
+
 const app = createApp(App);
 
 app.use(router);
