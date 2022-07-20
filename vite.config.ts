@@ -27,6 +27,25 @@ export default defineConfig({
       },
     ],
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          // 需要全局变量 （你定义的定义的方法 和 变量等）
+          hack: `true; @import (reference) "${resolve(__dirname, 'src/styles/ant-theme.less')}";`,
+          // hack: `true; @import (reference) "${resolve(__dirname, 'src/styles/index.less')}";`,
+          // 颜色变量有无 @ 都可以
+          // 'primary-color': '#1DA57A',
+          // 'link-color': '#1DA57A',
+          // 'border-radius-base': '2px',
+          // '@primary-color': '#1DA57A',
+          // '@link-color': '#1DA57A',
+          // '@border-radius-base': '2px',
+        },
+        javascriptEnabled: true,
+      },
+    },
+  },
   server: {
     host: true,
     port: 8082,
@@ -37,7 +56,7 @@ export default defineConfig({
     vueJsx(),
     cesium(),
     Components({
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver({ importStyle: false })],
     }),
   ],
 });

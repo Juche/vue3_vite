@@ -1,6 +1,6 @@
 import './styles/tailwind.css';
+import 'ant-design-vue/dist/antd.less';
 import './styles/index.less';
-import 'ant-design-vue/dist/antd.css';
 
 import { createApp } from 'vue';
 import App from './App.vue';
